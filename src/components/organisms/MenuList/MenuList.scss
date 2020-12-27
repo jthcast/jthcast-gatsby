@@ -1,0 +1,192 @@
+@import "../../../mixins";
+
+.jth-menuList {
+  z-index: 2;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  // background-color: $primaryBrandColor;
+  background-color: $backgroundColorDownOpacity;
+  backdrop-filter: blur(16px);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 200%;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  height: 100%;
+  overflow-y: auto;
+
+  a {
+    color: $color;
+
+    &:before {
+      content: none;
+    }
+  }
+
+  .jth-menuList-items {
+    margin: auto;
+
+    ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      li {
+        transition: transform 830ms cubic-bezier(0.19, 1, 0.22, 1);
+        transform: translateY(-30%);
+      }
+    }
+
+    .jth-switch {
+      // color: $white;
+      // border-color: $white;
+      color: $color;
+      border-color: $color;
+
+      .jth-switch-handle {
+        &:before {
+          // background-color: $white;
+          background-color: $color;
+        }
+      }
+    }
+  }
+
+  .jth-menuList-backdrop {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
+.jth-menuList-bottom {
+  transform: translateY(100%);
+}
+
+.jth-menuList-left {
+  transform: translateX(-100%);
+}
+
+.jth-menuList-none {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.jth-menuList-right {
+  transform: translateX(100%);
+}
+
+.jth-menuList-top {
+  transform: translateY(-100%);
+}
+
+.jth-scrollButton-menuList-menu {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2;
+}
+
+.jth-menuList-mark {
+  position: absolute;
+  right: 5vh;
+  top: 5vh;
+
+  .jth-menuList-markText,
+  .jth-menuList-markRing {
+    fill: $white;
+  }
+
+  .jth-menuList-markImage {
+    fill: none;
+    stroke: $white;
+    stroke-width: 30;
+
+    .jth-menuList-markImage-waving {
+      animation: waving 2.5s ease-in-out infinite alternate;
+    }
+  }
+
+  svg {
+    height: 10vh;
+  }
+}
+
+.jth-menuList-show {
+  .jth-menuList-bottom,
+  .jth-menuList-top {
+    transform: translateY(0);
+  }
+
+  .jth-menuList-left,
+  .jth-menuList-right {
+    transform: translateX(0);
+  }
+
+  .jth-menuList-none {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .jth-menuList {
+    .jth-menuList-links {
+      li {
+        transform: none;
+      }
+    }
+
+    // .jth-scrollButton.jth-scrollButton-menuList-menu{
+    //   background-color: $white;
+
+    //   &:hover{
+    //     opacity: 1;
+    //   }
+
+    //   &:focus{
+    //     opacity: 1;
+    //   }
+
+    //   &:active{
+    //     opacity: 1;
+    //   }
+
+    //   svg{
+    //     color: $primaryBrandColor;
+    //   }
+    // }
+  }
+}
+
+@keyframes waving {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@include mobile() {
+  .jth-menuList {
+    .jth-menuList-links {
+      line-height: 200%;
+    }
+
+    .jth-menuList-items {
+      line-height: 160%;
+    }
+  }
+
+  .jth-scrollButton-top.jth-scrollButton-menuList-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}

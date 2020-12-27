@@ -1,0 +1,229 @@
+// import React, { useCallback, useEffect, useRef, useState } from 'react';
+// import './Carousel.scss';
+// import Button from '../../atoms/Button';
+// import Card from '../../atoms/Card';
+// import { AngleDown } from '../../atoms/Icons';
+// import useObserver from '../../../customHooks/useObserver';
+
+// const Carousel = (props: {
+//   arrow?: boolean;
+//   arrowCount?: number;
+//   mobileCenter?: boolean;
+//   children?: any;
+//   className?: string;
+//   data?: Array<any>;
+//   position?: 'center' | 'left' | 'right';
+//   draggable?: boolean;
+// }) => {
+//   const {
+//     arrow = true,
+//     arrowCount = 1,
+//     mobileCenter = true,
+//     children = '',
+//     className = '',
+//     data = undefined,
+//     position = 'center',
+//     draggable = true,
+//   } = props;
+//   const ulRef = useRef<HTMLUListElement>(null);
+//   const startLiRef = useRef<HTMLLIElement>(null);
+//   const endLiRef = useRef<HTMLLIElement>(null);
+//   const count = useRef(0);
+//   const ulPosition = useRef(0);
+//   const mobilePosition = useRef(0);
+//   const [isStart, setIsStart] = useState(false);
+//   const [isEnd, setIsEnd] = useState(false);
+//   const dragRef = useRef({
+//     isDragStarted: false,
+//     clientX: 0,
+//     scrollX: 0,
+//     needForRaf: true,
+//   });
+//   const margin = 16;
+//   const threshold = 100;
+
+//   // TODO
+//   // pc와 태블릿 content elipsis 적용하기 컨텐츠를 어디까지 보여줄지 디바이스별로 고민하여 높이 정하기
+//   // 드래그 구현, 드래그할 때 하나씩? 아니면 주르륵? 펑션 작성해주기
+
+//   const dragStart = (event: React.TouchEvent | React.MouseEvent) => {
+//     console.log('dragstart');
+//     event.stopPropagation();
+//     if (event.nativeEvent instanceof TouchEvent) {
+//       dragRef.current = { ...dragRef.current, isDragStarted: true, clientX: event.nativeEvent.touches[0].clientX };
+//     } else if (event.nativeEvent instanceof MouseEvent) {
+//       event.preventDefault();
+//       dragRef.current = { ...dragRef.current, isDragStarted: true, clientX: event.nativeEvent.clientX };
+//     }
+//   };
+
+//   const dragAction = (event: React.TouchEvent | React.MouseEvent) => {
+//     console.log('dragaction');
+//     event.stopPropagation();
+//     if (dragRef.current.isDragStarted) {
+//       if (ulRef.current) {
+//         const childWidth = ulRef.current.children[1].getBoundingClientRect().width + margin;
+
+//         if (event.nativeEvent instanceof TouchEvent) {
+//           ulPosition.current = dragRef.current.scrollX + event.nativeEvent.touches[0].clientX - dragRef.current.clientX;
+//           dragRef.current = {
+//             ...dragRef.current,
+//             clientX: event.nativeEvent.touches[0].clientX,
+//             scrollX: ulPosition.current,
+//           };
+//         } else if (event.nativeEvent instanceof MouseEvent) {
+//           event.preventDefault();
+//           ulPosition.current = dragRef.current.scrollX + event.nativeEvent.clientX - dragRef.current.clientX;
+//           dragRef.current = { ...dragRef.current, clientX: event.nativeEvent.clientX, scrollX: ulPosition.current };
+//         }
+//         if (dragRef.current.needForRaf && dragRef.current.isDragStarted) {
+//           dragRef.current = { ...dragRef.current, needForRaf: false };
+//           requestAnimationFrame(dragUpdate);
+//         }
+//       }
+//     }
+//     console.log(dragRef.current);
+//   };
+
+//   const dragUpdate = () => {
+//     console.log('dragupdate');
+//     if (ulRef.current) {
+//       dragRef.current = { ...dragRef.current, needForRaf: true };
+//       ulRef.current.style.transform = `translateX(${ulPosition.current}px)`;
+//     }
+//   };
+
+//   const dragEnd = (event: React.TouchEvent<HTMLElement> | React.MouseEvent<HTMLElement>) => {
+//     console.log('dragend');
+//     dragRef.current = { ...dragRef.current, isDragStarted: false };
+//   };
+
+//   const resizeHandling = useCallback(() => {
+//     console.log('res');
+//     if (ulRef.current) {
+//       const parentWidth = ulRef.current.clientWidth;
+//       const childWidth = ulRef.current.children[1].getBoundingClientRect().width + margin;
+
+//       if (window.innerWidth >= 1080) {
+//         mobilePosition.current = 0;
+//       } else {
+//         mobilePosition.current = (parentWidth - childWidth) / 2;
+//       }
+//       ulPosition.current = childWidth * count.current;
+//       position === 'left'
+//         ? (ulRef.current.style.transform = `translateX(${mobilePosition.current + ulPosition.current}px)`)
+//         : (ulRef.current.style.transform = `translateX(${mobilePosition.current - ulPosition.current}px)`);
+//     }
+//   }, [position]);
+
+//   const buttonHandling = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+//     console.log('buttonhandling');
+//     if (ulRef.current) {
+//       const childWidth = ulRef.current.children[1].getBoundingClientRect().width + margin;
+
+//       if (event.currentTarget.classList.contains('jth-carousel-arrow-right')) {
+//         position === 'left' ? (count.current -= arrowCount) : (count.current += arrowCount);
+//       } else if (event.currentTarget.classList.contains('jth-carousel-arrow-left')) {
+//         position === 'left' ? (count.current += arrowCount) : (count.current -= arrowCount);
+//       }
+//       ulPosition.current = childWidth * count.current;
+//       position === 'left'
+//         ? (ulRef.current.style.transform = `translateX(${mobilePosition.current + ulPosition.current}px)`)
+//         : (ulRef.current.style.transform = `translateX(${mobilePosition.current - ulPosition.current}px)`);
+//     }
+//   };
+
+//   const startObserverHandling = useObserver({
+//     callback: (entry, observer) => {
+//       console.log('obser1');
+//       if (entry.isIntersecting) {
+//         setIsStart(true);
+//       } else {
+//         setIsStart(false);
+//       }
+//     },
+//   });
+
+//   const endObserverHandling = useObserver({
+//     callback: (entry, observer) => {
+//       console.log('obser2');
+//       if (entry.isIntersecting) {
+//         setIsEnd(true);
+//       } else {
+//         setIsEnd(false);
+//       }
+//     },
+//   });
+
+//   useEffect(() => {
+//     startObserverHandling(startLiRef);
+//   }, [startObserverHandling]);
+
+//   useEffect(() => {
+//     endObserverHandling(endLiRef);
+//   }, [endObserverHandling]);
+
+//   useEffect(() => {
+//     if (mobileCenter) {
+//       resizeHandling();
+//       window.addEventListener('resize', resizeHandling);
+
+//       return () => {
+//         window.removeEventListener('resize', resizeHandling);
+//       };
+//     }
+//   }, [mobileCenter, resizeHandling]);
+
+//   return (
+//     <section
+//       className={`jth-carousel jth-container${position ? ` jth-carousel-${position}` : ``}${
+//         draggable ? ` jth-carousel-draggable` : ``
+//       }${className ? ` ${className}` : ``}`}
+//       onTouchStart={dragStart}
+//       onTouchMove={dragAction}
+//       onTouchEnd={dragEnd}
+//       onTouchCancel={dragEnd}
+//       // onMouseDown={dragStart}
+//       // onMouseMove={dragAction}
+//       // onMouseUp={dragEnd}
+//       // onMouseLeave={dragEnd}
+//     >
+//       <ul className="jth-carousel-list" ref={ulRef}>
+//         <li ref={startLiRef} />
+//         {data
+//           ? data.map((item, index) => (
+//               <li key={index}>
+//                 <Card item={item} />
+//               </li>
+//             ))
+//           : null}
+//         {children || null}
+//         <li ref={endLiRef} />
+//       </ul>
+//       {arrow ? (
+//         <>
+//           {!isStart ? (
+//             <Button
+//               ariaLabel="move carousel to end position"
+//               className="jth-carousel-arrow-left"
+//               onClick={buttonHandling}
+//             >
+//               <AngleDown rotate={90} />
+//             </Button>
+//           ) : null}
+//           {!isEnd ? (
+//             <Button
+//               ariaLabel="move carousel to start position"
+//               className="jth-carousel-arrow-right"
+//               onClick={buttonHandling}
+//             >
+//               <AngleDown rotate={-90} />
+//             </Button>
+//           ) : null}
+//         </>
+//       ) : null}
+//     </section>
+//   );
+// };
+
+// export default Carousel;

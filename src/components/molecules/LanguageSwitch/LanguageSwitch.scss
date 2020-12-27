@@ -1,0 +1,19 @@
+@import "../../../mixins";
+
+li{
+  .switch-language{
+    color: $color;
+    font-size: 0.9rem;
+    width: 3rem;
+    background-color: transparent;
+    border: 0.063rem solid $color;
+
+    .jth-switch-handle{
+      
+      &:before{
+        background-color: $color;
+      }
+    }
+  }
+}
+

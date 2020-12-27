@@ -1,0 +1,171 @@
+@import "../../../mixins";
+
+.jth-footer{
+  margin: auto auto 0 auto;
+  width: 100%;
+  z-index: 1;
+
+  .jth-footer-container{
+    max-width: $maxWidth;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10%, auto));
+    align-items: center;
+    margin: auto;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 1.5rem 0;
+
+    .jth-footer-items-left{
+      height: 100%;
+      align-items: center;
+      justify-content: flex-start;
+
+      li{
+        margin: 0 1.5rem 0 0;
+      }
+    }
+
+    .jth-footer-items-center{
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+
+      li{
+        margin: 0 0.75rem 0 0.75rem;
+      }
+    }
+
+    .jth-footer-items-right{
+      height: 100%;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      li{
+        margin: 0 0 0 1.5rem;
+      }
+    }
+
+    .jth-footer-items-icon{
+      font-size: 1.5rem;
+    }
+
+    a{
+      color: $color;
+
+      &:before{
+        content: none;
+      }
+
+      &:hover{
+        color: $color;
+      }
+
+      &:focus{
+        color: $color;
+      }
+
+      &:active{
+        color: $color;
+      }
+    }
+
+    ul{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      flex: 1 1 33.3%;
+    }
+
+    .jth-footer-logo{
+      display: none;
+    }
+  }
+}
+.jth-button.jth-footer-scrollButton-top{
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1;
+}
+
+@include mobile {
+  .jth-footer{
+
+    .jth-footer-container{
+
+      .jth-footer-items-left{
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        li{
+          margin: 0.5rem;
+        }
+      }
+      .jth-footer-items-center{
+        align-items: center;
+        justify-content: flex-start;
+
+        li{
+          margin: 0.5rem;
+        }
+      }
+      .jth-footer-items-right{
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        li{
+          margin: 0.5rem;
+        }
+
+        .jth-footer-items-icon{
+          font-size: 2rem;
+        }
+      }
+
+      ul {
+        flex-direction: column;
+        line-height: 160%;
+        letter-spacing: 0.1rem;
+      }
+
+      .jth-footer-logo{
+        display: block;
+        font-size: 3rem;
+        margin-right: 2rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .jth-footer{
+
+    .jth-footer-container {
+
+      .jth-footer-items-left{
+
+        li{
+          margin: 0 1.5rem 0 0;
+        }
+      }
+
+      .jth-footer-items-center{
+
+        li{
+          margin: 0 0.75rem 0 0.75rem;
+        }
+      }
+
+      .jth-footer-items-right{
+
+        li{
+          margin: 0 0 0 1.5rem;
+        }
+      }
+    }
+  }
+}

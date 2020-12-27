@@ -1,0 +1,44 @@
+@import "../../../mixins";
+
+.jth-headerMessage{
+  position: relative;
+  width: 100%;
+  background-color: $primaryBrandColor;
+  padding: 0.7rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $black;
+  z-index: 2;
+
+  .jth-headerMessage-container{
+    max-width: $maxWidthHeader;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .jth-headerMessage-content{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: 0.1rem;
+      padding: 0 5vw;
+      text-align: center;
+    
+      a{
+        color: $black;
+
+        &:before{
+          content: none;
+        }
+      }
+    }
+
+    .jth-headerMessage-allowClose{
+      color: $black;
+      background-color: transparent;
+      position: absolute;
+      right: 1rem;
+    }
+  }
+}

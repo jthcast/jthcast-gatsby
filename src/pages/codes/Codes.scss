@@ -1,0 +1,131 @@
+@import '../../mixins';
+
+.jth-codes {
+  padding: 3rem 0;
+
+  .jth-codes-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.063rem solid $color;
+
+    &:hover {
+      border-bottom: 0.063rem solid $primaryBrandColor;
+    }
+
+    label {
+      width: 100%;
+    }
+
+    svg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      margin: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .jth-codes-search-input {
+      outline: 0;
+      border: 0;
+      width: 100%;
+      min-height: 1.375rem;
+      padding: 0.25rem 0.375rem;
+      background-color: transparent;
+      color: $color;
+      font-size: 1rem;
+      line-height: 1rem;
+    }
+
+    .jth-codes-search-clearIcon {
+      cursor: pointer;
+
+      &:hover {
+        color: $primaryBrandColor;
+      }
+    }
+  }
+
+  .jth-codes-searchResult {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .jth-codes-loading {
+    margin-top: 5rem;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .jth-codes-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    font-size: 1rem;
+    align-items: start;
+    justify-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    list-style: none;
+
+    li {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        width: 100%;
+        color: $color;
+        font-weight: normal;
+
+        &:before {
+          content: none;
+        }
+
+        svg {
+          width: 100%;
+          font-size: 3rem;
+        }
+
+        p {
+          text-align: center;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .jth-codes-nothing {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@include tablet {
+  .jth-codes {
+    .jth-codes-list {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+}
+
+@include mobile {
+  .jth-codes {
+    // margin-top: 3rem;
+
+    .jth-codes-list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+@import '../../mixins';
+
+.jth-code {
+  .jth-code-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 5rem;
+    text-align: center;
+
+    p {
+      color: $colorDown;
+    }
+
+    time {
+      color: $colorDown;
+    }
+
+    svg {
+      font-size: 3rem;
+    }
+  }
+
+  .jth-code-content {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    line-height: 1.8;
+
+    .jth-code-loading {
+      font-size: 2rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 1.5rem 0;
+    }
+
+    p {
+      margin: 1rem 0;
+    }
+  }
+
+  .jth-code-relatedCodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26%, auto));
+    justify-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    list-style: none;
+
+    li {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        width: 100%;
+
+        &:before {
+          content: none;
+        }
+
+        svg {
+          width: 100%;
+          font-size: 3rem;
+        }
+
+        p {
+          text-align: center;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+}

@@ -1,0 +1,115 @@
+@import '../../mixins';
+
+.jth-about {
+  .jth-about-contact {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+
+    a {
+      margin: 0 1.5rem 0 0;
+
+      &:before {
+        content: none;
+      }
+
+      &:nth-last-child(1) {
+        margin-right: 0;
+      }
+
+      svg {
+        color: $primaryBrandColor;
+      }
+    }
+  }
+
+  .jth-about-photo {
+    width: 100%;
+    max-width: 25rem;
+  }
+
+  .jth-about-manifesto {
+    h2 {
+      line-height: 200%;
+    }
+
+    ol {
+      list-style-type: none;
+      counter-reset: counter;
+    }
+
+    ol li {
+      counter-increment: counter;
+
+      button {
+        line-height: 200%;
+        text-align: left;
+      }
+
+      &:before {
+        content: counter(counter) '. ';
+        line-height: 200%;
+        color: $primaryBrandColor;
+        position: absolute;
+        right: 100%;
+        font-size: 1.25rem;
+        padding: 0 0.625rem 0 0;
+      }
+    }
+  }
+
+  .jth-about-experience {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5rem;
+
+    .jth-about-experience-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2vh;
+
+      svg {
+        font-size: 3rem;
+        color: $colorDown;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .jth-about {
+    .jth-about-experience {
+      gap: 2rem;
+    }
+  }
+}
+
+@include mobile {
+  .jth-about {
+    // margin-top: 3rem;
+
+    .jth-about-manifesto {
+      ol {
+        padding: 0 0 0 2rem;
+      }
+
+      ol li {
+        counter-increment: counter;
+
+        button {
+          font-size: 1rem;
+        }
+
+        &:before {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .jth-about-experience {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+}

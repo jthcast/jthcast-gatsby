@@ -1,0 +1,179 @@
+@import '../../../mixins';
+
+.jth-header-container {
+  padding: 1.5rem 3rem;
+  z-index: 2;
+  width: 100%;
+  background-color: $backgroundColorOpacity;
+  // font-size: 0.7rem;
+  font-weight: $fontBold;
+  text-transform: uppercase;
+
+  .jth-header-mobile {
+    display: none;
+
+    a {
+      color: $white;
+      line-height: 0;
+    }
+  }
+
+  .jth-header-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10%, auto));
+    align-items: center;
+    margin: auto;
+    max-width: $maxWidthHeader;
+
+    .jth-header-avtive {
+      border-bottom: 0.15rem solid $color;
+    }
+  }
+
+  a {
+    color: $color;
+
+    &:before {
+      content: none;
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+
+    li {
+      a {
+        &:before {
+          transition: none;
+        }
+      }
+
+      button {
+        transition: none;
+      }
+    }
+  }
+
+  .jth-header-items-left {
+    justify-content: flex-start;
+    align-items: center;
+
+    li {
+      margin-right: 1.5rem;
+    }
+  }
+  .jth-header-items-center {
+    justify-content: center;
+    align-items: center;
+
+    li {
+      margin: 0 0.75rem;
+    }
+  }
+  .jth-header-items-right {
+    justify-content: flex-end;
+    align-items: center;
+
+    li {
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+.jth-header-hide {
+  opacity: 0;
+  transition: 0.2s linear;
+  visibility: hidden;
+  position: sticky;
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.jth-header-show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0%);
+  background-color: $backgroundColorOpacity;
+}
+
+.jth-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: $backgroundColorOpacity;
+}
+
+.jth-header-fixed {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.jth-header-ghost {
+  position: absolute;
+  top: 0;
+  background-color: transparent;
+}
+
+.jth-header-title {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.25rem;
+  font-size: 1.25rem;
+
+  svg {
+    margin-right: 0.25rem;
+  }
+}
+
+.jth-header-subTitle {
+  margin: 0 0.25rem;
+  font-size: 0.75rem;
+}
+
+.jth-header-scroll {
+  transition: 0.3s ease-out;
+  border-bottom: 0.063rem solid $borderColor;
+}
+
+@include mobile {
+  .jth-header-container {
+    width: auto;
+    position: fixed;
+    top: 0;
+    transform: translate(30%, -100%);
+    padding: 0;
+    opacity: 0;
+    background-color: transparent;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    z-index: 3;
+
+    .jth-header-items {
+      display: none;
+    }
+
+    .jth-header-mobile {
+      width: 4rem;
+      height: 4rem;
+      background-color: $primaryBrandColor;
+      color: $white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem;
+      border-radius: 50%;
+    }
+  }
+
+  .jth-header-container.jth-header-show {
+    opacity: 1;
+    transform: translate(30%, 30%);
+  }
+}
+
+@include tablet {
+  .jth-header-container {
+    padding: 1.5rem 2rem;
+  }
+}

@@ -1,0 +1,93 @@
+@import "../../mixins";
+
+.jth-portfolio {
+  .jth-portfolio-title {
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.375rem;
+      font-weight: bold;
+    }
+  }
+
+  .jth-portfolio-content {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    line-height: 1.8;
+
+    .jth-portfolio-loading {
+      font-size: 2rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .jth-portfolio-widthImage {
+      height: 60vh;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .jth-portfolio-builtWith {
+      list-style-type: none;
+
+      li {
+        &:before {
+          content: " · ";
+        }
+      }
+    }
+
+    .jth-portfolio-logo {
+      font-size: 10rem;
+    }
+
+    p {
+      margin: 1rem 0;
+    }
+
+    svg {
+      font-size: 3rem;
+    }
+  }
+
+  .jth-portfolio-relatedPosts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    list-style-type: none;
+    counter-reset: counter;
+
+    li {
+      counter-increment: counter;
+      position: relative;
+
+      button {
+        line-height: 200%;
+        text-align: left;
+      }
+
+      &:before {
+        content: counter(counter) ". ";
+        color: $primaryBrandColor;
+        position: absolute;
+        right: 100%;
+        padding: 0 0.625rem 0 0;
+      }
+
+      a {
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+}

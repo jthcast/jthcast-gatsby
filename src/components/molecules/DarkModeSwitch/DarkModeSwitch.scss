@@ -1,0 +1,17 @@
+@import "../../../mixins";
+
+li{
+  .switch-darkMode{
+    width: 3rem;
+    background-color: transparent;
+    border: 0.063rem solid $color;
+
+    .jth-switch-handle{
+      
+      &:before{
+        background-color: $color;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,54 @@
+@import '../../../mixins';
+
+.jth-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  // .jth-card-content{
+  //   padding: 1rem 1.5rem 0.8rem;
+  // }
+
+  .jth-card-image {
+    max-height: rem(600px);
+
+    .gatsby-image-wrapper {
+      height: 100%;
+    }
+  }
+
+  .jth-card-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    .jth-card-tags {
+      font-size: 0.9rem;
+      color: $colorDown;
+      font-weight: $fontBold;
+    }
+
+    .jth-card-date {
+      font-size: 0.9rem;
+      color: $colorDown;
+      justify-self: end;
+    }
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    color: $color;
+  }
+
+  p {
+    line-height: 160%;
+    color: $color;
+  }
+
+  // img {
+  //   width: 100%;
+  //   object-fit: cover;
+  //   object-position: center center;
+  // }
+}

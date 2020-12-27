@@ -1,0 +1,105 @@
+{
+  "Common": {
+    "title": "JthCast",
+    "description": "Make digital products that people love to use. Don't force them to use it, make them want to use it.",
+    "searchResultsMessage": "There are {{what}} search results ✨",
+    "searchResultDoesntExist": "No results found 😅",
+    "homePage": "Go to the homepage 👉"
+  },
+  "Header": {
+    "headerMessage": "I'm looking for a job 👋",
+    "home": "home",
+    "about": "about",
+    "posts": "posts",
+    "codes": "codes",
+    "portfolios": "portfolio"
+  },
+  "Footer": {
+    "copyright": "JthCast.",
+    "contactMessage": "Let's make something beautiful together",
+    "contactSubMessage": "Do you have a creative challenge for me? Get in touch with me.",
+    "contactButtonMessage": "Get in touch 📧"
+  },
+  "ErrorPage": {
+    "errorMessage": "ERROR 💥",
+    "errorSubMessage": "Sorry about this 😥 Please report the error.",
+    "reportButtonMessage": "Report 📧"
+  },
+  "404Page": {
+    "title": "404",
+    "description": "Sorry about this 😥 It seems as though the page you are looking for no longer exists or has been moved.",
+    "message": "404",
+    "subMessage": "Sorry about this 😥 It seems as though the page you are looking for no longer exists or has been moved."
+  },
+  "Home": {
+    "title": "Home",
+    "greetMessage": "Make digital products that people love to use",
+    "greetSubMessage": "Don't force them to use it, make them want to use it.",
+    "recentPosts": "Recent Posts",
+    "postPage": "More 👉",
+    "aboutPage": "About 👉"
+  },
+  "About": {
+    "title": "About",
+    "description": "Make products for user's UI & UX, and co-worker's development convenience. Front-end developer work with design and technology, so trying to look problems from various perspective to solve them.",
+    "aboutMessage": "Make users and co-worker eager",
+    "introduceMyself": "Hey 👋 I'm TaeHun Jeong.",
+    "aboutSubMessage": "Make products for user's UI & UX, and co-worker's development convenience.\nFront-end developer work with design and technology, so trying to look problems from various perspective to solve them.",
+    "myManifesto": "My manifesto",
+    "manifesto1": "Don't just create, solve",
+    "manifesto1Detail": "Solve a problem not just working right but also efficiently.\nA single line of bad code not only gives the user an experience that significantly degrades the quality of service, but can also be a major obstacle in the process of maintenance and repair.",
+    "manifesto2": "Trust and communication",
+    "manifesto2Detail": "Respect co-worker's expertise, and communicate with them.\nThis process can be improved in a better way and better quality, such as preventing errors.",
+    "manifesto3": "Designing with users in mind",
+    "manifesto3Detail": "No matter how creative and technologically perfect a product is, no one will using a product that is uncomfortable to use.\nHowever, products that are comfortable to use and have high accessibility make users a fan.",
+    "manifesto4": "Creative and beautiful",
+    "manifesto4Detail": "People don't attraction in the same things as others.\nFrom being creative and beautiful, people get attracted and appreciate its value.",
+    "manifesto5": "Make things simple",
+    "manifesto5Detail": "Complex things are bad for both users and developers.",
+    "manifesto6": "Efforts to acquire skills not avoiding them",
+    "manifesto6Detail": "Old technology makes maintenance difficult and expensive.\nTechnologies are constantly evolving and created to meet the needs of users and developers. We need to follow the technology trends.",
+    "manifesto7": "Priority setting",
+    "manifesto7Detail": "Time is finite and work has a importance. we have to choose which one is more urgent and important.",
+    "manifesto8": "Truth, sincerity, humility",
+    "manifesto8Detail": "I don't hide for fear of being blamed. If I have tried but aren't enough, admit it and ask for help.",
+    "manifesto9": "Passion",
+    "manifesto9Detail": "Doing things without passion makes not only me but also co-worker feel weak. No wonder the result is a mess.",
+    "manifesto10": "Be happy",
+    "manifesto10Detail": "What's the point if I'm not happy?",
+    "summary": "To work actively, not passively",
+    "summarySubMessage": "Exchange opinions based on understanding of the back-end and design, and work with a sense of responsibility for work.\nCreate products with co-worker to provide better service for users.",
+    "webDevelopment": "Web Development",
+    "webDevelopmentDetail": "I mainly use 'React' to front-end development. experienced with 'Node.js', 'Java Spring', and 'Oracle DB' for back-end, recently, 'GraphQL' is also interested.",
+    "uiuxDesign": "UI & UX Design",
+    "uiuxDesignDetail": "Create a prototype using 'Figma'. I study design by looking around 'Dribble' and 'Behance', and I usually read about user experience and nudge.",
+    "communication": "Communication",
+    "communicationDetail": "Collaboration with back-end developers and designers is especially important for front-end developers. For a collaboration, I'm learning basic knowledge about the back-end and design.",
+    "entrepreneurship": "Entrepreneurship",
+    "entrepreneurshipDetail": "I don't aim only to create profits, but rather think from the perspective of users and collaborate with co-worker to develop creative and realistic services. I believe it will bring better profits."
+  },
+  "Posts": {
+    "title": "Posts",
+    "description": "Posts about what I felt while developing, and good things to know.",
+    "postDoesntExistMessage": "No posts yet"
+  },
+  "Post": {
+    "seriesPosts": "Series posts",
+    "relatedPosts": "Related posts"
+  },
+  "Codes": {
+    "title": "Codes",
+    "description": "Codes that helpful for development.",
+    "codeDoesntExistMessage": "No codes yet"
+  },
+  "Code": {
+    "relatedCodes": "Related Codes"
+  },
+  "Portfolios": {
+    "title": "Portfolio",
+    "description": "It's a portfolio of things I wanted to make, or work on.",
+    "portfolioDoesntExistMessage": "No portfolio yet"
+  },
+  "Portfolio": {
+    "relatedPosts": "Related Posts"
+  }
+}

@@ -1,0 +1,56 @@
+@import "../../mixins";
+
+.jth-home {
+  .jth-home-title {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+
+    h1 {
+      font-size: 6rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+  .jth-home-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, auto));
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    list-style: none;
+
+    .jth-card {
+      img {
+        max-height: 15.188rem;
+      }
+
+      //   &:hover{
+      //     transform: scale(1.03);
+      //   }
+      // }
+    }
+  }
+}
+
+@include tablet() {
+}
+
+@include mobile() {
+  .jth-home {
+    // margin-top: 3rem;
+
+    .jth-home-title {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    .jth-home-posts {
+      grid-template-columns: 1fr;
+    }
+  }
+}

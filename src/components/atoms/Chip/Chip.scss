@@ -1,0 +1,26 @@
+@import "../../../mixins";
+
+.jth-chip{
+  background-color: $groupColor;
+  color: $color;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vh;
+  padding: 0.5vh 1vh;
+  border-radius: 1rem;
+  font-weight: normal;
+
+  .jth-chip-close{
+    color: $color;
+    padding: 0 0 0 0.5vh;
+    display: inline-flex;
+    cursor: pointer;
+  }
+}
+
+.jth-chip-ghost{
+  background-color: transparent;
+  border: 0.063rem solid $borderColor;
+  border-radius: 1rem;
+}

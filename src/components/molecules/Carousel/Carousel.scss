@@ -1,0 +1,163 @@
+@import "../../../mixins";
+
+$background-color: var(--background-base);
+$background-color-elevated: var(--background-elevated);
+$color: var(--color-base);
+$primaryBackgroundColor: var(--brand-background);
+$primaryReversedBackgroundColor: var(--brand-background-reversed);
+$primaryColor: var(--brand-color);
+$dangerBackgroundColor: var(--danger-background);
+$dangerReversedBackgroundColor: var(--danger-background-reversed);
+$dangerColor: var(--danger-color);
+$borderColor: var(--border-base);
+$borderBackground: var(--border-background);
+
+.jth-carousel{
+  flex-direction: column;
+  justify-content: center;
+  margin: 5vh auto;
+  cursor: grab;
+
+  .jth-carousel-list{
+    transition: 0.3s ease;
+  }
+
+  .jth-carousel-arrow-left{
+    position: absolute;
+    left: 0;
+    margin: 0 0 0 5vh;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(250, 251, 252, 0.7);
+
+    &:hover{
+      color: $color;
+      opacity: 1;
+    }
+
+    &:focus{
+      color: $color;
+      opacity: 1;
+    }
+
+    &:active{
+      color: $color;
+      opacity: 1;
+    }
+  }
+
+  .jth-carousel-arrow-right{
+    position: absolute;
+    right: 0;
+    margin: 0 5vh 0 0;
+    width: 10vh;
+    height: 10vh;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(250, 251, 252, 0.7);
+
+    &:hover{
+      color: $color;
+      opacity: 1;
+    }
+
+    &:focus{
+      color: $color;
+      opacity: 1;
+    }
+
+    &:active{
+      color: $color;
+      opacity: 1;
+    }
+  }
+
+  svg{
+    font-size: 3rem;
+  }
+
+  ul{
+    display: flex;
+    list-style: none;
+
+    li{
+
+      p{
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        line-height: 160%;
+        overflow: hidden;
+      }
+    }
+
+    li:nth-child(1){
+      margin: 0;
+    }
+
+    li:last-child{
+      margin: 0;
+    }
+  }
+}
+
+@include darkMode{
+  .jth-carousel{
+
+    .jth-carousel-arrow-left{
+      background-color: rgba(18, 18, 18, 0.7);
+    }
+
+    .jth-carousel-arrow-right{
+      background-color: rgba(18, 18, 18, 0.7);
+    }
+  }
+}
+
+.jth-carousel-center{
+  align-items: center;
+
+  .jth-carousel-list{
+
+    li{
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+.jth-carousel-left{
+
+  .jth-carousel-list{
+    flex-direction: row-reverse;
+
+    li{
+      margin: 0 0 0 1rem;
+    }
+  }
+}
+
+.jth-carousel-right{
+
+  .jth-carousel-list{
+    flex-direction: row;
+
+    li{
+      margin: 0 1rem 0 0;
+    }
+  }
+}
+
+@include mobile(){
+  .jth-carousel{
+
+    .jth-carousel-arrow-left{
+      display: none;
+    }
+
+    .jth-carousel-arrow-right{
+      display: none;
+    }
+  }
+}

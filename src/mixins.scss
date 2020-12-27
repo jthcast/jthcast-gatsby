@@ -1,0 +1,63 @@
+//Device Size
+$breakpoint-mobile: 17.5rem;
+$breakpoint-tablet: 40.875rem;
+$breakpoint-desktop: 64rem;
+
+//Common
+$maxWidth: 82.5rem;
+$maxWidthHeader: 100%;
+$fontBold: 600;
+$fontNormal: 400;
+
+//CSS
+$backgroundColor: var(--background-base);
+$backgroundColorOpacity: var(--background-base-opacity);
+$backgroundColorDownOpacity: var(--background-down-opacity);
+$borderColor: var(--border-base);
+$groupColor: var(--group-base);
+$color: var(--color-base);
+$colorDown: var(--color-down);
+$primaryBrandColor: var(--primary-brand-base);
+$black: var(--black);
+$white: var(--white);
+$danger: var(--danger);
+
+@function rem($size) {
+  @return $size / 16px * 1rem;
+}
+
+@mixin mobile {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin darkMode {
+  [data-theme='dark'] {
+    @content;
+  }
+}
+
+@mixin touchDevice {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+@mixin notTouchDevice {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "Common": {
+    "title": "JthCast",
+    "description": "사용하고 싶은 것을 만듭니다. 사용을 강요하는 것이 아닌, 사용하고 싶도록 만듭니다.",
+    "searchResultsMessage": "{{what}}개의 검색 결과가 있습니다 ✨",
+    "searchResultDoesntExist": "검색 결과가 없습니다 😅",
+    "homePage": "시작 페이지로 가기 👉"
+  },
+  "Header": {
+    "headerMessage": "일 할 곳을 찾고 있어요 👋",
+    "home": "홈",
+    "about": "소개",
+    "posts": "글",
+    "codes": "코드",
+    "portfolios": "포트폴리오"
+  },
+  "Footer": {
+    "copyright": "JthCast.",
+    "contactMessage": "함께 환상적인 것을 만들어 봐요",
+    "contactSubMessage": "제가 도전할 창의적인 프로젝트가 있나요? 연락 주세요.",
+    "contactButtonMessage": "연락 하기 📧"
+  },
+  "ErrorPage": {
+    "errorMessage": "오류가 발생했습니다 💥",
+    "errorSubMessage": "죄송합니다 😥 해당 오류를 제보 부탁드립니다.",
+    "reportButtonMessage": "제보 하기 📧"
+  },
+  "404Page": {
+    "title": "404",
+    "description": "죄송합니다 😥 해당 페이지가 더는 존재하지 않거나 옮겨진 것 같습니다.",
+    "message": "404",
+    "subMessage": "죄송합니다 😥 해당 페이지가 더는 존재하지 않거나 옮겨진 것 같습니다."
+  },
+  "Home": {
+    "title": "홈",
+    "greetMessage": "사용하고 싶은 것을 만듭니다",
+    "greetSubMessage": "사용을 강요하는 것이 아닌, 사용하고 싶도록 만듭니다.",
+    "recentPosts": "최근 작성된 글",
+    "postPage": "더 보기 👉",
+    "aboutPage": "소개 👉"
+  },
+  "About": {
+    "title": "소개",
+    "description": "사용자의 UI & UX, 동료 개발자의 개발 편의성을 생각하며 만듭니다. 프론트 엔드 개발자는 디자인과 기술을 함께 다루는 만큼, 다양한 시각에서 문제를 바라보고 해결하기 위해 노력합니다.",
+    "aboutMessage": "사용자와 동료가 열광하게",
+    "introduceMyself": "안녕하세요 👋 정태훈입니다.",
+    "aboutSubMessage": "사용자의 UI & UX, 동료 개발자의 개발 편의성을 생각하며 만듭니다.\n프론트 엔드 개발자는 디자인과 기술을 함께 다루는 만큼, 다양한 시각에서 문제를 바라보고 해결하기 위해 노력합니다.",
+    "myManifesto": "나의 다짐",
+    "manifesto1": "그저 작동하는 것이 아닌, 문제를 해결하는 것",
+    "manifesto1Detail": "올바르게 작동하는 것에서 그치지 않고 효율성까지 생각하며 문제를 해결합니다.\n잘못된 코드 한 줄이 서비스의 품질을 크게 저하시키는 경험을 사용자에게 줄 뿐만 아니라, 유지 및 보수의 과정에서도 큰 걸림돌이 될 수 있습니다.",
+    "manifesto2": "신뢰하고 소통하며 협업하기",
+    "manifesto2Detail": "동료의 전문성을 존중하고, 건전하게 의견을 교환합니다.\n이러한 과정에서 더 나은 방향으로 개선하며, 오류를 예방하는 등 향상된 품질을 갖출 수 있습니다.",
+    "manifesto3": "사용자를 생각하며 만드는 디자인",
+    "manifesto3Detail": "제품이 아무리 창의적이고 기술적으로 완벽해도, 사용하기에 불편한 제품은 결국 아무도 사용하지 않게 됩니다.\n그러나, 사용감이 좋고 접근성이 높은 제품은 사용자를 팬으로 만들어 줍니다.",
+    "manifesto4": "창의적이고 아름답게 만들기",
+    "manifesto4Detail": "남들과 같은 것에서는 매력을 찾을 수 없습니다.\n창의적이고 아름다운 것에서 사람들은 매력을 발견하고 그 가치를 인정받습니다.",
+    "manifesto5": "복잡한 것을 단순하게",
+    "manifesto5Detail": "복잡한 것은 사용자에게도, 개발자에게도 좋지 않습니다.",
+    "manifesto6": "기술을 회피하지 않고 습득하기 위한 노력",
+    "manifesto6Detail": "낡은 기술은 유지와 보수를 어렵게 하며 비용 또한 상승시킵니다.\n기술들은 사용자와 개발자의 요구에 맞추어 끊임없이 발전하고 생성됩니다. 이러한 기술 트렌드를 놓치지 않고 앞서가야 합니다.",
+    "manifesto7": "우선순위 설정",
+    "manifesto7Detail": "시간은 유한하고 일에는 경중이 존재합니다. 어떤 일이 더 급하고 중요한지 잘 선택해야 합니다.",
+    "manifesto8": "진실, 성실, 겸손",
+    "manifesto8Detail": "비난받을 것이 두려워 숨기지 않습니다. 노력했지만 부족하다면 인정하고 도움을 요청합니다.",
+    "manifesto9": "열정",
+    "manifesto9Detail": "열정 없이 하는 일은 본인뿐 아니라 동료들 마저 힘 빠지게 합니다. 그 결과물이 엉망인 것은 당연합니다.",
+    "manifesto10": "행복하기",
+    "manifesto10Detail": "행복하지 않다면, 무슨 의미가 있을까요?",
+    "summary": "수동적이 아닌, 능동적으로 행동하기",
+    "summarySubMessage": "백엔드와 디자인에 대한 이해를 바탕으로 의견을 교환하며, 일에 대한 책임감을 가지고 임합니다.\n사용자에게 더 나은 서비스를 제공하기 위해 노력하고, 동료와 함께 제품을 만듭니다.",
+    "webDevelopment": "웹 개발",
+    "webDevelopmentDetail": "'React'를 주로 사용하여 화면을 구성합니다. 'Node.js'와 'Java Spring', 'Oracle DB'의 백엔드 경험이 있으며, 최근 'GraphQL'도 관심을 가지고 있습니다.",
+    "uiuxDesign": "UI & UX 디자인",
+    "uiuxDesignDetail": "'Figma'를 이용하여 프로토 타입을 제작합니다. 'Dribbble'과 'Behance'를 둘러보며 디자인을 공부하며, 사용자 경험과 넛지에 관한 글을 주로 읽습니다.",
+    "communication": "커뮤니케이션",
+    "communicationDetail": "프론트 엔드 개발자는 백엔드 개발자, 디자이너와의 협업이 특히 중요합니다. 원만한 협업과 이해를 위해 백엔드와 디자인에 대한 기본적인 지식을 쌓고 있습니다.",
+    "entrepreneurship": "기업가 정신",
+    "entrepreneurshipDetail": "오직 이익 창출에 목적을 두는 것이 아닌, 사용자 입장에서 생각하고 협업하는 동료의 입장에서 생각하여 창의적이고 현실성 있는 서비스를 개발하고자 합니다. 이러한 행동이 더 큰 이윤을 창출한다고 믿습니다."
+  },
+  "Posts": {
+    "title": "글",
+    "description": "개발하며 느낀점, 알고 있으면 좋은 것들을 작성합니다.",
+    "postDoesntExistMessage": "아직 글이 등록되지 않았습니다"
+  },
+  "Post": {
+    "seriesPosts": "시리즈",
+    "relatedPosts": "이 글과 관련된 글"
+  },
+  "Codes": {
+    "title": "코드",
+    "description": "개발에 도움이 되는 코드입니다.",
+    "codeDoesntExistMessage": "아직 코드가 등록되지 않았습니다"
+  },
+  "Code": {
+    "relatedCodes": "이 코드와 관련된 코드"
+  },
+  "Portfolios": {
+    "title": "포트폴리오",
+    "description": "만들어 보고 싶었던 것들, 혹은 작업한 결과물 포트폴리오 입니다.",
+    "portfolioDoesntExistMessage": "아직 포트폴리오가 등록되지 않았습니다"
+  },
+  "Portfolio": {
+    "relatedPosts": "이 포트폴리오와 관련된 글"
+  }
+}
