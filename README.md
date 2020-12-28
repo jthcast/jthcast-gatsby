@@ -1,6 +1,6 @@
 <p align="center">
   <a rel="noreferrer" target="_blank" alt="logo" href="https://jthcast.github.io">
-    <img width="150" src="./public/favicon.svg">
+    <img width="150" src="./static/favicon.svg">
   </a>
   <h3 align="center">JthCast</h3>
   <p align="center">
