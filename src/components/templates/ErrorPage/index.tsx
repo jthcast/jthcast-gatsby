@@ -4,7 +4,7 @@
 // import { useTranslation } from 'react-i18next';
 // import Button from '../../components/atoms/Button';
 
-// const ErrorPage = (): JSX.Element => {
+// const ErrorPage = (): React.ReactElement => {
 //   const { t } = useTranslation();
 //   return (
 //     <section className="jth-section jth-errorPage">

@@ -4,7 +4,7 @@ import Button from '../Button';
 import { IconAngleDown } from '../Icons';
 
 interface AccordionProps {
-  children?: JSX.Element | JSX.Element[];
+  children?: React.ReactElement | React.ReactElement[];
   className?: string;
   isOpen?: boolean;
   showIcon?: boolean;
@@ -17,7 +17,7 @@ const Accordion = ({
   isOpen = false,
   showIcon = true,
   title,
-}: AccordionProps): JSX.Element => {
+}: AccordionProps): React.ReactElement => {
   const [isOpenState, setIsOpenState] = useState(isOpen);
   const [heightState, setHeightState] = useState(0);
   const refEl = useRef<HTMLDivElement>(null);
@@ -70,9 +70,8 @@ const Accordion = ({
           </Button>
           {showIcon && (
             <IconAngleDown
-              className={`jth-accordion-icon${
-                isOpenState ? ` jth-accordion-icon-reverse` : ``
-              }`}
+              className={`jth-accordion-icon${isOpenState ? ` jth-accordion-icon-reverse` : ``
+                }`}
             />
           )}
         </div>

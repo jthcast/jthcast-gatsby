@@ -21,7 +21,7 @@ const PrismCode = ({
   code,
   language = 'typescript',
   plugins,
-}: IPrismCode): JSX.Element => {
+}: IPrismCode): React.ReactElement => {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -33,9 +33,8 @@ const PrismCode = ({
     <pre className={plugins && plugins.join(' ')}>
       <code
         ref={ref}
-        className={`language-${language}${
-          plugins ? ` ${plugins.join(' ')}` : ''
-        }`}
+        className={`language-${language}${plugins ? ` ${plugins.join(' ')}` : ''
+          }`}
       >
         {code && code.trim()}
       </code>

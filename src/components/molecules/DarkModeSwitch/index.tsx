@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import { initialColorMode } from '../../../recoilStates';
 import './DarkModeSwitch.scss';
 
-const DarkModeSwitch = (): JSX.Element => {
+const DarkModeSwitch = (): React.ReactElement => {
   const [colorMode, setColorMode] = useRecoilState(initialColorMode);
 
   const darkModeHandling = () => {

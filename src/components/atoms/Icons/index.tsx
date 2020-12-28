@@ -173,7 +173,7 @@ const IconTemplate = ({
   rotate,
   onClick,
   iconName,
-}: IconContentProps): JSX.Element => {
+}: IconContentProps): React.ReactElement => {
   return (
     <svg
       viewBox={icons[iconName].viewBox}
@@ -205,7 +205,7 @@ const IconAngleDown = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconAngleDown';
   return (
     <IconTemplate
@@ -225,7 +225,7 @@ const IconArrowToTop = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconArrowToTop';
   return (
     <IconTemplate
@@ -245,7 +245,7 @@ const IconBars = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconBars';
   return (
     <IconTemplate
@@ -265,7 +265,7 @@ const IconCombination = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconCombination';
   return (
     <IconTemplate
@@ -285,7 +285,7 @@ const IconCommentDots = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconCommentDots';
   return (
     <IconTemplate
@@ -305,7 +305,7 @@ const IconEye = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconEye';
   return (
     <IconTemplate
@@ -325,7 +325,7 @@ const IconEnvelope = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconEnvelope';
   return (
     <IconTemplate
@@ -345,7 +345,7 @@ const IconEyeSlash = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconEyeSlash';
   return (
     <IconTemplate
@@ -365,7 +365,7 @@ const IconGithub = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconGithub';
   return (
     <IconTemplate
@@ -385,7 +385,7 @@ const IconGCD = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconGCD';
   return (
     <IconTemplate
@@ -405,7 +405,7 @@ const IconHome = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconHome';
   return (
     <IconTemplate
@@ -425,7 +425,7 @@ const IconLaptopCode = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconLaptopCode';
   return (
     <IconTemplate
@@ -445,7 +445,7 @@ const IconLCM = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconLCM';
   return (
     <IconTemplate
@@ -465,7 +465,7 @@ const IconLink = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconLink';
   return (
     <IconTemplate
@@ -485,7 +485,7 @@ const IconLinkedIn = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconLinkedIn';
   return (
     <IconTemplate
@@ -505,7 +505,7 @@ const IconLogo = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconLogo';
   return (
     <IconTemplate
@@ -525,7 +525,7 @@ const IconObjectGroup = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconObjectGroup';
   return (
     <IconTemplate
@@ -545,7 +545,7 @@ const IconPermutation = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconPermutation';
   return (
     <IconTemplate
@@ -565,7 +565,7 @@ const IconPlay = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconPlay';
   return (
     <IconTemplate
@@ -585,7 +585,7 @@ const IconSearch = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconSearch';
   return (
     <IconTemplate
@@ -605,7 +605,7 @@ const IconSearchPlus = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconSearchPlus';
   return (
     <IconTemplate
@@ -625,7 +625,7 @@ const IconSieve = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconSieve';
   return (
     <IconTemplate
@@ -645,7 +645,7 @@ const IconSpinner = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconSpinner';
   return (
     <IconTemplate
@@ -665,7 +665,7 @@ const IconTimes = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconTimes';
   return (
     <IconTemplate
@@ -685,7 +685,7 @@ const IconTimesCircle = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconTimesCircle';
   return (
     <IconTemplate
@@ -705,7 +705,7 @@ const IconUser = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconUser';
   return (
     <IconTemplate
@@ -725,7 +725,7 @@ const IconUserTie = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const icon = 'IconUserTie';
   return (
     <IconTemplate
@@ -745,7 +745,7 @@ const IconLogoColored = ({
   spin,
   rotate,
   onClick,
-}: IconProps): JSX.Element => {
+}: IconProps): React.ReactElement => {
   const viewBox = '0 0 512 512';
   return (
     <svg

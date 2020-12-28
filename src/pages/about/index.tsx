@@ -25,7 +25,7 @@ type aboutQueryProps = {
   }
 }
 
-const About = (): JSX.Element => {
+const About = (): React.ReactElement => {
   const { t } = useTranslation();
   const query: aboutQueryProps = useStaticQuery(graphql`
     query {

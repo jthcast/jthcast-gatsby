@@ -13,7 +13,7 @@
 //   seq: string;
 // }
 
-// const Portfolio = (): JSX.Element => {
+// const Portfolio = (): React.ReactElement => {
 //   const { t } = useTranslation();
 //   const { seq } = useParams<PortfolioUri>();
 //   const portfolioState = portfoliosData.filter(

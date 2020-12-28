@@ -14,7 +14,7 @@ interface FooterProps {
   className?: string;
 }
 
-const Footer = ({ className }: FooterProps): JSX.Element => {
+const Footer = ({ className }: FooterProps): React.ReactElement => {
   const { t } = useTranslation();
   const scrollToTop = () => {
     window.scrollTo(0, 0);

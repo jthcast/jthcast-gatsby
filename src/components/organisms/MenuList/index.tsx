@@ -15,7 +15,7 @@ interface MenuListProps {
 const MenuList = ({
   className,
   showStartPosition = 'none',
-}: MenuListProps): JSX.Element => {
+}: MenuListProps): React.ReactElement => {
   let firstTabEl = undefined;
   let lastTabEl = undefined;
   const isClient = typeof window !== 'undefined';
@@ -41,6 +41,7 @@ const MenuList = ({
         setMenuState(false);
       }
       if (
+        menuState &&
         event.code === 'Tab' &&
         event.target === lastTabEl &&
         !event.shiftKey
@@ -49,6 +50,7 @@ const MenuList = ({
         firstTabEl.focus();
       }
       if (
+        menuState &&
         event.code === 'Tab' &&
         event.target === firstTabEl &&
         event.shiftKey

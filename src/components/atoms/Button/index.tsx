@@ -5,7 +5,7 @@ import './Button.scss';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   ariaLabel?: string;
   block?: boolean;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   className?: string;
   danger?: boolean;
   disabled?: boolean;
@@ -42,7 +42,7 @@ const Button = ({
   formTarget,
   lineType,
   target = '_blank',
-}: ButtonProps): JSX.Element => {
+}: ButtonProps): React.ReactElement => {
   return (
     <>
       {buttonType === 'button' ? (
@@ -60,7 +60,7 @@ const Button = ({
           formAction={formAction}
         >
           {loading && <IconSpinner spin className="loading" />}
-          {children && <span>{children}</span>}
+          {children}
         </button>
       ) : (
           <a

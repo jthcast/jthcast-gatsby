@@ -6,7 +6,7 @@ import Layout from '../../components/layout';
 import { Query } from '../../graphql-types';
 import './Portfolios.scss';
 
-const Portfolios = (): JSX.Element => {
+const Portfolios = (): React.ReactElement => {
   const query: Query = useStaticQuery(graphql`
     query {
       site {

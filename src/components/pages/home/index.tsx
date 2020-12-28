@@ -11,7 +11,7 @@ import Button from '../../atoms/Button';
 import useAnimation from '../../../customHooks/useAnimation';
 import { Link } from 'gatsby';
 
-const Home = (): JSX.Element => {
+const Home = (): React.ReactElement => {
   const { t } = useTranslation();
   useAnimation();
   return (

@@ -7,7 +7,7 @@ import { IconTimes } from '../Icons';
 
 interface HeaderMessageProps {
   allowClose?: boolean;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   className?: string;
 }
 
@@ -15,7 +15,7 @@ const HeaderMessage = ({
   allowClose = true,
   children,
   className,
-}: HeaderMessageProps): JSX.Element => {
+}: HeaderMessageProps): React.ReactElement => {
   const [headerMessage, setHeaderMessageState] = useRecoilState(
     headerMessageState
   );

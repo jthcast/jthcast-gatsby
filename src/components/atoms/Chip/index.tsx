@@ -5,7 +5,7 @@ import Button from '../Button';
 
 interface ChipProps {
   allowClose?: boolean;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   className?: string;
   onClose?: () => void;
   ghost?: boolean;
@@ -17,7 +17,7 @@ const Chip = ({
   className,
   onClose,
   ghost = false,
-}: ChipProps): JSX.Element => {
+}: ChipProps): React.ReactElement => {
   const [isClose, setIsClose] = useState(false);
 
   const closeHandling = () => {
@@ -31,9 +31,8 @@ const Chip = ({
     <>
       {!isClose && (
         <span
-          className={`jth-chip${ghost ? ` jth-chip-ghost` : ``}${
-            className ? ` ${className}` : ``
-          }`}
+          className={`jth-chip${ghost ? ` jth-chip-ghost` : ``}${className ? ` ${className}` : ``
+            }`}
         >
           {children}
           {allowClose && (

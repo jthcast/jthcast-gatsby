@@ -30,7 +30,7 @@ const Card = ({
   className,
   item,
   showContent = false,
-}: CardProps): JSX.Element => {
+}: CardProps): React.ReactElement => {
   return (
     <>
       {item && (

@@ -8,7 +8,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby';
 import Layout from '../../components/layout';
 import { Query } from '../../graphql-types';
 
-const Codes = (): JSX.Element => {
+const Codes = (): React.ReactElement => {
   const query: Query = useStaticQuery(graphql`
     query {
       site {

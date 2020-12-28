@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component<Props, ErrorBoundaryInterface> {
   //   console.error('Uncaught error:', error, errorInfo);
   // }
 
-  render(): JSX.Element | ReactNode {
+  render(): React.ReactElement | ReactNode {
     const { hasError } = this.state;
     if (hasError) {
       return <ErrorPage />;

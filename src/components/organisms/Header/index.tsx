@@ -21,7 +21,7 @@ const Header = ({
   showType = 'top',
   subTitle,
   title,
-}: HeaderProps): JSX.Element => {
+}: HeaderProps): React.ReactElement => {
   const { t } = useTranslation();
   const [scrollState, setScrollState] = useState(false);
   const prevScrollRef = useRef(0);

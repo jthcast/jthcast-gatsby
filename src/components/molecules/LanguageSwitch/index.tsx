@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import Switch from '../../atoms/Switch';
 import { initialLanguageMode } from '../../../recoilStates';
 
-const LanguageSwitch = (): JSX.Element => {
+const LanguageSwitch = (): React.ReactElement => {
   const { i18n } = useTranslation();
   const [language, setLanguage] = useRecoilState(initialLanguageMode);
 

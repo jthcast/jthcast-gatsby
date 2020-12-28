@@ -4,7 +4,7 @@ import Button from '../../atoms/Button';
 
 interface ScrollButtonProps {
   ariaLabel?: string;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   className?: string;
   ghost?: boolean;
   onClick?: () => void;
@@ -20,7 +20,7 @@ const ScrollButton = ({
   onClick,
   showType = 'notTop',
   tabIndex,
-}: ScrollButtonProps): JSX.Element => {
+}: ScrollButtonProps): React.ReactElement => {
   const [scrollState, setScrollState] = useState(false);
   const [isTopState, setIsTopState] = useState(false);
   const prevScrollRef = useRef(0);

@@ -26,7 +26,7 @@ const Switch = ({
   onClick,
   tabIndex,
   unCheckedChildren,
-}: SwitchProps): JSX.Element => {
+}: SwitchProps): React.ReactElement => {
   const onClickHandling = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

@@ -15,17 +15,17 @@ export interface InputProps {
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onPressEnter?: (event: React.KeyboardEvent | React.MouseEvent) => void;
   placeholder?: string;
-  prefix?: string | JSX.Element;
-  suffix?: string | JSX.Element;
+  prefix?: string | React.ReactElement;
+  suffix?: string | React.ReactElement;
   type?:
-    | 'color'
-    | 'date'
-    | 'email'
-    | 'number'
-    | 'password'
-    | 'search'
-    | 'text'
-    | 'url';
+  | 'color'
+  | 'date'
+  | 'email'
+  | 'number'
+  | 'password'
+  | 'search'
+  | 'text'
+  | 'url';
   value?: string;
 }
 
@@ -45,7 +45,7 @@ const Input = ({
   suffix,
   type = 'text',
   value,
-}: InputProps): JSX.Element => {
+}: InputProps): React.ReactElement => {
   const [inputRef, setFocus] = useFocus();
 
   const [inputValue, setInputValue] = useState(defaultValue || value || '');

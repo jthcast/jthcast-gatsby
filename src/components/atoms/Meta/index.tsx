@@ -36,7 +36,7 @@
 //   height = '630',
 //   fbAppId,
 //   siteName = 'JthCast',
-// }: MetaProps): JSX.Element => {
+// }: MetaProps): React.ReactElement => {
 //   const { t } = useTranslation();
 //   const languageValue = useRecoilValue(languageState);
 //   const lang = language || languageValue;
