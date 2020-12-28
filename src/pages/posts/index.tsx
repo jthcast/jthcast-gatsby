@@ -9,8 +9,10 @@ import useDebounce from '../../customHooks/useDebounce';
 import useFocus from '../../customHooks/useFocus';
 import Layout from '../../components/layout';
 import { graphql, Link, useStaticQuery } from 'gatsby';
+import Button from '../../components/atoms/Button';
+import { navigate } from 'gatsby';
 
-const Posts = (): JSX.Element => {
+const Posts = (): React.ReactElement => {
   const query = useStaticQuery(graphql`
     query AllPosts{
       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
@@ -43,7 +45,13 @@ const Posts = (): JSX.Element => {
   `);
   const postsData: Array<CardInterface> = query.allMarkdownRemark.nodes;
   const [posts, setPosts] = useState<Array<CardInterface>>(postsData);
+  const queryObject = useQuery();
+  const [searchInputValue, setSearchInputValue] = useState<string>(queryObject.query ? queryObject.query : '');
+  const [searchInputRef, setFocus] = useFocus();
+  const debounceValue = useDebounce(searchInputValue.toLowerCase(), 50);
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+
   const tags = postsData.reduce<{ [key: string]: number }>(
     (acc, data) => {
       data.frontmatter.tags?.forEach((tagItem) => {
@@ -51,25 +59,26 @@ const Posts = (): JSX.Element => {
       });
       return acc;
     },
-    { All: postsData.length }
+    {}
   );
-  const queryObject = useQuery();
-  const filterPosts = useCallback(() => {
-    // const tagKeyword = queryObject.tag;
-    // const results = posts.filter((post) => {
-    //   if (tagKeyword) {
-    //     return post.frontmatter.tags?.includes(tagKeyword);
-    //   }
-    //   return posts;
-    // });
-    // setPosts(results);
-  }, [queryObject.tag]);
-  const [searchInputValue, setSearchInputValue] = useState<string>('');
-  const [searchInputRef, setFocus] = useFocus();
+
+  const tagHandling = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const tag = event.currentTarget.firstChild.firstChild.nodeValue;
+    const isAdded = searchInputValue.toLowerCase().split(' ').includes(tag.toLowerCase());
+    const reg = new RegExp(tag, 'gi');
+    if (isAdded) {
+      const tagRemovedString = searchInputValue.replace(reg, '').trim();
+      setSearchInputValue(tagRemovedString);
+      return;
+    }
+    setSearchInputValue((searchInputValue.trim() + ` ${tag}`).trim());
+  };
+
   const clearInput = () => {
     setSearchInputValue('');
     setFocus();
   };
+
   const searchInputKeyDownHandling = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
@@ -81,25 +90,44 @@ const Posts = (): JSX.Element => {
       clearInput();
     }
   };
+
   const searchInputChangeHandling = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const keyword = event.currentTarget.value;
     setSearchInputValue(keyword);
   };
-  const debounceValue = useDebounce(searchInputValue.toLowerCase(), 0);
-  const [isLoading, setIsLoading] = useState(false);
+
   const searchHandling = useCallback(() => {
+    const query = queryObject.query ? queryObject.query : ``;
+    const tagColorHandling = () => {
+      const tags = document.querySelectorAll(`.jth-posts-tag span`);
+      tags.forEach((tag) => {
+        const tagValue = tag.firstChild.nodeValue;
+        if (query && query.toLowerCase().split(' ').find((value) => tagValue === value)) {
+          tag.classList.add(`jth-posts-tag-active`);
+          return;
+        }
+        tag.classList.remove(`jth-posts-tag-active`);
+      });
+    }
     setIsLoading(true);
-    const filteredPosts = postsData.filter((post) => post.frontmatter.title.toLowerCase().includes(debounceValue));
+    navigate(searchInputValue ? `?query=${encodeURIComponent(searchInputValue)}` : `/posts/`, { replace: true });
+    tagColorHandling();
+    if (!searchInputValue) {
+      setPosts(postsData);
+      setIsLoading(false);
+      return;
+    }
+    const filteredPosts = postsData.filter((post) => {
+      const target = `${post.frontmatter.title} ${post.frontmatter.tags ? post.frontmatter.tags.join(' ') : ''}`.toLowerCase().trim();
+      return (
+        query.toLowerCase().split(' ').every((value) => target.includes(value))
+      )
+    });
     setPosts(filteredPosts);
     setIsLoading(false);
-  }, [debounceValue]);
-
-  useEffect(() => {
-    filterPosts();
-    setSearchInputValue('');
-  }, [filterPosts]);
+  }, [postsData, searchInputValue, queryObject.query]);
 
   useEffect(() => {
     searchHandling();
@@ -114,17 +142,19 @@ const Posts = (): JSX.Element => {
               <h1>{t('Posts.postDoesntExistMessage')}</h1>
             </div>
           )}
-          {/* {tags.All > 0 && (
+          {tags && (
             <div className="jth-posts-tags">
               {Object.entries(tags).map((tagItem) => {
                 return (
-                  <Chip className="jth-posts-tag" ghost allowClose={false} key={tagItem[0]} onClick={filterPosts}>
-                    {tagItem[0]} {tagItem[1]}
-                  </Chip>
+                  <Button ghost lineType="none" className="jth-posts-tag" onClick={tagHandling} key={tagItem[0]}>
+                    <Chip ghost allowClose={false}>
+                      {tagItem[0]} {tagItem[1]}
+                    </Chip>
+                  </Button>
                 );
               })}
             </div>
-          )} */}
+          )}
           {postsData.length > 0 && (
             <div className="jth-posts-search">
               <input
