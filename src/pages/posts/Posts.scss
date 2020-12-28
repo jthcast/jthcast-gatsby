@@ -10,13 +10,24 @@
 
     .jth-posts-tag {
       font-size: 0.9rem;
-    }
 
-    a {
-      &:before {
-        content: none;
+      &:hover {
+        opacity: 1;
+      }
+
+      &:focus {
+        opacity: 1;
+      }
+
+      &:active {
+        opacity: 1;
       }
     }
+  }
+
+  .jth-posts-tag-active {
+    background-color: $secondaryBrandColor;
+    color: $white;
   }
 
   .jth-posts-search {
@@ -74,8 +85,7 @@
   .jth-posts-loading {
     margin-top: 5rem;
     font-size: 2rem;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
   }
 
   .jth-posts-list {
