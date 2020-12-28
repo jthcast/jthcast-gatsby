@@ -5,7 +5,7 @@ import Button from '../Button';
 
 interface ChipProps {
   allowClose?: boolean;
-  children?: React.ReactElement;
+  children?: React.ReactElement | Array<any>;
   className?: string;
   onClose?: () => void;
   ghost?: boolean;
