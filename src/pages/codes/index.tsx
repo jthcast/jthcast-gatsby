@@ -2,40 +2,56 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useDebounce from '../../customHooks/useDebounce';
 import useFocus from '../../customHooks/useFocus';
-import { IconSearch, IconSpinner, IconTimesCircle } from '../../components/atoms/Icons';
+import { IconSearch, IconSpinner, IconTimesCircle, IconTemplate } from '../../components/atoms/Icons';
 import './Codes.scss';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { graphql, Link, navigate, useStaticQuery } from 'gatsby';
 import Layout from '../../components/layout';
-import { Query } from '../../graphql-types';
+import useQuery from '../../customHooks/useQuery';
+
+export interface CodesProps {
+  excerpt?: string;
+  frontmatter?: {
+    date?: string;
+    title?: string;
+    icon?: string;
+    series?: string;
+    tags?: string[];
+  }
+  fields?: {
+    slug?: string;
+  }
+}
 
 const Codes = (): React.ReactElement => {
-  const query: Query = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+  const query = useStaticQuery(graphql`
+    query AllCodes{
+      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/codes)/"}, frontmatter: {visible: {eq: true}}}) {
         nodes {
           excerpt
+          frontmatter {
+            title
+            date(formatString: "YYYY-MM-DD")
+            description
+            icon
+            series
+            tags
+          }
           fields {
             slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
           }
         }
       }
     }
   `);
-  const codes = query.allMarkdownRemark.nodes;
+  const codesData: Array<CodesProps> = query.allMarkdownRemark.nodes;
   const { t } = useTranslation();
-  // const [codes, setCodes] = useState<Array<CodeProps>>(codesData);
-  const [searchInputValue, setSearchInputValue] = useState('');
+  const [codes, setCodes] = useState<Array<CodesProps>>(codesData);
+  const queryObject = useQuery();
+  const [searchInputValue, setSearchInputValue] = useState<string>(queryObject.query ? queryObject.query : '');
   const [searchInputRef, setFocus] = useFocus();
+  const debounceValue = useDebounce(searchInputValue.toLowerCase(), 50);
+  const [isLoading, setIsLoading] = useState(false);
+
   const clearInput = () => {
     setSearchInputValue('');
     setFocus();
@@ -57,19 +73,25 @@ const Codes = (): React.ReactElement => {
     const keyword = event.currentTarget.value;
     setSearchInputValue(keyword);
   };
-  const debounceValue = useDebounce(searchInputValue, 100);
-  const [isLoading, setIsLoading] = useState(false);
+
   const searchHandling = useCallback(() => {
+    const query = queryObject.query ? queryObject.query : ``;
     setIsLoading(true);
-    // const filteredCodes = codesData.filter((code) => {
-    //   return (
-    //     code.title?.includes(debounceValue) ||
-    //     code.subTitle?.includes(debounceValue)
-    //   );
-    // });
-    // setCodes(filteredCodes);
+    navigate(searchInputValue ? `?query=${encodeURIComponent(searchInputValue)}` : `/codes/`, { replace: true });
+    if (!searchInputValue) {
+      setCodes(codesData);
+      setIsLoading(false);
+      return;
+    }
+    const filteredCodes = codesData.filter((code) => {
+      const target = code.frontmatter.title.toLowerCase().trim();
+      return (
+        query.toLowerCase().split(' ').every((param) => target.includes(param))
+      )
+    });
+    setCodes(filteredCodes);
     setIsLoading(false);
-  }, [debounceValue]);
+  }, [codesData, searchInputValue, queryObject.query]);
 
   useEffect(() => {
     searchHandling();
@@ -78,12 +100,12 @@ const Codes = (): React.ReactElement => {
     <Layout title={t('Codes.title')} description={t('Codes.description')}>
       <section className="jth-codes">
         <div className="jth-container">
-          {codes.length === 0 && (
+          {codesData.length === 0 && (
             <div className="jth-codes-nothing">
               <h1>{t('Codes.codeDoesntExistMessage')}</h1>
             </div>
           )}
-          {codes.length > 0 && (
+          {codesData.length > 0 && (
             <div className="jth-codes-search">
               <input
                 aria-label="Search"
@@ -121,20 +143,20 @@ const Codes = (): React.ReactElement => {
               <h1>{t('Common.searchResultDoesntExist')}</h1>
             </div>
           )}
-          {/* {!isLoading && codes.length > 0 && (
+          {!isLoading && codes.length > 0 && (
             <ul className="jth-codes-list">
               {codes.map((code) => {
                 return (
-                  <li key={code.seq}>
-                    <Link to={`/codes/${code.seq}`} aria-label={code.title}>
-                      {code.icon && code.icon}
-                      <p>{code.title}</p>
+                  <li key={code.fields.slug}>
+                    <Link to={code.fields.slug} aria-label={code.frontmatter.title}>
+                      {code.frontmatter.icon && IconTemplate({ iconName: code.frontmatter.icon })}
+                      <p>{code.frontmatter.title}</p>
                     </Link>
                   </li>
                 );
               })}
             </ul>
-          )} */}
+          )}
         </div>
       </section>
     </Layout>

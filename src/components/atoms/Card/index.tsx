@@ -1,22 +1,23 @@
 import React from 'react';
-import Img, { FluidObject } from "gatsby-image";
+import Img, { FixedObject, FluidObject } from "gatsby-image";
 import './Card.scss';
 
 export interface CardInterface {
-  excerpt: string;
-  frontmatter: {
+  excerpt?: string;
+  frontmatter?: {
     date?: string;
     title?: string;
     image?: {
-      childImageSharp: {
-        fluid: FluidObject;
+      childImageSharp?: {
+        fluid?: FluidObject;
+        fixed?: FixedObject;
       }
     }
     series?: string;
     tags?: string[];
   }
-  fields: {
-    slug: string;
+  fields?: {
+    slug?: string;
   }
 }
 
@@ -37,7 +38,10 @@ const Card = ({
         <div className={`jth-card${className ? ` ${className}` : ``}`}>
           {item.frontmatter.image &&
             <div className="jth-card-image">
-              <Img fluid={item.frontmatter.image.childImageSharp.fluid} alt={item.frontmatter.title} />
+              <Img
+                fluid={item.frontmatter.image.childImageSharp.fluid && item.frontmatter.image.childImageSharp.fluid}
+                fixed={item.frontmatter.image.childImageSharp.fixed && item.frontmatter.image.childImageSharp.fixed}
+                alt={item.frontmatter.title} />
             </div>}
           {(item.frontmatter.tags || item.frontmatter.date) && (
             <div className="jth-card-info">

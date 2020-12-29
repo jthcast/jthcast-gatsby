@@ -1,35 +1,65 @@
-import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
+import Img, { FixedObject, FluidObject } from "gatsby-image";
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 import { IconGithub, IconPlay } from '../../components/atoms/Icons';
 import Layout from '../../components/layout';
-import { Query } from '../../graphql-types';
 import './Portfolios.scss';
 
-const Portfolios = (): React.ReactElement => {
-  const query: Query = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
+export interface PortfoliosProps {
+  excerpt?: string;
+  frontmatter?: {
+    title?: string;
+    date?: string;
+    description?: string;
+    image?: {
+      childImageSharp?: {
+        fluid?: FluidObject;
+        fixed?: FixedObject;
       }
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    }
+    series?: string;
+    detailPage?: boolean;
+    github?: string;
+    demo?: string;
+    visible?: boolean;
+  }
+  fields?: {
+    slug?: string;
+  }
+}
+
+const Portfolios = (): React.ReactElement => {
+  const query = useStaticQuery(graphql`
+    query AllPortfolios{
+      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/portfolios)/"}, frontmatter: {visible: {eq: true}}}) {
         nodes {
           excerpt
+          frontmatter {
+            title
+            date(formatString: "YYYY-MM-DD")
+            description
+            image {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
+                }
+              }
+            }
+            series
+            detailPage
+            github
+            demo
+            visible
+          }
           fields {
             slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
           }
         }
       }
     }
   `);
-  const portfolios = query.allMarkdownRemark.nodes;
+  const portfolios: Array<PortfoliosProps> = query.allMarkdownRemark.nodes;
   const { t } = useTranslation();
   return (
     <Layout title={t('Portfolios.title')} description={t('Portfolios.description')}>
@@ -42,33 +72,33 @@ const Portfolios = (): React.ReactElement => {
           )}
           {portfolios.length > 0 && (
             <ul className="jth-portfolios-list">
-              {/* {portfolios.map((portfolio) => {
+              {portfolios.map((portfolio) => {
                 return (
-                  <li key={portfolio.seq}>
+                  <li key={portfolio.fields.slug}>
                     <article className="jth-portfolios-item">
-                      {portfolio.image && (
+                      {portfolio.frontmatter.image && portfolio.frontmatter.detailPage && (
                         <Link
-                          to={`/portfolio/${portfolio.seq}`}
-                          aria-label={portfolio.title}
+                          to={portfolio.fields.slug}
+                          aria-label={portfolio.frontmatter.title}
                         >
-                          <img src={portfolio.image} alt={portfolio.title} />
+                          <Img fluid={portfolio.frontmatter.image.childImageSharp.fluid} alt={portfolio.frontmatter.title} />
                         </Link>
                       )}
                       <div className="jth-portfolios-item-info">
-                        {portfolio.title && portfolio.detailPage ? (
+                        {portfolio.frontmatter.title && portfolio.frontmatter.detailPage ? (
                           <Link
-                            to={`/portfolio/${portfolio.seq}`}
-                            aria-label={portfolio.title}
+                            to={portfolio.fields.slug}
+                            aria-label={portfolio.frontmatter.title}
                           >
-                            <h2>{portfolio.title}</h2>
+                            <h2>{portfolio.frontmatter.title}</h2>
                           </Link>
                         ) : (
-                          <h2>{portfolio.title}</h2>
-                        )}
+                            <h2>{portfolio.frontmatter.title}</h2>
+                          )}
                         <div className="jth-portfolios-item-info-links">
-                          {portfolio.github && (
+                          {portfolio.frontmatter.github && (
                             <a
-                              href={portfolio.github}
+                              href={portfolio.frontmatter.github}
                               target="_blank"
                               rel="noreferrer"
                               aria-label="github"
@@ -76,9 +106,9 @@ const Portfolios = (): React.ReactElement => {
                               <IconGithub />
                             </a>
                           )}
-                          {portfolio.demo && (
+                          {portfolio.frontmatter.demo && (
                             <a
-                              href={portfolio.demo}
+                              href={portfolio.frontmatter.demo}
                               target="_blank"
                               rel="noreferrer"
                               aria-label="github"
@@ -88,11 +118,11 @@ const Portfolios = (): React.ReactElement => {
                           )}
                         </div>
                       </div>
-                      <p>{portfolio.content}</p>
+                      <p>{portfolio.frontmatter.description}</p>
                     </article>
                   </li>
                 );
-              })} */}
+              })}
             </ul>
           )}
         </div>
