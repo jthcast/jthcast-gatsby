@@ -94,22 +94,22 @@ const Header = ({
             ))} */}
           <ul className="jth-header-items-right">
             <li>
-              <Link to="/about/" activeClassName="jth-header-avtive">
+              <Link to="/about/" activeClassName="jth-header-avtive" partiallyActive>
                 {t('Header.about')}
               </Link>
             </li>
             <li>
-              <Link to="/posts/" activeClassName="jth-header-avtive">
+              <Link to="/posts/" activeClassName="jth-header-avtive" partiallyActive>
                 {t('Header.posts')}
               </Link>
             </li>
             <li>
-              <Link to="/codes/" activeClassName="jth-header-avtive">
+              <Link to="/codes/" activeClassName="jth-header-avtive" partiallyActive>
                 {t('Header.codes')}
               </Link>
             </li>
             <li>
-              <Link to="/portfolios/" activeClassName="jth-header-avtive">
+              <Link to="/portfolios/" activeClassName="jth-header-avtive" partiallyActive>
                 {t('Header.portfolios')}
               </Link>
             </li>
