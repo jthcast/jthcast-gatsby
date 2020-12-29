@@ -24,7 +24,7 @@ const Posts = (): React.ReactElement => {
             description
             image {
               childImageSharp {
-                fluid {
+                fluid(quality: 90) {
                   ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
@@ -48,7 +48,7 @@ const Posts = (): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
 
-  const tags = postsData.reduce<{ [key: string]: number }>(
+  const tags = postsData.reduce<Record<string, number>>(
     (acc, data) => {
       data.frontmatter.tags?.forEach((tagItem) => {
         acc[tagItem] = acc[tagItem] ? acc[tagItem] + 1 : 1;
@@ -99,7 +99,7 @@ const Posts = (): React.ReactElement => {
     const tagColorHandling = () => {
       const tags = document.querySelectorAll(`.jth-posts-tag span`);
       tags.forEach((tag) => {
-        const tagValue = tag.firstChild.nodeValue;
+        const tagValue = tag.firstChild.nodeValue.toLowerCase();
         if (query && query.toLowerCase().split(' ').find((value) => tagValue === value)) {
           tag.classList.add(`jth-posts-tag-active`);
           return;
@@ -140,11 +140,11 @@ const Posts = (): React.ReactElement => {
           )}
           {tags && (
             <div className="jth-posts-tags">
-              {Object.entries(tags).map((tagItem) => {
+              {Object.keys(tags).map((tagItem) => {
                 return (
                   <Button ghost lineType="none" className="jth-posts-tag" onClick={tagHandling} key={tagItem[0]}>
                     <Chip ghost allowClose={false}>
-                      {tagItem[0]} {tagItem[1]}
+                      {tagItem}
                     </Chip>
                   </Button>
                 );
