@@ -736,6 +736,10 @@ export type FileFieldsEnum =
   | 'childMarkdownRemark___frontmatter___title'
   | 'childMarkdownRemark___frontmatter___description'
   | 'childMarkdownRemark___frontmatter___date'
+  | 'childMarkdownRemark___frontmatter___visible'
+  | 'childMarkdownRemark___frontmatter___icon'
+  | 'childMarkdownRemark___frontmatter___series'
+  | 'childMarkdownRemark___frontmatter___tags'
   | 'childMarkdownRemark___frontmatter___image___sourceInstanceName'
   | 'childMarkdownRemark___frontmatter___image___absolutePath'
   | 'childMarkdownRemark___frontmatter___image___relativePath'
@@ -772,8 +776,9 @@ export type FileFieldsEnum =
   | 'childMarkdownRemark___frontmatter___image___publicURL'
   | 'childMarkdownRemark___frontmatter___image___id'
   | 'childMarkdownRemark___frontmatter___image___children'
-  | 'childMarkdownRemark___frontmatter___series'
-  | 'childMarkdownRemark___frontmatter___tags'
+  | 'childMarkdownRemark___frontmatter___detailPage'
+  | 'childMarkdownRemark___frontmatter___github'
+  | 'childMarkdownRemark___frontmatter___demo'
   | 'childMarkdownRemark___fields___slug'
   | 'childMarkdownRemark___excerpt'
   | 'childMarkdownRemark___rawMarkdownBody'
@@ -902,9 +907,14 @@ export type Frontmatter = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
-  image?: Maybe<File>;
+  visible?: Maybe<Scalars['Boolean']>;
+  icon?: Maybe<Scalars['String']>;
   series?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  image?: Maybe<File>;
+  detailPage?: Maybe<Scalars['Boolean']>;
+  github?: Maybe<Scalars['String']>;
+  demo?: Maybe<Scalars['String']>;
 };
 
 
@@ -919,9 +929,14 @@ export type FrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
-  image?: Maybe<FileFilterInput>;
+  visible?: Maybe<BooleanQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
   series?: Maybe<StringQueryOperatorInput>;
   tags?: Maybe<StringQueryOperatorInput>;
+  image?: Maybe<FileFilterInput>;
+  detailPage?: Maybe<BooleanQueryOperatorInput>;
+  github?: Maybe<StringQueryOperatorInput>;
+  demo?: Maybe<StringQueryOperatorInput>;
 };
 
 export type ImageCropFocus = 
@@ -1626,6 +1641,10 @@ export type MarkdownRemarkFieldsEnum =
   | 'frontmatter___title'
   | 'frontmatter___description'
   | 'frontmatter___date'
+  | 'frontmatter___visible'
+  | 'frontmatter___icon'
+  | 'frontmatter___series'
+  | 'frontmatter___tags'
   | 'frontmatter___image___sourceInstanceName'
   | 'frontmatter___image___absolutePath'
   | 'frontmatter___image___relativePath'
@@ -1688,8 +1707,9 @@ export type MarkdownRemarkFieldsEnum =
   | 'frontmatter___image___childMarkdownRemark___timeToRead'
   | 'frontmatter___image___childMarkdownRemark___tableOfContents'
   | 'frontmatter___image___childMarkdownRemark___children'
-  | 'frontmatter___series'
-  | 'frontmatter___tags'
+  | 'frontmatter___detailPage'
+  | 'frontmatter___github'
+  | 'frontmatter___demo'
   | 'fields___slug'
   | 'excerpt'
   | 'rawMarkdownBody'
