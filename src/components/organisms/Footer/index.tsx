@@ -75,6 +75,7 @@ const Footer = ({ className }: FooterProps): React.ReactElement => {
         </ul>
       </nav>
       <ScrollButton
+        ariaLabel="ScrollTop"
         tabIndex={-1}
         onClick={scrollToTop}
         showType="notTopAndUp"
