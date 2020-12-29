@@ -15,21 +15,17 @@ import { navigate } from 'gatsby';
 const Posts = (): React.ReactElement => {
   const query = useStaticQuery(graphql`
     query AllPosts{
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/posts)/"}, frontmatter: {visible: {eq: true}}}) {
         nodes {
           excerpt
           frontmatter {
-            date(formatString: "YYYY-MM-DD")
             title
+            date(formatString: "YYYY-MM-DD")
+            description
             image {
               childImageSharp {
                 fluid {
-                  base64
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
-                  srcWebp
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
             }
@@ -122,7 +118,7 @@ const Posts = (): React.ReactElement => {
     const filteredPosts = postsData.filter((post) => {
       const target = `${post.frontmatter.title} ${post.frontmatter.tags ? post.frontmatter.tags.join(' ') : ''}`.toLowerCase().trim();
       return (
-        query.toLowerCase().split(' ').every((value) => target.includes(value))
+        query.toLowerCase().split(' ').every((param) => target.includes(param))
       )
     });
     setPosts(filteredPosts);
@@ -195,7 +191,7 @@ const Posts = (): React.ReactElement => {
               {posts.map((post) => {
                 return (
                   <li key={post.fields.slug}>
-                    <Link to={`/posts${post.fields.slug}`} aria-label={post.frontmatter.title}>
+                    <Link to={post.fields.slug} aria-label={post.frontmatter.title}>
                       <Card item={post} />
                     </Link>
                   </li>
