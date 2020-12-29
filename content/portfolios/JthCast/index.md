@@ -1,10 +1,13 @@
 ---
-title: Hello World
+title: JthCast
 date: '2015-05-01T22:12:03.284Z'
 description: 'Hello World'
 image: salty_egg.jpg
 series: 'jthCast'
-tags: ['알고리즘', '잡담']
+detailPage: true
+github: 'https://github.com/jthcast/jthcast-client/'
+demo: 'https://jthcast.github.io/'
+visible: true
 ---
 
 This is my first post on my new fake blog! How exciting!
