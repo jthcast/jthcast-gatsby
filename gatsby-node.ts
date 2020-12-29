@@ -57,7 +57,7 @@ export const createPages = async ({
         index === posts.length - 1 ? null : posts[index + 1].id;
 
       createPage({
-        path: `/posts${post.fields?.slug}` || '/404',
+        path: `${post.fields?.slug}` || '/404',
         component: blogPost,
         context: {
           id: post.id,
