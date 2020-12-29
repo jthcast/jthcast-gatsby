@@ -83,9 +83,7 @@
       }
 
       a {
-        &:before {
-          content: none;
-        }
+        border-bottom: none;
       }
     }
 

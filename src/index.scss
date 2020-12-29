@@ -75,6 +75,7 @@ a {
   // height: fit-content;
   font-weight: bold;
   z-index: 1;
+  border-bottom: rem(2px) solid var(--secondary-brand-base);
 
   // &:before{
   //   content: '';
@@ -121,6 +122,10 @@ blockquote {
   background: var(--group-base);
   border-bottom-right-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+}
+
+.gatsby-resp-image-link {
+  border-bottom: none;
 }
 
 .jth-text {
@@ -187,10 +192,7 @@ blockquote {
 
 .jth-router-link {
   color: var(--color-down);
-
-  &:before {
-    content: none;
-  }
+  border-bottom: none;
 }
 
 .jth-svg-fill {

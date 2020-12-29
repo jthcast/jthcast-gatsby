@@ -8,10 +8,7 @@
 
     a {
       margin: 0 1.5rem 0 0;
-
-      &:before {
-        content: none;
-      }
+      border-bottom: none;
 
       &:nth-last-child(1) {
         margin-right: 0;

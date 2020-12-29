@@ -26,16 +26,13 @@
     max-width: $maxWidthHeader;
 
     .jth-header-avtive {
-      border-bottom: 0.15rem solid $color;
+      border-bottom: rem(2px) solid $secondaryBrandColor;
     }
   }
 
   a {
     color: $color;
-
-    &:before {
-      content: none;
-    }
+    border-bottom: none;
   }
 
   ul {

@@ -1,6 +1,6 @@
-@import "../../../mixins";
+@import '../../../mixins';
 
-@mixin button(){
+@mixin button() {
   position: relative;
   display: inline-block;
   padding: 0.5rem;
@@ -10,114 +10,114 @@
   border: 0.063rem solid $borderColor;
   border-radius: 0.125rem;
   cursor: pointer;
-  transition: all .2s;
+  transition: all 0.2s;
   font-weight: normal;
 
-  &:hover{
+  &:hover {
     opacity: 0.8;
     border: 0.063rem solid $primaryBrandColor;
     color: $primaryBrandColor;
   }
 
-  &:focus{
+  &:focus {
     opacity: 0.8;
     border: 0.063rem solid $primaryBrandColor;
     color: $primaryBrandColor;
   }
 
-  &:active{
+  &:active {
     border: 0.063rem solid $primaryBrandColor;
     color: $primaryBrandColor;
   }
 
-  &:before{
+  &:before {
     content: none;
   }
 }
 
-@mixin jth-icon{
+@mixin jth-icon {
   color: $primaryBrandColor;
 }
 
-.jth-button{
+.jth-button {
   @include button();
 
-  .jth-icon{
+  .jth-icon {
     vertical-align: middle;
   }
 
-  .loading{
+  .loading {
     margin: 0 0.938rem 0 0;
   }
 }
 
-.jth-button.jth-button-danger{
+.jth-button.jth-button-danger {
   border: 0.063rem solid $danger;
   color: $danger;
 
-  &:hover{
+  &:hover {
     color: $danger;
   }
 
-  &:focus{
+  &:focus {
     color: $danger;
   }
 
-  &:active{
+  &:active {
     border: 0.063rem solid $danger;
     color: $danger;
   }
 }
 
-.jth-button-block{
+.jth-button-block {
   width: inherit;
   height: inherit;
 }
 
-.jth-button-line-primary{
+.jth-button-line-primary {
   background-color: $primaryBrandColor;
   color: $white;
   border: 1px solid $primaryBrandColor;
 
-  &:hover{
+  &:hover {
     background-color: $primaryBrandColor;
     color: $white;
     border: 1px solid $primaryBrandColor;
   }
 
-  &:focus{
+  &:focus {
     background-color: $primaryBrandColor;
     color: $white;
     border: 1px solid $primaryBrandColor;
   }
 
-  &:active{
+  &:active {
     background-color: $primaryBrandColor;
     color: $white;
     border: 1px solid $primaryBrandColor;
   }
 }
 
-.jth-button-line-reverseBackground{
+.jth-button-line-reverseBackground {
   background-color: $color;
   color: $backgroundColor;
   border: 1px solid $color;
 
-  &:hover{
+  &:hover {
     opacity: 1;
     background-color: $color;
     color: $backgroundColor;
     border: 1px solid $color;
   }
 
-  &:focus{
+  &:focus {
     opacity: 1;
     background-color: $color;
     color: $backgroundColor;
     border: 1px solid $color;
   }
 
-  &:active{
+  &:active {
     opacity: 1;
     background-color: $color;
     color: $backgroundColor;
@@ -125,160 +125,160 @@
   }
 }
 
-.jth-button-line-primary.jth-button-danger{
+.jth-button-line-primary.jth-button-danger {
   background-color: $backgroundColor;
   color: $danger;
   border: 1px solid $danger;
 
-  &:hover{
+  &:hover {
     background-color: $backgroundColor;
     color: $danger;
     border: 1px solid $danger;
   }
 
-  &:focus{
+  &:focus {
     background-color: $backgroundColor;
     color: $danger;
     border: 1px solid $danger;
   }
 
-  &:active{
+  &:active {
     background-color: $backgroundColor;
     color: $danger;
     border: 1px solid $danger;
   }
 }
 
-.jth-button-line-dashed{
+.jth-button-line-dashed {
   border: 1px dashed $borderColor;
 
-  &:hover{
+  &:hover {
     border: 1px dashed $backgroundColor;
   }
 
-  &:focus{
+  &:focus {
     border: 1px dashed $backgroundColor;
   }
 
-  &:active{
+  &:active {
     border: 1px dashed $backgroundColor;
   }
 }
 
-.jth-button-line-dashed.jth-button-danger{
+.jth-button-line-dashed.jth-button-danger {
   color: $danger;
   border: 1px dashed $danger;
 
-  &:hover{
+  &:hover {
     color: $danger;
     border: 1px dashed $danger;
   }
 
-  &:focus{
+  &:focus {
     color: $danger;
     border: 1px dashed $danger;
   }
 
-  &:active{
+  &:active {
     color: $danger;
     border: 1px dashed $danger;
   }
 }
 
-.jth-button-line-none{
+.jth-button-line-none {
   padding: 0;
   border: 0;
 
-  &:hover{
+  &:hover {
     border: 0;
   }
 
-  &:focus{
+  &:focus {
     border: 0;
   }
 
-  &:active{
+  &:active {
     border: 0;
   }
 }
 
-.jth-button-line-none.jth-button-danger{
+.jth-button-line-none.jth-button-danger {
   border: 0;
   color: $danger;
 
-  &:hover{
+  &:hover {
     border: 0;
     color: $danger;
   }
 
-  &:focus{
+  &:focus {
     border: 0;
     color: $danger;
   }
 
-  &:active{
+  &:active {
     border: 0;
     color: $danger;
   }
 }
 
-.jth-button-line-text{
+.jth-button-line-text {
   border: 0;
   padding: 0;
   color: $color;
 
-  &:hover{
+  &:hover {
     color: $color;
     opacity: 1;
     border: 0;
   }
 
-  &:focus{
+  &:focus {
     color: $color;
     opacity: 1;
     border: 0;
   }
 
-  &:active{
+  &:active {
     color: $color;
     opacity: 1;
     border: 0;
   }
 }
 
-.jth-button-line-text.jth-button-danger{
+.jth-button-line-text.jth-button-danger {
   border: 0;
   color: $danger;
 
-  &:hover{
+  &:hover {
     border: 0;
     color: $danger;
   }
 
-  &:focus{
+  &:focus {
     border: 0;
     color: $danger;
   }
 
-  &:active{
+  &:active {
     border: 0;
     color: $danger;
   }
 }
 
-.jth-button-circle{
+.jth-button-circle {
   border-radius: 50%;
 }
 
-.jth-button-round{
+.jth-button-round {
   border-radius: 25px;
 }
 
-.jth-button-ghost{
+.jth-button-ghost {
   background-color: transparent;
 }
 
-.jth-button-disabled{
+.jth-button-disabled {
   cursor: not-allowed;
-  opacity: .4;
+  opacity: 0.4;
 }

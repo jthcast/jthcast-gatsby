@@ -83,10 +83,7 @@
         width: 100%;
         color: $color;
         font-weight: normal;
-
-        &:before {
-          content: none;
-        }
+        border-bottom: none;
 
         svg {
           width: 100%;

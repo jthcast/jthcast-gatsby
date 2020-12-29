@@ -1,4 +1,4 @@
-@import "../../mixins";
+@import '../../mixins';
 
 .jth-portfolio {
   .jth-portfolio-title {
@@ -34,7 +34,7 @@
 
       li {
         &:before {
-          content: " · ";
+          content: ' · ';
         }
       }
     }
@@ -72,7 +72,7 @@
       }
 
       &:before {
-        content: counter(counter) ". ";
+        content: counter(counter) '. ';
         color: $primaryBrandColor;
         position: absolute;
         right: 100%;
@@ -80,9 +80,7 @@
       }
 
       a {
-        &:before {
-          content: none;
-        }
+        border-bottom: none;
       }
     }
   }

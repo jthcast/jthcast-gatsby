@@ -81,6 +81,10 @@
         grid-template-columns: 1fr;
         gap: 1rem;
 
+        a {
+          border-bottom: none;
+        }
+
         .jth-portfolios-item-info {
           display: flex;
           flex-direction: row;
@@ -91,6 +95,7 @@
             h2 {
               color: $color;
             }
+            border-bottom: rem(2px) solid $secondaryBrandColor;
           }
 
           .jth-portfolios-item-info-links {
@@ -101,10 +106,7 @@
             a {
               display: flex;
               align-items: center;
-
-              &:before {
-                content: none;
-              }
+              border-bottom: none;
 
               .jth-portfolios-item-info-link {
                 font-size: 1.6rem;

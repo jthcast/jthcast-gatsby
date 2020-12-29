@@ -65,10 +65,7 @@
 
       a {
         width: 100%;
-
-        &:before {
-          content: none;
-        }
+        border-bottom: none;
 
         svg {
           width: 100%;

@@ -1,4 +1,4 @@
-@import "../../../mixins";
+@import '../../../mixins';
 
 .jth-menuList {
   z-index: 2;
@@ -21,10 +21,7 @@
 
   a {
     color: $color;
-
-    &:before {
-      content: none;
-    }
+    border-bottom: none;
   }
 
   .jth-menuList-items {

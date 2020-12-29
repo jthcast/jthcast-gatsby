@@ -1,6 +1,6 @@
-@import "../../../mixins";
+@import '../../../mixins';
 
-.jth-headerMessage{
+.jth-headerMessage {
   position: relative;
   width: 100%;
   background-color: $primaryBrandColor;
@@ -11,30 +11,27 @@
   color: $black;
   z-index: 2;
 
-  .jth-headerMessage-container{
+  .jth-headerMessage-container {
     max-width: $maxWidthHeader;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .jth-headerMessage-content{
+    .jth-headerMessage-content {
       display: flex;
       justify-content: center;
       align-items: center;
       letter-spacing: 0.1rem;
       padding: 0 5vw;
       text-align: center;
-    
-      a{
-        color: $black;
 
-        &:before{
-          content: none;
-        }
+      a {
+        color: $black;
+        border-bottom: none;
       }
     }
 
-    .jth-headerMessage-allowClose{
+    .jth-headerMessage-allowClose {
       color: $black;
       background-color: transparent;
       position: absolute;
