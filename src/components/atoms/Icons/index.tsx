@@ -779,6 +779,7 @@ const IconLogoColored = ({
 };
 
 export {
+  IconTemplate,
   IconAngleDown,
   IconArrowToTop,
   IconBars,
