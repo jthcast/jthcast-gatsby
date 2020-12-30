@@ -14,7 +14,7 @@ import {
 import Button from '../../components/atoms/Button';
 import Layout from '../../components/layout';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img, { FluidObject } from "gatsby-image";
+import GatsbyImage, { FluidObject } from "gatsby-image";
 
 type aboutQueryProps = {
   file: {
@@ -32,7 +32,7 @@ const About = (): React.ReactElement => {
       file(relativePath: {eq: "resources/images/myPhoto.jpg"}) {
         id
         childImageSharp {
-          fluid {
+          fluid(maxWidth: 1160, quality: 90) {
             ...GatsbyImageSharpFluid_withWebp_noBase64
           }
         }
@@ -75,7 +75,7 @@ const About = (): React.ReactElement => {
               </div>
             </div>
             <div className="jth-about-photo jth-animation" data-animationtype="opacityUp">
-              <Img fluid={query.file.childImageSharp.fluid} alt="My photo" />
+              <GatsbyImage fluid={query.file.childImageSharp.fluid} alt="My photo" />
             </div>
           </div>
         </section>

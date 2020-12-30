@@ -1,5 +1,5 @@
 import React from 'react';
-import Img, { FixedObject, FluidObject } from "gatsby-image";
+import GatsbyImage, { FixedObject, FluidObject } from "gatsby-image";
 import './Card.scss';
 
 export interface CardInterface {
@@ -38,7 +38,7 @@ const Card = ({
         <div className={`jth-card${className ? ` ${className}` : ``}`}>
           {item.frontmatter.image &&
             <div className="jth-card-image">
-              <Img
+              <GatsbyImage
                 fluid={item.frontmatter.image.childImageSharp.fluid && item.frontmatter.image.childImageSharp.fluid}
                 fixed={item.frontmatter.image.childImageSharp.fixed && item.frontmatter.image.childImageSharp.fixed}
                 alt={item.frontmatter.title} />
