@@ -24,7 +24,7 @@ const Posts = (): React.ReactElement => {
             description
             image {
               childImageSharp {
-                fluid(quality: 90) {
+                fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
                   ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
