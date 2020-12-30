@@ -84,7 +84,7 @@
   },
   "Post": {
     "seriesPosts": "시리즈",
-    "relatedPosts": "이 글과 관련된 글"
+    "relatedPosts": "관련 글"
   },
   "Codes": {
     "title": "코드",
@@ -92,7 +92,7 @@
     "codeDoesntExistMessage": "아직 코드가 등록되지 않았습니다"
   },
   "Code": {
-    "relatedCodes": "이 코드와 관련된 코드"
+    "relatedCodes": "관련 코드"
   },
   "Portfolios": {
     "title": "포트폴리오",
