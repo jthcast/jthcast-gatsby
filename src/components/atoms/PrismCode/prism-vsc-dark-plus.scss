@@ -298,22 +298,10 @@ div.gatsby-highlight {
   position: relative;
 }
 
-div.gatsby-highlight[data-language]:before {
-  content: attr(data-language);
-  color: $white;
-  background-color: $colorDown;
-  display: inline-block;
-  position: absolute;
-  top: 0rem;
-  left: 2rem;
-  font-size: 0.9em;
-  border-radius: 0 0 5px 5px;
-  padding: 0 0.7rem;
-  text-shadow: none;
-  z-index: 1;
-}
-
-// .gatsby-highlight pre::before {
+// div.gatsby-highlight[data-language]:before {
+//   content: attr(data-language);
+//   color: $white;
+//   background-color: $colorDown;
 //   display: inline-block;
 //   position: absolute;
 //   top: 0rem;
@@ -325,86 +313,99 @@ div.gatsby-highlight[data-language]:before {
 //   z-index: 1;
 // }
 
-// .gatsby-highlight pre[class='language-javascript']::before {
-//   content: 'js';
-//   background: #f7df1e;
-// }
-// .gatsby-highlight pre[class='language-js']::before {
-//   content: 'js';
-//   background: #f7df1e;
-// }
-// .gatsby-highlight pre[class='language-jsx']::before {
-//   content: 'jsx';
-//   background: #61dafb;
-// }
-// .gatsby-highlight pre[class='language-typescript']::before {
-//   content: 'ts';
-//   background: #294e80;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-ts']::before {
-//   content: 'ts';
-//   background: #294e80;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-tsx']::before {
-//   content: 'tsx';
-//   background: #294e80;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-graphql']::before {
-//   content: 'GraphQL';
-//   background: #e10098;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-html']::before {
-//   content: 'html';
-//   background: #005a9c;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-css']::before {
-//   content: 'css';
-//   background: #ff9800;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-mdx']::before {
-//   content: 'mdx';
-//   background: #f9ac00;
-//   color: white;
-// }
-// .gatsby-highlight pre[class='language-shell']::before {
-//   content: 'shell';
-// }
-// .gatsby-highlight pre[class='language-sh']::before {
-//   content: 'sh';
-// }
-// .gatsby-highlight pre[class='language-bash']::before {
-//   content: 'bash';
-// }
-// .gatsby-highlight pre[class='language-yaml']::before {
-//   content: 'yaml';
-//   background: #ffa8df;
-// }
-// .gatsby-highlight pre[class='language-markdown']::before {
-//   content: 'md';
-// }
-// .gatsby-highlight pre[class='language-json']::before,
-// .gatsby-highlight pre[class='language-json5']::before {
-//   content: 'json';
-//   background: linen;
-// }
-// .gatsby-highlight pre[class='language-diff']::before {
-//   content: 'diff';
-//   background: #e6ffed;
-// }
-// .gatsby-highlight pre[class='language-text']::before {
-//   content: 'text';
-//   background: white;
-// }
-// .gatsby-highlight pre[class='language-flow']::before {
-//   content: 'flow';
-//   background: #e8bd36;
-// }
+.gatsby-highlight pre::before {
+  display: inline-block;
+  position: absolute;
+  top: 0rem;
+  left: 2rem;
+  font-size: 0.9em;
+  border-radius: 0 0 5px 5px;
+  padding: 0 0.7rem;
+  text-shadow: none;
+  z-index: 1;
+  color: $black;
+}
+
+.gatsby-highlight pre[class='language-javascript']::before {
+  content: 'js';
+  background: #f7df1e;
+}
+.gatsby-highlight pre[class='language-js']::before {
+  content: 'js';
+  background: #f7df1e;
+}
+.gatsby-highlight pre[class='language-jsx']::before {
+  content: 'jsx';
+  background: #61dafb;
+}
+.gatsby-highlight pre[class='language-typescript']::before {
+  content: 'ts';
+  background: #294e80;
+  color: white;
+}
+.gatsby-highlight pre[class='language-ts']::before {
+  content: 'ts';
+  background: #294e80;
+  color: white;
+}
+.gatsby-highlight pre[class='language-tsx']::before {
+  content: 'tsx';
+  background: #294e80;
+  color: white;
+}
+.gatsby-highlight pre[class='language-graphql']::before {
+  content: 'GraphQL';
+  background: #e10098;
+  color: white;
+}
+.gatsby-highlight pre[class='language-html']::before {
+  content: 'html';
+  background: #005a9c;
+  color: white;
+}
+.gatsby-highlight pre[class='language-css']::before {
+  content: 'css';
+  background: #ff9800;
+  color: white;
+}
+.gatsby-highlight pre[class='language-mdx']::before {
+  content: 'mdx';
+  background: #f9ac00;
+  color: white;
+}
+.gatsby-highlight pre[class='language-shell']::before {
+  content: 'shell';
+}
+.gatsby-highlight pre[class='language-sh']::before {
+  content: 'sh';
+}
+.gatsby-highlight pre[class='language-bash']::before {
+  content: 'bash';
+}
+.gatsby-highlight pre[class='language-yaml']::before {
+  content: 'yaml';
+  background: #ffa8df;
+}
+.gatsby-highlight pre[class='language-markdown']::before {
+  content: 'md';
+}
+.gatsby-highlight pre[class='language-json']::before,
+.gatsby-highlight pre[class='language-json5']::before {
+  content: 'json';
+  background: linen;
+}
+.gatsby-highlight pre[class='language-diff']::before {
+  content: 'diff';
+  background: #e6ffed;
+}
+.gatsby-highlight pre[class='language-text']::before {
+  content: 'text';
+  background: white;
+}
+.gatsby-highlight pre[class='language-flow']::before {
+  content: 'flow';
+  background: #e8bd36;
+}
 
 @include mobile {
   div.gatsby-highlight[data-language]:before {
