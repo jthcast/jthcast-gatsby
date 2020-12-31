@@ -191,7 +191,7 @@ const Posts = (): React.ReactElement => {
               return (
                 <li key={post.fields.slug}>
                   <Link to={post.fields.slug} aria-label={post.frontmatter.title}>
-                    <Card item={post} />
+                    <Card showContent item={post} />
                   </Link>
                 </li>
               );

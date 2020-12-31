@@ -7,6 +7,7 @@ import GatsbyImage from 'gatsby-image';
 import Card from '../../components/atoms/Card';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Mdx } from '../../graphql-types';
+import { IconTemplate } from '../../components/atoms/Icons';
 
 interface PostDataProps {
   mdx?: Mdx;
@@ -45,9 +46,11 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
           <p className="jth-post-info-content">{post.frontmatter.description}</p>
         </header>
         <section className="jth-post-content" itemProp="articleBody">
+          <IconTemplate iconName="IconWaveLine" className="jth-post-separator" />
           <MDXRenderer scope className="jth-post-content">
             {post.body}
           </MDXRenderer>
+          <IconTemplate iconName="IconWaveLine" className="jth-post-separator" />
         </section>
       </article>
       <nav className="jth-post-links jth-container">
@@ -86,7 +89,7 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
                 return (
                   <li key={post.fields.slug}>
                     <Link to={post.fields.slug} aria-label={post.frontmatter.title}>
-                      <Card item={post} />
+                      <Card showContent item={post} />
                     </Link>
                   </li>
                 );
@@ -142,6 +145,8 @@ export const pageQuery = graphql`
         }
         frontmatter {
           title
+          date(formatString: "YYYY-MM-DD")
+          description
           image {
             childImageSharp {
               fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
@@ -149,6 +154,7 @@ export const pageQuery = graphql`
               }
             }
           }
+          tags
         }
       }
     }
