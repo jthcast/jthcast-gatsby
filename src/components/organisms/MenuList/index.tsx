@@ -110,7 +110,7 @@ const MenuList = ({
               </Link>
             </li>
             <li>
-              <Link onClick={menuListHandling} to="/portfolio/">
+              <Link onClick={menuListHandling} to="/portfolios/">
                 {t('Header.portfolios')}
               </Link>
             </li>
