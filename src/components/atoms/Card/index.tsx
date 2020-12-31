@@ -6,6 +6,7 @@ export interface CardInterface {
   excerpt?: string;
   frontmatter?: {
     date?: string;
+    description?: string;
     title?: string;
     image?: {
       childImageSharp?: {
@@ -52,7 +53,7 @@ const Card = ({
             </div>
           )}
           {item.frontmatter.title && <h2>{item.frontmatter.title}</h2>}
-          {item.excerpt && showContent && <p>{item.excerpt}</p>}
+          {showContent && (item.frontmatter.description ? <p>{item.frontmatter.description}</p> : item.excerpt ? <p>{item.excerpt}</p> : null)}
         </div>
       )}
     </>
