@@ -41,7 +41,8 @@
     "react-helmet-async": "^1.0.7",
     "react-i18next": "^11.8.4",
     "recoil": "^0.1.2",
-    "rehype-accessible-emojis": "^0.3.2"
+    "rehype-accessible-emojis": "^0.3.2",
+    "remark-unwrap-images": "^2.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",

@@ -48,6 +48,7 @@ export const plugins = [
       rehypePlugins: [
         require(`rehype-accessible-emojis`).rehypeAccessibleEmojis,
       ],
+      remarkPlugins: [require('remark-unwrap-images')],
       gatsbyRemarkPlugins: [
         {
           resolve: `gatsby-remark-images`,
