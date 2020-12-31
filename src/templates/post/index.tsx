@@ -47,7 +47,7 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
         </header>
         <section className="jth-post-content" itemProp="articleBody">
           <IconTemplate iconName="IconWaveLine" className="jth-post-separator" />
-          <MDXRenderer scope className="jth-post-content">
+          <MDXRenderer className="jth-post-content">
             {post.body}
           </MDXRenderer>
           <IconTemplate iconName="IconWaveLine" className="jth-post-separator" />

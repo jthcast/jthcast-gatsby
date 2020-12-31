@@ -41,7 +41,7 @@ const CodePostTemplate = ({ data }: PageProps<CodeDataProps>) => {
           <p className="jth-code-info-content">{code.frontmatter.description}</p>
         </header>
         <section className="jth-code-content" itemProp="articleBody">
-          <MDXRenderer scope className="jth-code-content">
+          <MDXRenderer className="jth-code-content">
             {code.body}
           </MDXRenderer>
         </section>
