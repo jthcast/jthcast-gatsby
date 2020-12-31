@@ -139,9 +139,9 @@ const Posts = (): React.ReactElement => {
         )}
         {tags && (
           <div className="jth-posts-tags">
-            {Object.keys(tags).map((tagItem) => {
+            {Object.keys(tags).map((tagItem, index) => {
               return (
-                <Button ghost lineType="none" className="jth-posts-tag" onClick={tagHandling} key={tagItem[0]}>
+                <Button ghost lineType="none" className="jth-posts-tag" onClick={tagHandling} key={`${tagItem[0]}${index}`}>
                   <Chip ghost allowClose={false}>
                     {tagItem}
                   </Chip>
