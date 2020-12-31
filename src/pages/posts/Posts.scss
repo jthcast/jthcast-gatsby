@@ -1,6 +1,7 @@
 @import '../../mixins';
 
 .jth-posts {
+  margin-top: 5rem;
   .jth-posts-tags {
     display: flex;
     flex-wrap: wrap;
@@ -125,7 +126,7 @@
 
 @include mobile {
   .jth-posts {
-    // margin-top: 3rem;
+    margin-top: 3rem;
 
     .jth-posts-list {
       grid-template-columns: 1fr;

@@ -32,17 +32,15 @@
   }
 
   .jth-post-content {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
     line-height: 1.8;
     max-width: rem(800px);
-    margin: auto;
+    margin: 2rem auto;
     width: 100%;
 
-    .jth-post-loading {
-      font-size: 2rem;
-      justify-content: center;
-      align-items: center;
+    .jth-post-separator {
+      font-size: 5rem;
+      width: 100%;
+      color: $secondaryBrandColor;
     }
 
     h1,
@@ -87,29 +85,18 @@
     }
 
     .gatsby-highlight {
-      margin: 0 -2rem;
+      margin: 2rem -2rem;
 
       pre {
         padding: 3rem 2rem;
         border-radius: rem(4px);
       }
     }
-
-    .jth-post-caption {
-      text-align: center;
-      color: $colorDown;
-      margin: rem(16px) 0 rem(32px) 0;
-    }
-  }
-
-  section {
-    margin-bottom: 3rem;
   }
 }
 
 .jth-post-links {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   .jth-post-seriesPosts {
     display: grid;
     grid-template-columns: 1fr;
@@ -165,6 +152,7 @@
 
 @include mobile {
   .jth-post {
+    margin-top: 3rem;
     .jth-post-content {
       .gatsby-highlight {
         margin: 0 -1.25rem;

@@ -1,6 +1,7 @@
 @import '../../mixins';
 
 .jth-codes {
+  margin-top: 5rem;
   .jth-codes-search {
     display: flex;
     justify-content: center;
@@ -117,7 +118,7 @@
 
 @include mobile {
   .jth-codes {
-    // margin-top: 3rem;
+    margin-top: 3rem;
 
     .jth-codes-list {
       grid-template-columns: 1fr 1fr 1fr;

@@ -1,8 +1,7 @@
 @import '../../mixins';
 
 .jth-portfolios {
-  padding: 3rem 0;
-
+  margin-top: 5rem;
   .jth-portfolios-search {
     display: flex;
     justify-content: center;
@@ -146,7 +145,7 @@
 
 @include mobile {
   .jth-portfolios {
-    // margin-top: 3rem;
+    margin-top: 3rem;
 
     .jth-portfolios-list {
       li {
