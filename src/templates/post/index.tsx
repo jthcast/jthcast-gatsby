@@ -8,61 +8,6 @@ import Card from '../../components/atoms/Card';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Mdx } from '../../graphql-types';
 
-
-export const pageQuery = graphql`
-  query createPostPage(
-    $id: String!
-    $series: String
-    $tag: [String]
-  ) {
-    mdx (id: { eq: $id }) {
-      excerpt(pruneLength: 160)
-      body
-      frontmatter {
-        title
-        date(formatString: "YYYY-MM-DD")
-        description
-        image {
-          childImageSharp {
-            fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
-            }
-          }
-        }
-        series
-        tags
-      }
-    }
-    series: allMdx(filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-        }
-      }
-    }
-    related: allMdx(filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/posts)/"}, id: {ne: $id}}, limit: 2) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          image {
-            childImageSharp {
-              fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 interface PostDataProps {
   mdx?: Mdx;
   series?: {
@@ -155,3 +100,57 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
 };
 
 export default Post;
+
+export const pageQuery = graphql`
+  query createPostPage(
+    $id: String!
+    $series: String
+    $tag: [String]
+  ) {
+    mdx (id: { eq: $id }) {
+      excerpt(pruneLength: 160)
+      body
+      frontmatter {
+        title
+        date(formatString: "YYYY-MM-DD")
+        description
+        image {
+          childImageSharp {
+            fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
+              ...GatsbyImageSharpFluid_withWebp_noBase64
+            }
+          }
+        }
+        series
+        tags
+      }
+    }
+    series: allMdx(filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
+      }
+    }
+    related: allMdx(filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/posts)/"}, id: {ne: $id}}, limit: 2) {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          image {
+            childImageSharp {
+              fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
