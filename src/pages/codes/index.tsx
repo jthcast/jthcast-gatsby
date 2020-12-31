@@ -25,7 +25,7 @@ export interface CodesProps {
 const Codes = (): React.ReactElement => {
   const query = useStaticQuery(graphql`
     query AllCodes{
-      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/codes)/"}, frontmatter: {visible: {eq: true}}}) {
+      allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/codes)/"}, frontmatter: {visible: {eq: true}}}) {
         nodes {
           excerpt
           frontmatter {
@@ -43,7 +43,7 @@ const Codes = (): React.ReactElement => {
       }
     }
   `);
-  const codesData: Array<CodesProps> = query.allMarkdownRemark.nodes;
+  const codesData: Array<CodesProps> = query.allMdx.nodes;
   const { t } = useTranslation();
   const [codes, setCodes] = useState<Array<CodesProps>>(codesData);
   const queryObject = useQuery();
@@ -98,66 +98,64 @@ const Codes = (): React.ReactElement => {
   }, [debounceValue, searchHandling]);
   return (
     <Layout title={t('Codes.title')} description={t('Codes.description')}>
-      <section className="jth-codes">
-        <div className="jth-container">
-          {codesData.length === 0 && (
-            <div className="jth-codes-nothing">
-              <h1>{t('Codes.codeDoesntExistMessage')}</h1>
-            </div>
-          )}
-          {codesData.length > 0 && (
-            <div className="jth-codes-search">
-              <input
-                aria-label="Search"
-                className="jth-codes-search-input"
-                type="text"
-                value={searchInputValue}
-                onChange={searchInputChangeHandling}
-                onKeyDown={searchInputKeyDownHandling}
-                ref={searchInputRef}
+      <section className="jth-codes jth-container">
+        {codesData.length === 0 && (
+          <div className="jth-codes-nothing">
+            <h1>{t('Codes.codeDoesntExistMessage')}</h1>
+          </div>
+        )}
+        {codesData.length > 0 && (
+          <div className="jth-codes-search">
+            <input
+              aria-label="Search"
+              className="jth-codes-search-input"
+              type="text"
+              value={searchInputValue}
+              onChange={searchInputChangeHandling}
+              onKeyDown={searchInputKeyDownHandling}
+              ref={searchInputRef}
+            />
+            {searchInputValue && (
+              <IconTimesCircle
+                onClick={clearInput}
+                className="jth-codes-search-clearIcon"
               />
-              {searchInputValue && (
-                <IconTimesCircle
-                  onClick={clearInput}
-                  className="jth-codes-search-clearIcon"
-                />
-              )}
-              <IconSearch />
-            </div>
-          )}
-          {isLoading && (
-            <div className="jth-codes-loading">
-              <IconSpinner spin />
-            </div>
-          )}
-          {!isLoading && searchInputValue && codes.length > 0 && (
-            <div className="jth-codes-searchResult">
-              <p>
-                {codes.length}
-                {t('Common.searchResultsMessage')}
-              </p>
-            </div>
-          )}
-          {!isLoading && searchInputValue && codes.length === 0 && (
-            <div className="jth-codes-nothing">
-              <h1>{t('Common.searchResultDoesntExist')}</h1>
-            </div>
-          )}
-          {!isLoading && codes.length > 0 && (
-            <ul className="jth-codes-list">
-              {codes.map((code) => {
-                return (
-                  <li key={code.fields.slug}>
-                    <Link to={code.fields.slug} aria-label={code.frontmatter.title}>
-                      {code.frontmatter.icon && IconTemplate({ iconName: code.frontmatter.icon })}
-                      <p>{code.frontmatter.title}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
+            )}
+            <IconSearch />
+          </div>
+        )}
+        {isLoading && (
+          <div className="jth-codes-loading">
+            <IconSpinner spin />
+          </div>
+        )}
+        {!isLoading && searchInputValue && codes.length > 0 && (
+          <div className="jth-codes-searchResult">
+            <p>
+              {codes.length}
+              {t('Common.searchResultsMessage')}
+            </p>
+          </div>
+        )}
+        {!isLoading && searchInputValue && codes.length === 0 && (
+          <div className="jth-codes-nothing">
+            <h1>{t('Common.searchResultDoesntExist')}</h1>
+          </div>
+        )}
+        {!isLoading && codes.length > 0 && (
+          <ul className="jth-codes-list">
+            {codes.map((code) => {
+              return (
+                <li key={code.fields.slug}>
+                  <Link to={code.fields.slug} aria-label={code.frontmatter.title}>
+                    {code.frontmatter.icon && IconTemplate({ iconName: code.frontmatter.icon })}
+                    <p>{code.frontmatter.title}</p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
     </Layout>
   );

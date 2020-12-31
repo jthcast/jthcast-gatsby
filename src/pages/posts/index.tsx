@@ -15,7 +15,7 @@ import { navigate } from 'gatsby';
 const Posts = (): React.ReactElement => {
   const query = useStaticQuery(graphql`
     query AllPosts{
-      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/posts)/"}, frontmatter: {visible: {eq: true}}}) {
+      allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/posts)/"}, frontmatter: {visible: {eq: true}}}) {
         nodes {
           excerpt
           frontmatter {
@@ -39,7 +39,7 @@ const Posts = (): React.ReactElement => {
       }
     }
   `);
-  const postsData: Array<CardInterface> = query.allMarkdownRemark.nodes;
+  const postsData: Array<CardInterface> = query.allMdx.nodes;
   const [posts, setPosts] = useState<Array<CardInterface>>(postsData);
   const queryObject = useQuery();
   const [searchInputValue, setSearchInputValue] = useState<string>(queryObject.query ? queryObject.query : '');
@@ -131,75 +131,73 @@ const Posts = (): React.ReactElement => {
 
   return (
     <Layout title={t('Posts.title')} description={t('Posts.description')}>
-      <section className="jth-posts">
-        <div className="jth-container">
-          {postsData.length === 0 && (
-            <div className="jth-posts-nothing">
-              <h1>{t('Posts.postDoesntExistMessage')}</h1>
-            </div>
-          )}
-          {tags && (
-            <div className="jth-posts-tags">
-              {Object.keys(tags).map((tagItem) => {
-                return (
-                  <Button ghost lineType="none" className="jth-posts-tag" onClick={tagHandling} key={tagItem[0]}>
-                    <Chip ghost allowClose={false}>
-                      {tagItem}
-                    </Chip>
-                  </Button>
-                );
-              })}
-            </div>
-          )}
-          {postsData.length > 0 && (
-            <div className="jth-posts-search">
-              <input
-                aria-label="Search"
-                className="jth-posts-search-input"
-                type="text"
-                value={searchInputValue}
-                onChange={searchInputChangeHandling}
-                onKeyDown={searchInputKeyDownHandling}
-                ref={searchInputRef}
+      <section className="jth-posts jth-container">
+        {postsData.length === 0 && (
+          <div className="jth-posts-nothing">
+            <h1>{t('Posts.postDoesntExistMessage')}</h1>
+          </div>
+        )}
+        {tags && (
+          <div className="jth-posts-tags">
+            {Object.keys(tags).map((tagItem) => {
+              return (
+                <Button ghost lineType="none" className="jth-posts-tag" onClick={tagHandling} key={tagItem[0]}>
+                  <Chip ghost allowClose={false}>
+                    {tagItem}
+                  </Chip>
+                </Button>
+              );
+            })}
+          </div>
+        )}
+        {postsData.length > 0 && (
+          <div className="jth-posts-search">
+            <input
+              aria-label="Search"
+              className="jth-posts-search-input"
+              type="text"
+              value={searchInputValue}
+              onChange={searchInputChangeHandling}
+              onKeyDown={searchInputKeyDownHandling}
+              ref={searchInputRef}
+            />
+            {searchInputValue && (
+              <IconTimesCircle
+                onClick={clearInput}
+                className="jth-posts-search-clearIcon"
               />
-              {searchInputValue && (
-                <IconTimesCircle
-                  onClick={clearInput}
-                  className="jth-posts-search-clearIcon"
-                />
-              )}
-              <IconSearch />
-            </div>
-          )}
-          {isLoading && (
-            <div className="jth-posts-loading">
-              <IconSpinner spin />
-            </div>
-          )}
-          {!isLoading && searchInputValue && posts.length > 0 && (
-            <div className="jth-posts-searchResult">
-              <p>{t('Common.searchResultsMessage', { what: posts.length })}</p>
-            </div>
-          )}
-          {!isLoading && searchInputValue && posts.length === 0 && (
-            <div className="jth-posts-nothing">
-              <h1>{t('Common.searchResultDoesntExist')}</h1>
-            </div>
-          )}
-          {!isLoading && posts.length > 0 && (
-            <ul className="jth-posts-list">
-              {posts.map((post) => {
-                return (
-                  <li key={post.fields.slug}>
-                    <Link to={post.fields.slug} aria-label={post.frontmatter.title}>
-                      <Card item={post} />
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
+            )}
+            <IconSearch />
+          </div>
+        )}
+        {isLoading && (
+          <div className="jth-posts-loading">
+            <IconSpinner spin />
+          </div>
+        )}
+        {!isLoading && searchInputValue && posts.length > 0 && (
+          <div className="jth-posts-searchResult">
+            <p>{t('Common.searchResultsMessage', { what: posts.length })}</p>
+          </div>
+        )}
+        {!isLoading && searchInputValue && posts.length === 0 && (
+          <div className="jth-posts-nothing">
+            <h1>{t('Common.searchResultDoesntExist')}</h1>
+          </div>
+        )}
+        {!isLoading && posts.length > 0 && (
+          <ul className="jth-posts-list">
+            {posts.map((post) => {
+              return (
+                <li key={post.fields.slug}>
+                  <Link to={post.fields.slug} aria-label={post.frontmatter.title}>
+                    <Card item={post} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
     </Layout>
   );

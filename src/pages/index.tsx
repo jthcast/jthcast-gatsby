@@ -7,7 +7,7 @@ import { Link, graphql, useStaticQuery } from "gatsby";
 const Index = (): React.ReactElement => {
   const query: Query = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
         nodes {
           excerpt
           fields {
@@ -22,7 +22,7 @@ const Index = (): React.ReactElement => {
       }
     }
   `);
-  const posts = query.allMarkdownRemark.nodes;
+  const posts = query.allMdx.nodes;
   const { t } = useTranslation();
 
   if (posts.length === 0) {

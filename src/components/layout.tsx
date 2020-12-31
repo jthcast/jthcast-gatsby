@@ -16,6 +16,7 @@ type layoutProps = {
 
 const Layout = ({ title, description = '', children }: layoutProps) => {
   const { t } = useTranslation();
+
   useAnimation();
   useEffect(() => {
     unFocus();
