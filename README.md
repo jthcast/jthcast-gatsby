@@ -32,5 +32,5 @@ Because it's a project to experience and learn the latest technologies.
 
 ## 📝 License
 
-© 2020 [JthCast](https://github.com/jthcast).  
+© 2021 [JthCast](https://github.com/jthcast).  
 This project is [MIT](./LICENSE.txt) licensed.
