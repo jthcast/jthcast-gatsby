@@ -143,6 +143,12 @@
   }
 }
 
+@include tablet {
+  .jth-portfolios {
+    margin-top: 3rem;
+  }
+}
+
 @include mobile {
   .jth-portfolios {
     margin-top: 3rem;

@@ -110,6 +110,7 @@
 
 @include tablet {
   .jth-codes {
+    margin-top: 3rem;
     .jth-codes-list {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }

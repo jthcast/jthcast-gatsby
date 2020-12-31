@@ -124,6 +124,12 @@
   }
 }
 
+@include tablet {
+  .jth-posts {
+    margin-top: 3rem;
+  }
+}
+
 @include mobile {
   .jth-posts {
     margin-top: 3rem;
