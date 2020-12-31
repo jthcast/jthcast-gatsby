@@ -1,29 +1,117 @@
 import {
+  Actions,
   CreateNodeArgs,
   CreatePagesArgs,
   CreateSchemaCustomizationArgs,
 } from 'gatsby';
 import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
-import { Query } from './src/graphql-types';
+import { Mdx } from './src/graphql-types';
+
+function createMdxPages(actions: Actions, nodes: Mdx[], pageTemplate: string) {
+  const { createPage } = actions;
+
+  if (nodes && nodes.length > 0) {
+    nodes.forEach((node, index) => {
+      const previousNodeId = index === 0 ? null : nodes[index - 1].id;
+      const nextNodeId =
+        index === nodes.length - 1 ? null : nodes[index + 1].id;
+
+      createPage({
+        path: `${node.fields?.slug}` || '/404',
+        component: pageTemplate,
+        context: {
+          id: node.id,
+          previousNodeId,
+          nextNodeId,
+        },
+      });
+    });
+  }
+}
+
+interface Post {
+  id: string;
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    series: string;
+    tags: string[];
+  };
+}
+
+function createPostPages(
+  actions: Actions,
+  posts: Post[],
+  postTemplate: string
+) {
+  const { createPage } = actions;
+
+  if (posts && posts.length > 0) {
+    posts.forEach(post => {
+      const series = post.frontmatter.series;
+      const tag = post.frontmatter.tags ? post.frontmatter.tags[0] : '';
+
+      createPage({
+        path: `${post.fields?.slug}` || '/404',
+        component: postTemplate,
+        context: {
+          id: post.id,
+          series,
+          tag,
+        },
+      });
+    });
+  }
+}
 
 export const createPages = async ({
   graphql,
   actions,
   reporter,
 }: CreatePagesArgs) => {
-  const { createPage } = actions;
-
   // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/post/index.tsx`);
+  const postTemplate = path.resolve(`./src/templates/post/index.tsx`);
+  const codeTemplate = path.resolve(`./src/templates/code/index.tsx`);
+  const portfolioTemplate = path.resolve(`./src/templates/portfolio/index.tsx`);
 
   // Get all markdown blog posts sorted by date
-  const result = await graphql<Query>(
+  const { data, errors } = await graphql<any>(
     `
       {
-        allMarkdownRemark(
+        posts: allMdx(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
+          filter: { fileAbsolutePath: { regex: "/(content/posts)/" } }
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              series
+              tags
+            }
+          }
+        }
+        codes: allMdx(
+          sort: { fields: [frontmatter___date], order: ASC }
+          limit: 1000
+          filter: { fileAbsolutePath: { regex: "/(content/codes)/" } }
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+        portfolios: allMdx(
+          sort: { fields: [frontmatter___date], order: ASC }
+          limit: 1000
+          filter: { fileAbsolutePath: { regex: "/(content/portfolios)/" } }
         ) {
           nodes {
             id
@@ -35,44 +123,28 @@ export const createPages = async ({
       }
     `
   );
-
-  if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      result.errors
-    );
+  if (errors) {
+    reporter.panicOnBuild(`There was an error loading your blog posts`, errors);
     return;
   }
 
-  const posts = result.data?.allMarkdownRemark.nodes;
+  const posts: Post[] = data?.posts.nodes;
+  const codes: Mdx[] = data?.codes.nodes;
+  const portfolios: Mdx[] = data?.portfolios.nodes;
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
 
-  if (posts && posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id;
-      const nextPostId =
-        index === posts.length - 1 ? null : posts[index + 1].id;
-
-      createPage({
-        path: `${post.fields?.slug}` || '/404',
-        component: blogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      });
-    });
-  }
+  createPostPages(actions, posts, postTemplate);
+  createMdxPages(actions, codes, codeTemplate);
+  createMdxPages(actions, portfolios, portfolioTemplate);
 };
 
 export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const value = createFilePath({ node, getNode });
 
     createNodeField({
@@ -110,7 +182,7 @@ export const createSchemaCustomization = ({
       twitter: String
     }
 
-    type MarkdownRemark implements Node {
+    type Mdx implements Node {
       frontmatter: Frontmatter
       fields: Fields
     }
