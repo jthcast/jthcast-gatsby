@@ -1,0 +1,28 @@
+@import '../mixins';
+
+.jth-home {
+  .jth-home-posts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    list-style: none;
+  }
+}
+
+@include tablet() {
+}
+
+@include mobile() {
+  .jth-home {
+    .jth-home-title {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    .jth-home-posts {
+      grid-template-columns: 1fr;
+    }
+  }
+}

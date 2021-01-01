@@ -1,4 +1,13 @@
-@import '../../../mixins';
+@import './mixins';
+
+code[class*='language-'],
+pre[class*='language-'] {
+  font-family: 'Source Code Pro', monospace;
+
+  span {
+    font-family: 'Source Code Pro', monospace;
+  }
+}
 
 pre[class*='language-'],
 code[class*='language-'] {
