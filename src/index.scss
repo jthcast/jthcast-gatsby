@@ -8,6 +8,14 @@
   font-style: normal;
   font-display: block;
 }
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('./resources/fonts/Source-code-pro/SourceCodePro-Regular.ttf')
+    format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
 
 * {
   box-sizing: border-box;

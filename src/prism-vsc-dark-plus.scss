@@ -1,22 +1,13 @@
 @import './mixins';
 
-code[class*='language-'],
-pre[class*='language-'] {
-  font-family: 'Source Code Pro', monospace;
-
-  span {
-    font-family: 'Source Code Pro', monospace;
-  }
-}
-
 pre[class*='language-'],
 code[class*='language-'] {
   color: #d4d4d4;
   font-size: 1rem;
   font-size: 1rem;
   text-shadow: none;
-  font-family: Menlo, Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono',
-    'Courier New', monospace;
+  font-family: 'Source Code Pro', monospace, Menlo, Monaco, Consolas,
+    'Andale Mono', 'Ubuntu Mono', 'Courier New', monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
