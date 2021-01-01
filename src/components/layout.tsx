@@ -24,7 +24,7 @@ const Layout = ({ title, description = '', children }: layoutProps) => {
   return (
     <div className="global-wrapper">
       <SEO title={title} description={description} />
-      <Header ghost={false} showType="top" title={t('Common.title')} />
+      <Header ghost showType="top" title={t('Common.title')} />
       <MenuList />
       <main>{children}</main>
       <Footer />
