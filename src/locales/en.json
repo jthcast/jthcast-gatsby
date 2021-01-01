@@ -42,9 +42,9 @@
   "About": {
     "title": "About",
     "description": "Make products for user's UI & UX, and co-worker's development convenience. Front-end developer work with design and technology, so trying to look problems from various perspective to solve them.",
-    "aboutMessage": "Make users and co-worker eager",
-    "introduceMyself": "Hey 👋 I'm TaeHun Jeong.",
-    "aboutSubMessage": "Make products for user's UI & UX, and co-worker's development convenience.\nFront-end developer work with design and technology, so trying to look problems from various perspective to solve them.",
+    "aboutMessage": "Hey 👋 I'm TaeHun Jeong.",
+    "introduceMyself": "Make products for user's UI & UX, and co-worker's development convenience.",
+    "aboutSubMessage": "Front-end developer work with design and technology, so trying to look problems from various perspective to solve them.",
     "myManifesto": "My manifesto",
     "manifesto1": "Don't just create, solve",
     "manifesto1Detail": "Solve a problem not just working right but also efficiently.\nA single line of bad code not only gives the user an experience that significantly degrades the quality of service, but can also be a major obstacle in the process of maintenance and repair.",
