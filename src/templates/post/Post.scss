@@ -118,7 +118,7 @@
 
       &:before {
         content: counter(counter) '. ';
-        color: $primaryBrandColor;
+        color: $secondaryBrandColor;
         position: absolute;
         right: 100%;
         padding: 0 0.625rem 0 0;
