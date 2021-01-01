@@ -1,78 +1,71 @@
-import React from "react";
-import Layout from "../components/layout";
-import { Query } from "../graphql-types";
-import { useTranslation } from "react-i18next";
-import { Link, graphql, useStaticQuery } from "gatsby";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import Card, { CardInterface } from '../components/atoms/Card';
+import './Home.scss';
+import Layout from '../components/layout';
+import { graphql, Link, PageProps } from 'gatsby';
+import { Query } from '../graphql-types';
 
-const Index = (): React.ReactElement => {
-  const query: Query = useStaticQuery(graphql`
+const Index = ({ data }: PageProps<Query>): React.ReactElement => {
+  const postsData: Array<CardInterface> = data.allMdx.nodes;
+  const { t } = useTranslation();
+
+  return (
+    <Layout title={t('Home.title')} description={t('Common.description')}>
+      <section className="jth-section">
+        <div
+          className="jth-container jth-animation"
+          data-animationtype="opacityUp"
+        >
+          <h1>{t('Home.greetMessage')}</h1>
+          <p>{t('Home.greetSubMessage')}</p>
+        </div>
+      </section>
+      {postsData && postsData.length > 0 && (
+        <section className="jth-home jth-container">
+          <h2>{t('Home.recentPosts')}</h2>
+          <ul className="jth-home-posts">
+            {postsData.map((post) => {
+              return (
+                <li key={post.fields.slug} className="jth-animation" data-animationtype="opacityUp">
+                  <Link to={post.fields.slug} aria-label={post.frontmatter.title}>
+                    <Card showContent item={post} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+    </Layout>
+  );
+};
+
+export default Index;
+
+export const query = graphql`
     query {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {fileAbsolutePath: {regex: "/(content/posts)/"}, frontmatter: {visible: {eq: true}}}, limit: 3) {
         nodes {
           excerpt
+          frontmatter {
+            title
+            date(formatString: "YYYY-MM-DD")
+            description
+            image {
+              childImageSharp {
+                fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
+                }
+              }
+            }
+            series
+            tags
+          }
           fields {
             slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
           }
         }
       }
     }
-  `);
-  const posts = query.allMdx.nodes;
-  const { t } = useTranslation();
-
-  if (posts.length === 0) {
-    return (
-      <Layout title={t('Common.title')}>
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    )
-  }
-
-  return (
-    <Layout title={t('Common.title')}>
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter?.title || post.fields?.slug
-
-          return (
-            <li key={post.fields?.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.fields?.slug || ''} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.frontmatter?.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter?.description || post.excerpt || '',
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
-    </Layout>
-  )
-}
-
-export default Index
+  `;
