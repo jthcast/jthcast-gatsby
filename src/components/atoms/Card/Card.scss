@@ -44,6 +44,11 @@
     line-height: 160%;
     color: $colorDown;
     font-weight: $fontNormal;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
   }
 
   // img {
