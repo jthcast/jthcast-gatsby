@@ -41,6 +41,20 @@ interface Post {
   };
 }
 
+interface Code {
+  id: string;
+  fields: {
+    slug: string;
+  };
+}
+
+interface Portfolio {
+  id: string;
+  fields: {
+    slug: string;
+  };
+}
+
 function createPostPages(
   actions: Actions,
   posts: Post[],
@@ -66,6 +80,46 @@ function createPostPages(
   }
 }
 
+function createCodePages(
+  actions: Actions,
+  codes: Code[],
+  codeTemplate: string
+) {
+  const { createPage } = actions;
+
+  if (codes && codes.length > 0) {
+    codes.forEach(post => {
+      createPage({
+        path: `${post.fields?.slug}` || '/404',
+        component: codeTemplate,
+        context: {
+          id: post.id,
+        },
+      });
+    });
+  }
+}
+
+function createPortfolioPages(
+  actions: Actions,
+  portfolio: Portfolio[],
+  portfolioTemplate: string
+) {
+  const { createPage } = actions;
+
+  if (portfolio && portfolio.length > 0) {
+    portfolio.forEach(portfolio => {
+      createPage({
+        path: `${portfolio.fields?.slug}` || '/404',
+        component: portfolioTemplate,
+        context: {
+          id: portfolio.id,
+        },
+      });
+    });
+  }
+}
+
 export const createPages = async ({
   graphql,
   actions,
@@ -83,7 +137,10 @@ export const createPages = async ({
         posts: allMdx(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
-          filter: { fileAbsolutePath: { regex: "/(content/posts)/" } }
+          filter: {
+            fileAbsolutePath: { regex: "/(content/posts)/" }
+            frontmatter: { visible: { eq: true } }
+          }
         ) {
           nodes {
             id
@@ -99,7 +156,10 @@ export const createPages = async ({
         codes: allMdx(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
-          filter: { fileAbsolutePath: { regex: "/(content/codes)/" } }
+          filter: {
+            fileAbsolutePath: { regex: "/(content/codes)/" }
+            frontmatter: { visible: { eq: true } }
+          }
         ) {
           nodes {
             id
@@ -111,7 +171,10 @@ export const createPages = async ({
         portfolios: allMdx(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
-          filter: { fileAbsolutePath: { regex: "/(content/portfolios)/" } }
+          filter: {
+            fileAbsolutePath: { regex: "/(content/portfolios)/" }
+            frontmatter: { visible: { eq: true } }
+          }
         ) {
           nodes {
             id
@@ -129,16 +192,16 @@ export const createPages = async ({
   }
 
   const posts: Post[] = data?.posts.nodes;
-  const codes: Mdx[] = data?.codes.nodes;
-  const portfolios: Mdx[] = data?.portfolios.nodes;
+  const codes: Code[] = data?.codes.nodes;
+  const portfolios: Portfolio[] = data?.portfolios.nodes;
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
 
   createPostPages(actions, posts, postTemplate);
-  createMdxPages(actions, codes, codeTemplate);
-  createMdxPages(actions, portfolios, portfolioTemplate);
+  createCodePages(actions, codes, codeTemplate);
+  createPortfolioPages(actions, portfolios, portfolioTemplate);
 };
 
 export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {

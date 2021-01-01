@@ -53,7 +53,7 @@ export const plugins = [
         {
           resolve: `gatsby-remark-images`,
           options: {
-            maxWidth: 800,
+            maxWidth: 1040,
             showCaptions: true,
             quality: 90,
             withWebp: true,
