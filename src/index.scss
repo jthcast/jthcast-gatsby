@@ -137,7 +137,7 @@ blockquote {
 .jth-external-link {
   text-decoration: none;
   position: relative;
-  color: var(--secondary-brand-base);
+  color: $color;
   width: fit-content;
   height: fit-content;
   font-weight: bold;
@@ -214,6 +214,14 @@ blockquote {
     justify-items: center;
   }
 
+  .jth-section-repeatColGrid-center {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10%, auto));
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+  }
+
   img {
     width: 100%;
     border-radius: rem(4px);
@@ -276,6 +284,10 @@ blockquote {
     }
 
     .jth-section-twoColGrid-center {
+      grid-template-columns: 1fr;
+    }
+
+    .jth-section-repeatColGrid-center {
       grid-template-columns: 1fr;
     }
 

@@ -40,6 +40,10 @@
     display: flex;
 
     li {
+      &:before {
+        content: none;
+      }
+
       a {
         &:before {
           transition: none;

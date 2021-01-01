@@ -78,6 +78,10 @@
       align-items: center;
       justify-content: center;
 
+      &:before {
+        content: none;
+      }
+
       a {
         width: 100%;
         color: $color;
@@ -110,7 +114,7 @@
 
 @include tablet {
   .jth-codes {
-    margin-top: 3rem;
+    margin-top: 2rem;
     .jth-codes-list {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }

@@ -73,6 +73,10 @@
     li {
       width: 100%;
 
+      &:before {
+        content: none;
+      }
+
       .jth-portfolios-item {
         width: 100%;
         color: $color;
@@ -145,7 +149,7 @@
 
 @include tablet {
   .jth-portfolios {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }
 

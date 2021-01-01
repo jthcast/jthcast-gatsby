@@ -1,7 +1,10 @@
 @import '../../mixins';
 
 .jth-portfolio {
+  margin-bottom: 5rem;
   .jth-portfolio-title {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
     h1 {
       font-size: 2rem;
     }
@@ -12,53 +15,68 @@
     }
   }
 
-  .jth-portfolio-content {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-    line-height: 1.8;
+  .jth-portfolio-logo {
+    max-width: rem(250px);
+  }
 
-    .jth-portfolio-loading {
-      font-size: 2rem;
-      justify-content: center;
-      align-items: center;
-    }
+  ul {
+    padding-left: rem(30px);
+    list-style: none;
 
-    .jth-portfolio-widthImage {
-      height: 60vh;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    .jth-portfolio-builtWith {
-      list-style-type: none;
-
-      li {
-        &:before {
-          content: ' · ';
-        }
+    li {
+      position: relative;
+      &:before {
+        background-color: $secondaryBrandColor;
+        border-radius: 50%;
+        content: '';
+        height: 0.5rem;
+        left: rem(-24px);
+        position: absolute;
+        display: inline;
+        top: 0.625rem;
+        width: 0.5rem;
       }
-    }
-
-    .jth-portfolio-logo {
-      font-size: 10rem;
-    }
-
-    p {
-      margin: 1rem 0;
-    }
-
-    svg {
-      font-size: 3rem;
     }
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    a {
+      border-bottom: none;
+
+      svg {
+        fill: $secondaryBrandColor;
+        vertical-align: middle;
+        margin-left: rem(5px);
+        visibility: hidden;
+      }
+    }
+
+    &:hover {
+      a {
+        svg {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  .jth-portfolio-content {
+    align-items: flex-start;
+  }
+}
+
+.jth-portfolio-links {
   .jth-portfolio-relatedPosts {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-
     list-style-type: none;
     counter-reset: counter;
 
@@ -84,8 +102,34 @@
       }
     }
   }
+}
 
-  section {
+@include tablet {
+  .jth-portfolio {
     margin-bottom: 3rem;
+    .jth-portfolio-title {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .jth-portfolio-content {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@include mobile {
+  .jth-portfolio {
+    margin-bottom: 3rem;
+    .jth-portfolio-title {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .jth-portfolio-content {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
   }
 }

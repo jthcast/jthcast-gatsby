@@ -101,6 +101,10 @@
     }
 
     li {
+      &:before {
+        content: none;
+      }
+
       width: 100%;
     }
 
@@ -126,7 +130,7 @@
 
 @include tablet {
   .jth-posts {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }
 

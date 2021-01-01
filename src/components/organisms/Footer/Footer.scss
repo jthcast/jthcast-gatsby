@@ -16,6 +16,14 @@
     width: 100%;
     padding: 1.5rem 0;
 
+    ul {
+      li {
+        &:before {
+          content: none;
+        }
+      }
+    }
+
     .jth-footer-items-left {
       height: 100%;
       align-items: center;

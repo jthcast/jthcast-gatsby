@@ -114,6 +114,10 @@
       justify-content: center;
       min-width: rem(50px);
 
+      &:before {
+        content: none;
+      }
+
       a {
         width: 100%;
         border-bottom: none;
@@ -133,6 +137,12 @@
         }
       }
     }
+  }
+}
+
+@include tablet {
+  .jth-code {
+    margin-top: 2rem;
   }
 }
 

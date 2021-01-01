@@ -147,7 +147,17 @@
 
     li {
       width: 100%;
+
+      &:before {
+        content: none;
+      }
     }
+  }
+}
+
+@include tablet {
+  .jth-post {
+    margin-top: 2rem;
   }
 }
 
