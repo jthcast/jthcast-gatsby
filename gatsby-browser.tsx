@@ -5,8 +5,7 @@ import './src/normalize.css'
 import './src/mixins.scss'
 import './src/index.scss'
 // Highlighting for code blocks
-// import 'prismjs/themes/prism.css'
-import './src/components/atoms/PrismCode/prism-vsc-dark-plus.scss'
+import './src/prism-vsc-dark-plus.scss'
 import { MDXProvider } from '@mdx-js/react'
 
 export const wrapRootElement = ({ element, props }) => {
