@@ -737,9 +737,9 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___title'
   | 'childMdx___frontmatter___description'
   | 'childMdx___frontmatter___date'
-  | 'childMdx___frontmatter___visible'
+  | 'childMdx___frontmatter___icon'
   | 'childMdx___frontmatter___tags'
-  | 'childMdx___frontmatter___series'
+  | 'childMdx___frontmatter___visible'
   | 'childMdx___frontmatter___image___sourceInstanceName'
   | 'childMdx___frontmatter___image___absolutePath'
   | 'childMdx___frontmatter___image___relativePath'
@@ -776,10 +776,51 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___image___publicURL'
   | 'childMdx___frontmatter___image___id'
   | 'childMdx___frontmatter___image___children'
+  | 'childMdx___frontmatter___series'
   | 'childMdx___frontmatter___detailPage'
   | 'childMdx___frontmatter___github'
   | 'childMdx___frontmatter___demo'
-  | 'childMdx___frontmatter___icon'
+  | 'childMdx___frontmatter___brief'
+  | 'childMdx___frontmatter___solution'
+  | 'childMdx___frontmatter___results'
+  | 'childMdx___frontmatter___builtWith'
+  | 'childMdx___frontmatter___logo___sourceInstanceName'
+  | 'childMdx___frontmatter___logo___absolutePath'
+  | 'childMdx___frontmatter___logo___relativePath'
+  | 'childMdx___frontmatter___logo___extension'
+  | 'childMdx___frontmatter___logo___size'
+  | 'childMdx___frontmatter___logo___prettySize'
+  | 'childMdx___frontmatter___logo___modifiedTime'
+  | 'childMdx___frontmatter___logo___accessTime'
+  | 'childMdx___frontmatter___logo___changeTime'
+  | 'childMdx___frontmatter___logo___birthTime'
+  | 'childMdx___frontmatter___logo___root'
+  | 'childMdx___frontmatter___logo___dir'
+  | 'childMdx___frontmatter___logo___base'
+  | 'childMdx___frontmatter___logo___ext'
+  | 'childMdx___frontmatter___logo___name'
+  | 'childMdx___frontmatter___logo___relativeDirectory'
+  | 'childMdx___frontmatter___logo___dev'
+  | 'childMdx___frontmatter___logo___mode'
+  | 'childMdx___frontmatter___logo___nlink'
+  | 'childMdx___frontmatter___logo___uid'
+  | 'childMdx___frontmatter___logo___gid'
+  | 'childMdx___frontmatter___logo___rdev'
+  | 'childMdx___frontmatter___logo___ino'
+  | 'childMdx___frontmatter___logo___atimeMs'
+  | 'childMdx___frontmatter___logo___mtimeMs'
+  | 'childMdx___frontmatter___logo___ctimeMs'
+  | 'childMdx___frontmatter___logo___atime'
+  | 'childMdx___frontmatter___logo___mtime'
+  | 'childMdx___frontmatter___logo___ctime'
+  | 'childMdx___frontmatter___logo___birthtime'
+  | 'childMdx___frontmatter___logo___birthtimeMs'
+  | 'childMdx___frontmatter___logo___blksize'
+  | 'childMdx___frontmatter___logo___blocks'
+  | 'childMdx___frontmatter___logo___publicURL'
+  | 'childMdx___frontmatter___logo___id'
+  | 'childMdx___frontmatter___logo___children'
+  | 'childMdx___frontmatter___logoDescription'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -907,14 +948,20 @@ export type Frontmatter = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
-  visible?: Maybe<Scalars['Boolean']>;
+  icon?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
-  series?: Maybe<Scalars['String']>;
+  visible?: Maybe<Scalars['Boolean']>;
   image?: Maybe<File>;
+  series?: Maybe<Scalars['String']>;
   detailPage?: Maybe<Scalars['Boolean']>;
   github?: Maybe<Scalars['String']>;
   demo?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
+  brief?: Maybe<Scalars['String']>;
+  solution?: Maybe<Scalars['String']>;
+  results?: Maybe<Array<Maybe<Scalars['String']>>>;
+  builtWith?: Maybe<Array<Maybe<Scalars['String']>>>;
+  logo?: Maybe<File>;
+  logoDescription?: Maybe<Scalars['String']>;
 };
 
 
@@ -929,14 +976,20 @@ export type FrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
-  visible?: Maybe<BooleanQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
   tags?: Maybe<StringQueryOperatorInput>;
-  series?: Maybe<StringQueryOperatorInput>;
+  visible?: Maybe<BooleanQueryOperatorInput>;
   image?: Maybe<FileFilterInput>;
+  series?: Maybe<StringQueryOperatorInput>;
   detailPage?: Maybe<BooleanQueryOperatorInput>;
   github?: Maybe<StringQueryOperatorInput>;
   demo?: Maybe<StringQueryOperatorInput>;
-  icon?: Maybe<StringQueryOperatorInput>;
+  brief?: Maybe<StringQueryOperatorInput>;
+  solution?: Maybe<StringQueryOperatorInput>;
+  results?: Maybe<StringQueryOperatorInput>;
+  builtWith?: Maybe<StringQueryOperatorInput>;
+  logo?: Maybe<FileFilterInput>;
+  logoDescription?: Maybe<StringQueryOperatorInput>;
 };
 
 export type HeadingsMdx = 
@@ -1611,9 +1664,9 @@ export type MdxFieldsEnum =
   | 'frontmatter___title'
   | 'frontmatter___description'
   | 'frontmatter___date'
-  | 'frontmatter___visible'
+  | 'frontmatter___icon'
   | 'frontmatter___tags'
-  | 'frontmatter___series'
+  | 'frontmatter___visible'
   | 'frontmatter___image___sourceInstanceName'
   | 'frontmatter___image___absolutePath'
   | 'frontmatter___image___relativePath'
@@ -1677,10 +1730,78 @@ export type MdxFieldsEnum =
   | 'frontmatter___image___childMdx___timeToRead'
   | 'frontmatter___image___childMdx___id'
   | 'frontmatter___image___childMdx___children'
+  | 'frontmatter___series'
   | 'frontmatter___detailPage'
   | 'frontmatter___github'
   | 'frontmatter___demo'
-  | 'frontmatter___icon'
+  | 'frontmatter___brief'
+  | 'frontmatter___solution'
+  | 'frontmatter___results'
+  | 'frontmatter___builtWith'
+  | 'frontmatter___logo___sourceInstanceName'
+  | 'frontmatter___logo___absolutePath'
+  | 'frontmatter___logo___relativePath'
+  | 'frontmatter___logo___extension'
+  | 'frontmatter___logo___size'
+  | 'frontmatter___logo___prettySize'
+  | 'frontmatter___logo___modifiedTime'
+  | 'frontmatter___logo___accessTime'
+  | 'frontmatter___logo___changeTime'
+  | 'frontmatter___logo___birthTime'
+  | 'frontmatter___logo___root'
+  | 'frontmatter___logo___dir'
+  | 'frontmatter___logo___base'
+  | 'frontmatter___logo___ext'
+  | 'frontmatter___logo___name'
+  | 'frontmatter___logo___relativeDirectory'
+  | 'frontmatter___logo___dev'
+  | 'frontmatter___logo___mode'
+  | 'frontmatter___logo___nlink'
+  | 'frontmatter___logo___uid'
+  | 'frontmatter___logo___gid'
+  | 'frontmatter___logo___rdev'
+  | 'frontmatter___logo___ino'
+  | 'frontmatter___logo___atimeMs'
+  | 'frontmatter___logo___mtimeMs'
+  | 'frontmatter___logo___ctimeMs'
+  | 'frontmatter___logo___atime'
+  | 'frontmatter___logo___mtime'
+  | 'frontmatter___logo___ctime'
+  | 'frontmatter___logo___birthtime'
+  | 'frontmatter___logo___birthtimeMs'
+  | 'frontmatter___logo___blksize'
+  | 'frontmatter___logo___blocks'
+  | 'frontmatter___logo___publicURL'
+  | 'frontmatter___logo___childImageSharp___gatsbyImageData'
+  | 'frontmatter___logo___childImageSharp___id'
+  | 'frontmatter___logo___childImageSharp___children'
+  | 'frontmatter___logo___id'
+  | 'frontmatter___logo___parent___id'
+  | 'frontmatter___logo___parent___children'
+  | 'frontmatter___logo___children'
+  | 'frontmatter___logo___children___id'
+  | 'frontmatter___logo___children___children'
+  | 'frontmatter___logo___internal___content'
+  | 'frontmatter___logo___internal___contentDigest'
+  | 'frontmatter___logo___internal___description'
+  | 'frontmatter___logo___internal___fieldOwners'
+  | 'frontmatter___logo___internal___ignoreType'
+  | 'frontmatter___logo___internal___mediaType'
+  | 'frontmatter___logo___internal___owner'
+  | 'frontmatter___logo___internal___type'
+  | 'frontmatter___logo___childMdx___rawBody'
+  | 'frontmatter___logo___childMdx___fileAbsolutePath'
+  | 'frontmatter___logo___childMdx___slug'
+  | 'frontmatter___logo___childMdx___body'
+  | 'frontmatter___logo___childMdx___excerpt'
+  | 'frontmatter___logo___childMdx___headings'
+  | 'frontmatter___logo___childMdx___html'
+  | 'frontmatter___logo___childMdx___mdxAST'
+  | 'frontmatter___logo___childMdx___tableOfContents'
+  | 'frontmatter___logo___childMdx___timeToRead'
+  | 'frontmatter___logo___childMdx___id'
+  | 'frontmatter___logo___childMdx___children'
+  | 'frontmatter___logoDescription'
   | 'slug'
   | 'body'
   | 'excerpt'
