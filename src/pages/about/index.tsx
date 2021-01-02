@@ -29,7 +29,7 @@ const About = (): React.ReactElement => {
   const { t } = useTranslation();
   const query: aboutQueryProps = useStaticQuery(graphql`
     query {
-      file(relativePath: {eq: "resources/images/myPhoto.jpg"}) {
+      file(relativePath: {eq: "static/myPhoto.jpg"}) {
         id
         childImageSharp {
           fluid(maxWidth: 1160, quality: 90) {
@@ -207,16 +207,3 @@ const About = (): React.ReactElement => {
 };
 
 export default About;
-
-// export const pageQuery = graphql`
-//   query {
-//     file(relativePath: {eq: "resources/images/myPhoto.jpg"}) {
-//       id
-//       childImageSharp {
-//         fluid {
-//           ...GatsbyImageSharpFluid_withWebp
-//         }
-//       }
-//     }
-//   }
-// `;
