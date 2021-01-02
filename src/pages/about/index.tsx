@@ -53,6 +53,9 @@ const About = (): React.ReactElement => {
               <p>{t('About.introduceMyself')}</p>
               <p>{t('About.aboutSubMessage')}</p>
               <div className="jth-about-contact">
+                <a href="mailto:jthcast@gmail.com" aria-label="mail">
+                  <IconEnvelope />
+                </a>
                 <a
                   href="https://github.com/jthcast"
                   target="_blank"
@@ -68,9 +71,6 @@ const About = (): React.ReactElement => {
                   aria-label="linkedIn"
                 >
                   <IconLinkedIn />
-                </a>
-                <a href="mailto:jthcast@gmail.com" aria-label="mail">
-                  <IconEnvelope />
                 </a>
               </div>
             </div>
