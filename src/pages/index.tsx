@@ -23,7 +23,7 @@ const Index = ({ data }: PageProps<Query>): React.ReactElement => {
       </section>
       {postsData && postsData.length > 0 && (
         <section className="jth-home jth-container">
-          <h2>{t('Home.recentPosts')}</h2>
+          <h2 className="jth-animation" data-animationtype="opacityUp">{t('Home.recentPosts')}</h2>
           <ul className="jth-home-posts">
             {postsData.map((post) => {
               return (
