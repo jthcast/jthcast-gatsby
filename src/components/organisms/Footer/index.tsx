@@ -8,6 +8,7 @@ import {
   IconGithub,
   IconLinkedIn,
   IconLogoColored,
+  IconTemplate,
 } from '../../atoms/Icons';
 
 interface FooterProps {
@@ -48,6 +49,11 @@ const Footer = ({ className }: FooterProps): React.ReactElement => {
         </ul> */}
         <ul className="jth-footer-items-right">
           <li className="jth-footer-items-icon">
+            <a href="mailto:jthcast@gmail.com" aria-label="mail">
+              <IconEnvelope />
+            </a>
+          </li>
+          <li className="jth-footer-items-icon">
             <a
               href="https://github.com/jthcast"
               target="_blank"
@@ -68,8 +74,12 @@ const Footer = ({ className }: FooterProps): React.ReactElement => {
             </a>
           </li>
           <li className="jth-footer-items-icon">
-            <a href="mailto:jthcast@gmail.com" aria-label="mail">
-              <IconEnvelope />
+            <a href="/rss.xml"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="rss"
+            >
+              <IconTemplate iconName="IconRss" />
             </a>
           </li>
         </ul>
