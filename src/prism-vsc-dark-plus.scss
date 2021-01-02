@@ -20,6 +20,10 @@ code[class*='language-'] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+
+  span {
+    font-family: 'Source Code Pro', monospace;
+  }
 }
 
 pre[class*='language-']::selection,
