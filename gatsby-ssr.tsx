@@ -54,6 +54,10 @@ const SetColorModeBeforeRendering = () => {
     }
   }
   const colorMode = getInitialColorMode();
+  document.documentElement.style.setProperty(
+    'background-color',
+    colorMode === 'light' ? '#FFFFFF' : '#000000'
+  );
   document.body.setAttribute('data-theme', colorMode);
 })()`;
   // eslint-disable-next-line react/no-danger

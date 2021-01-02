@@ -19,6 +19,7 @@ const Layout = ({ title, description = '', children }: layoutProps) => {
 
   useAnimation();
   useEffect(() => {
+    document.documentElement.removeAttribute('style');
     unFocus();
   }, []);
   return (
