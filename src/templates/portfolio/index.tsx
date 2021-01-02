@@ -14,7 +14,7 @@ interface PortfolioDataProps {
   }
 }
 
-const Portfolio = ({ data }: PageProps<any>): React.ReactElement => {
+const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement => {
   const { t } = useTranslation();
   const portfolio = data.mdx;
   const related = data.series.nodes;
