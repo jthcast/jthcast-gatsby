@@ -11,7 +11,7 @@ const Index = ({ data }: PageProps<Query>): React.ReactElement => {
   const { t } = useTranslation();
 
   return (
-    <Layout title={t('Home.title')} description={t('Common.description')}>
+    <Layout title={t('Common.title')} description={t('Common.description')}>
       <section className="jth-section">
         <div
           className="jth-container jth-animation"
