@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
-import Layout from '../../components/layout';
+import Layout from '../../components/atoms/Layout';
 import './Post.scss';
 import { useTranslation } from 'react-i18next';
 import GatsbyImage from 'gatsby-image';

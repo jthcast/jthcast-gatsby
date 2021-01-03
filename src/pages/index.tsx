@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Card, { CardInterface } from '../components/atoms/Card';
 import './Home.scss';
-import Layout from '../components/layout';
+import Layout from '../components/atoms/Layout';
 import { graphql, Link, PageProps } from 'gatsby';
 import { Query } from '../graphql-types';
 

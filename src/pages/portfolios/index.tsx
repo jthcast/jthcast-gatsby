@@ -3,7 +3,7 @@ import GatsbyImage, { FixedObject, FluidObject } from "gatsby-image";
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 import { IconGithub, IconPlay } from '../../components/atoms/Icons';
-import Layout from '../../components/layout';
+import Layout from '../../components/atoms/Layout';
 import './Portfolios.scss';
 
 export interface PortfoliosProps {

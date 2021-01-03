@@ -4,7 +4,7 @@ import { graphql, Link, PageProps } from 'gatsby';
 import { Mdx } from '../../graphql-types';
 import { useTranslation } from 'react-i18next';
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import Layout from '../../components/layout';
+import Layout from '../../components/atoms/Layout';
 import GatsbyImage from 'gatsby-image';
 
 interface PortfolioDataProps {

@@ -12,7 +12,7 @@ import {
   IconUserTie,
 } from '../../components/atoms/Icons';
 import Button from '../../components/atoms/Button';
-import Layout from '../../components/layout';
+import Layout from '../../components/atoms/Layout';
 import { graphql, useStaticQuery } from 'gatsby';
 import GatsbyImage, { FluidObject } from "gatsby-image";
 
