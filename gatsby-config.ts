@@ -5,7 +5,7 @@ export const siteMetadata = {
     summary: `Front-end developer work with design and technology, so trying to look problems from various perspective to solve them.`,
   },
   description: `Make digital products that people love to use. Don't force them to use it, make them want to use it.`,
-  siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
+  siteUrl: `https://jthcast.dev`,
   social: {
     twitter: ``,
   },

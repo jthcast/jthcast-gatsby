@@ -56,5 +56,5 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme"
+  "homepage": "https://jthcast.dev"
 }
