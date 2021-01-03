@@ -3,6 +3,7 @@ import {
   CreateNodeArgs,
   CreatePagesArgs,
   CreateSchemaCustomizationArgs,
+  CreateWebpackConfigArgs,
 } from 'gatsby';
 import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
@@ -260,4 +261,19 @@ export const createSchemaCustomization = ({
       slug: String
     }
   `);
+};
+
+export const onCreateWebpackConfig = ({
+  stage,
+  actions,
+}: CreateWebpackConfigArgs) => {
+  if (stage.startsWith('develop')) {
+    actions.setWebpackConfig({
+      resolve: {
+        alias: {
+          'react-dom': '@hot-loader/react-dom',
+        },
+      },
+    });
+  }
 };
