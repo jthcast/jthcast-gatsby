@@ -5,7 +5,7 @@ import useFocus from '../../customHooks/useFocus';
 import { IconSearch, IconSpinner, IconTimesCircle, IconTemplate } from '../../components/atoms/Icons';
 import './Codes.scss';
 import { graphql, Link, navigate, useStaticQuery } from 'gatsby';
-import Layout from '../../components/layout';
+import Layout from '../../components/atoms/Layout';
 import useQuery from '../../customHooks/useQuery';
 
 export interface CodesProps {

@@ -7,7 +7,7 @@ import { IconSearch, IconSpinner, IconTimesCircle } from '../../components/atoms
 import './Posts.scss';
 import useDebounce from '../../customHooks/useDebounce';
 import useFocus from '../../customHooks/useFocus';
-import Layout from '../../components/layout';
+import Layout from '../../components/atoms/Layout';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import Button from '../../components/atoms/Button';
 import { navigate } from 'gatsby';
