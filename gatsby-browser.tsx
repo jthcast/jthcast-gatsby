@@ -8,8 +8,17 @@ import './src/index.scss'
 import './src/prism-vsc-dark-plus.scss'
 import { MDXProvider } from '@mdx-js/react'
 
+const ExternalLink = ({ children, ...props }) => {
+  return (
+    <a target="_blank" rel="noopener noreferrer" className="jth-external-link" {...props}>
+      {children}
+    </a>
+  )
+}
+
 export const wrapRootElement = ({ element, props }) => {
-  const shortcodes = null;
+
+  const shortcodes = { ExternalLink };
 
   return (
     <RecoilRoot {...props}>

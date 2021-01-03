@@ -140,14 +140,6 @@ blockquote {
 }
 
 .jth-external-link {
-  text-decoration: none;
-  position: relative;
-  color: $color;
-  width: fit-content;
-  height: fit-content;
-  font-weight: bold;
-  z-index: 1;
-
   &:after {
     content: '👉 ';
   }
