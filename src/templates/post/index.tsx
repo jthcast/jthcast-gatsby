@@ -128,7 +128,7 @@ export const pageQuery = graphql`
         tags
       }
     }
-    series: allMdx(filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
+    series: allMdx(sort: {fields: [frontmatter___date], order: ASC}, filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
       nodes {
         fields {
           slug
@@ -138,7 +138,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    related: allMdx(filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/posts)/"}, id: {ne: $id}}, limit: 2) {
+    related: allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/posts)/"}, id: {ne: $id}}, limit: 2) {
       nodes {
         fields {
           slug

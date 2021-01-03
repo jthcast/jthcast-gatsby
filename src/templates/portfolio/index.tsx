@@ -179,7 +179,7 @@ export const pageQuery = graphql`
         logoDescription
       }
     }
-    series: allMdx(filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
+    series: allMdx(sort: {fields: [frontmatter___date], order: ASC}, filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
       nodes {
         fields {
           slug

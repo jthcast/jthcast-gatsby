@@ -86,7 +86,7 @@ export const pageQuery = graphql`
         tags
       }
     }
-    related: allMdx(filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/codes)/"}, id: {ne: $id}}, limit: 3) {
+    related: allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/codes)/"}, id: {ne: $id}}, limit: 3) {
       nodes {
         fields {
           slug
