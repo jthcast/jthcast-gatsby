@@ -19,22 +19,23 @@
     .jth-code-info-content {
       color: $color;
       text-align: start;
+      max-width: rem(720px);
     }
 
     h1 {
-      max-width: rem(800px);
+      max-width: rem(720px);
       margin: 0;
     }
 
     p {
       color: $colorDown;
-      max-width: rem(800px);
+      max-width: rem(720px);
     }
   }
 
   .jth-code-content {
     line-height: 1.8;
-    max-width: rem(800px);
+    max-width: rem(720px);
     margin: 2rem auto;
     width: 100%;
 

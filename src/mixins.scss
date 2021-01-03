@@ -4,11 +4,12 @@ $breakpoint-tablet: 40.875rem;
 $breakpoint-desktop: 64rem;
 
 //Common
-$maxWidth: 75rem;
+$maxWidth: 66.667rem;
 $maxWidthHeader: 100%;
 $fontBold: 600;
 $fontNormal: 400;
 $borderRadius: 0.5rem;
+$fontSize: 18px;
 
 //CSS
 $backgroundColor: var(--background-base);
@@ -24,8 +25,12 @@ $black: var(--black);
 $white: var(--white);
 $danger: var(--danger);
 
+@function getFontPercent() {
+  @return ($fontSize / 16px) * 100%;
+}
+
 @function rem($size) {
-  @return $size / 16px * 1rem;
+  @return $size / $fontSize * 1rem;
 }
 
 @mixin mobile {
