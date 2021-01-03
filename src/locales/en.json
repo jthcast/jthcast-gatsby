@@ -4,7 +4,7 @@
     "description": "Make digital products that people love to use. Don't force them to use it, make them want to use it.",
     "searchResultsMessage": "There are {{what}} search results ✨",
     "searchResultDoesntExist": "No results found 😅",
-    "homePage": "Go to the homepage 👉"
+    "homePage": "Go to the homepage"
   },
   "Header": {
     "headerMessage": "I'm looking for a job 👋",
@@ -36,8 +36,8 @@
     "greetMessage": "Make digital products that people love to use",
     "greetSubMessage": "Don't force them to use it, make them want to use it.",
     "recentPosts": "Recent Posts",
-    "postPage": "More 👉",
-    "aboutPage": "About 👉"
+    "postPage": "More",
+    "aboutPage": "About"
   },
   "About": {
     "title": "About",
