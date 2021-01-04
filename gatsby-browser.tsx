@@ -6,42 +6,7 @@ import './src/mixins.scss'
 import './src/index.scss'
 // Highlighting for code blocks
 import './src/prism-vsc-dark-plus.scss'
-import { MDXProvider } from '@mdx-js/react'
-
-const ExternalLink = ({ children, ...props }) => {
-  return (
-    <a target="_blank" rel="noopener noreferrer" className="jth-external-link" {...props}>
-      {children}
-    </a>
-  )
-}
-
-const Video = ({ children, ...props }) => {
-  return (
-    <figure>
-      <video
-        preload="auto"
-        muted
-        loop
-        playsInline
-        autoPlay
-        controls
-        {...props}
-      />
-      <figcaption>
-        {children}
-      </figcaption>
-    </figure>
-  )
-}
 
 export const wrapRootElement = ({ element, props }) => {
-
-  const shortcodes = { ExternalLink, Video };
-
-  return (
-    <RecoilRoot {...props}>
-      <MDXProvider components={shortcodes}>{element}</MDXProvider>
-    </RecoilRoot>
-  )
+  return <RecoilRoot {...props}>{element}</RecoilRoot>
 }

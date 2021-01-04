@@ -7,6 +7,7 @@ import Footer from '../../organisms/Footer';
 import unFocus from '../../../customHooks/unFocus';
 import SEO from '../Seo';
 import useAnimation from '../../../customHooks/useAnimation';
+import { MDXProvider } from '@mdx-js/react';
 
 type layoutProps = {
   title: string,
@@ -14,8 +15,36 @@ type layoutProps = {
   children?: any
 }
 
+const ExternalLink = ({ children, ...props }) => {
+  return (
+    <a target="_blank" rel="noopener noreferrer" className="jth-external-link" {...props}>
+      {children}
+    </a>
+  )
+}
+
+const Video = ({ children, ...props }) => {
+  return (
+    <figure>
+      <video
+        preload="auto"
+        muted
+        loop
+        playsInline
+        autoPlay
+        controls
+        {...props}
+      />
+      <figcaption>
+        {children}
+      </figcaption>
+    </figure>
+  )
+}
+
 const Layout = ({ title, description = '', children }: layoutProps) => {
   const { t } = useTranslation();
+  const shortcodes = { ExternalLink, Video };
 
   useAnimation();
   useEffect(() => {
@@ -27,7 +56,9 @@ const Layout = ({ title, description = '', children }: layoutProps) => {
       <SEO title={title} description={description} />
       <Header ghost showType="top" title={t('Common.title')} />
       <MenuList />
-      <main>{children}</main>
+      <MDXProvider components={shortcodes}>
+        <main>{children}</main>
+      </MDXProvider>
       <Footer />
     </div>
   );
