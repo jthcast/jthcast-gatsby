@@ -13,7 +13,7 @@ let systemLanguage = undefined;
 let preferedLanguage = undefined;
 if (isClient) {
   systemLanguage = window.navigator.language;
-  preferedLanguage = localStorage.getItem('language');
+  preferedLanguage = localStorage.getItem('language-mode');
 }
 
 i18n.use(initReactI18next).init({

@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Query } from '../../../graphql-types';
+import { useRecoilValue } from 'recoil';
+import { initialLanguageMode } from '../../../recoilStates';
 
 type seoProps = {
   description: string,
@@ -37,6 +39,7 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
 
   const metaDescription = description || site.siteMetadata.description;
   const defaultTitle = site.siteMetadata?.title;
+  lang = useRecoilValue(initialLanguageMode);
 
   return (
     <Helmet
