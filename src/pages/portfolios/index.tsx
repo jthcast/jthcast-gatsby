@@ -40,11 +40,7 @@ const Portfolios = (): React.ReactElement => {
             date(formatString: "YYYY-MM-DD")
             description
             image {
-              childImageSharp {
-                fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
+              ...TitleImage
             }
             series
             detailPage

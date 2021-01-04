@@ -8,6 +8,7 @@ import Card from '../../components/atoms/Card';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Mdx } from '../../graphql-types';
 import { IconTemplate } from '../../components/atoms/Icons';
+import '../../fragments';
 
 interface PostDataProps {
   mdx?: Mdx;
@@ -122,11 +123,7 @@ export const pageQuery = graphql`
         date(formatString: "YYYY-MM-DD")
         description
         image {
-          childImageSharp {
-            fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
-            }
-          }
+          ...TitleImage
           publicURL
         }
         series
@@ -153,11 +150,7 @@ export const pageQuery = graphql`
           date(formatString: "YYYY-MM-DD")
           description
           image {
-            childImageSharp {
-              fluid(maxWidth: 1160, maxHeight: 500, quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
+            ...TitleImage
           }
           tags
         }

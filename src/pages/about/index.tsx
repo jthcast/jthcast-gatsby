@@ -32,7 +32,7 @@ const About = (): React.ReactElement => {
       file(relativePath: {eq: "myPhoto.jpg"}) {
         id
         childImageSharp {
-          fluid(maxWidth: 1160, quality: 90) {
+          fluid(maxWidth: 360, quality: 90) {
             ...GatsbyImageSharpFluid_withWebp_noBase64
           }
         }
