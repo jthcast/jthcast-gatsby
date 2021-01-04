@@ -19,9 +19,11 @@ type seoProps = {
   meta?: ConcatArray<{ name: string; content: any; property?: undefined; }>,
   title?: string,
   image?: string,
+  author?: string,
+  publishDate?: string,
 }
 
-const SEO = ({ description = '', lang = 'ko', meta = [], title, image }: seoProps) => {
+const SEO = ({ description = '', lang = 'ko', meta = [], title, image, author, publishDate }: seoProps) => {
   const { pathname } = useLocation();
   const { site }: Query = useStaticQuery(
     graphql`
@@ -35,6 +37,9 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title, image }: seoProp
             }
             siteUrl
             image
+            author{
+              name
+            }
           }
         }
       }
@@ -43,6 +48,8 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title, image }: seoProp
 
   const metaDescription = description || site.siteMetadata.description;
   const metaTitle = title || site.siteMetadata?.title;
+  const metaAuthor = author || site.siteMetadata?.author.name;
+  const metaPublishDate = publishDate;
   const defaultTitle = site.siteMetadata?.title;
   const defaultImage = site.siteMetadata?.image;
   const siteUrl = site.siteMetadata?.siteUrl;
@@ -59,6 +66,18 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title, image }: seoProp
         {
           name: `description`,
           content: metaDescription,
+        },
+        {
+          name: `author`,
+          content: metaAuthor,
+        },
+        {
+          itemprop: `datePublished`,
+          content: metaPublishDate,
+        },
+        {
+          property: `article:published_time`,
+          content: metaPublishDate,
         },
         {
           name: `og:url`,

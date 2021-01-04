@@ -29,6 +29,8 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
     <Layout title={post.frontmatter.title}
       description={post.frontmatter.description || post.excerpt}
       image={post.frontmatter.image.publicURL}
+      // author={post.frontmatter.author}
+      publishDate={post.frontmatter.date}
     >
       <article
         className="jth-container jth-post"

@@ -22,7 +22,10 @@ const CodePostTemplate = ({ data }: PageProps<CodeDataProps>) => {
 
   return (
     <Layout title={code.frontmatter.title}
-      description={code.frontmatter.description || code.excerpt}>
+      description={code.frontmatter.description || code.excerpt}
+      // author={code.frontmatter.author}
+      publishDate={code.frontmatter.date}
+    >
       <article
         className="jth-container jth-code"
         itemScope

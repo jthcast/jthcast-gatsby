@@ -23,6 +23,8 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
     <Layout title={portfolio.frontmatter.title}
       description={portfolio.frontmatter.description || portfolio.excerpt}
       image={portfolio.frontmatter.image.publicURL}
+      // author={portfolio.frontmatter.author}
+      publishDate={portfolio.frontmatter.date}
     >
       <article
         className="jth-portfolio"
