@@ -6,9 +6,9 @@ const CheckLegacyIE = () => {
 (function() {
   if (document['documentMode'] === 11 && navigator.userAgent.indexOf('Windows NT 10.0') > -1) {
     window.location.href = 'microsoft-edge:' + document.URL;
-    setTimeout(() => {
+    setTimeout(function() {
       window.location.href = 'https://support.microsoft.com/office/the-website-you-were-trying-to-reach-doesn-t-work-with-internet-explorer-8f5fc675-cd47-414c-9535-12821ddfc554';
-    }), 50);
+    }, 50);
   }else if (document['documentMode'] <= 11) {
     var paragraph = document.createElement('p');
     var message = document.createTextNode('Sorry, Browser version is not supported. Please use a modern browser.');
@@ -31,7 +31,7 @@ const CheckLegacyIE = () => {
     document.body.appendChild(edgeParagraph);
     document.body.appendChild(chromeParagraph);
   }
-})()`;
+})();`
   // eslint-disable-next-line react/no-danger
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
 };
