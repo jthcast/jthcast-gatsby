@@ -16,9 +16,28 @@ const ExternalLink = ({ children, ...props }) => {
   )
 }
 
+const Video = ({ children, ...props }) => {
+  return (
+    <figure>
+      <video
+        preload="auto"
+        muted
+        loop
+        playsInline
+        autoPlay
+        controls
+        {...props}
+      />
+      <figcaption>
+        {children}
+      </figcaption>
+    </figure>
+  )
+}
+
 export const wrapRootElement = ({ element, props }) => {
 
-  const shortcodes = { ExternalLink };
+  const shortcodes = { ExternalLink, Video };
 
   return (
     <RecoilRoot {...props}>
