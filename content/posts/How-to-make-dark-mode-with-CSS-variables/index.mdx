@@ -1,0 +1,329 @@
+---
+title: CSS변수를 활용하여 다크 모드 구현하기
+date: '2020-12-20'
+description: 모바일 활용이 점차 늘어남에 따라 웹 생태계도 PC 대신 모바일을 중점으로 맞춰지고 있습니다. 특히 모바일에서 어두운 테마를 사용하는 사용자가 많아짐에 따라 웹 페이지도 다크 모드를 지원하는 경우가 많아지고 있습니다. CSS 변수를 활용하여 다크 모드를 구현해 보겠습니다.
+image: ./images/darkMode title.jpg
+series: jthCast
+tags: ['css', 'javascript']
+visible: true
+---
+
+## 요구 사항 분석
+
+일반적으로 요구하는 다크 모드는 아래와 같은 기능을 합니다.
+
+- 밝은 테마와 어두운 테마를 지원해야 합니다.
+  - 테마는 웹 접근성을 만족해야 합니다.
+- 사용자의 환경 설정을 파악하여 초기 테마를 자동으로 선택합니다.
+- 사용자가 테마를 선택할 수 있습니다.
+
+3개밖에 안되네요. 하지만 이 블로그를 개발하면서 제일 시간이 오래 걸린 기능이었습니다.😫
+
+UX/UI에 신경 써야 할 부분이 너무도 많기 때문입니다. 어떤 부분인지 구현하며 알아보겠습니다.
+
+> **주의사항**
+>
+> 이 글은 CSS 변수를 활용하여 다크 모드를 구현하지만, 인터넷 익스플로러는 CSS 변수 기능을 지원하지 않습니다.💢
+>
+> CSS 변수 기능은 폴리필로도 구현이 불가능하고, 변수 비슷한 기능을 하는 라이브러리의 도움이 필요하니 주의하시기 바랍니다.
+>
+> 인터넷 익스플로러를 지원하는 다른 방법으로는 클래스 노가다가 있지만, 이 글에서는 다루지 않습니다.
+
+## 다크 모드의 이해
+
+사람은 깊이감을 느낄 때 밝은 것을 가깝게 인식하고 어두운 것을 멀게 인식합니다.
+따라서, 페이지에서 계층 구조를 나눌 때 사용자에게 가장 가까운 레이어일수록 밝게 표시하는 게 좋습니다.
+
+![Darkmode color guide](./images/darkmode_color_guide.png '밝은 테마의 색상을 반전시켜도 다크 모드가 되지 않습니다.')
+
+## 테마 구분
+
+색상을 고르기에 앞서, 다크 모드의 로직을 구현하겠습니다.
+
+```JS
+import { atom } from 'recoil';
+
+function getInitialColorMode() {
+  const persistedColorPreference = window.localStorage.getItem('color-mode');
+
+  if (persistedColorPreference) {
+    return persistedColorPreference;
+  }
+
+  const systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+  if (systemPreference.matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
+const initialColorMode = atom({
+  key: 'initialColorMode',
+  default: getInitialColorMode(),
+});
+
+export { initialColorMode };
+```
+
+`'(prefers-color-scheme: dark)'`를 통해 현재 사용자의 환경 설정값이 밝은 테마인지, 어두운 테마인지 알 수 있습니다.
+
+저는 상태 관리 라이브러리로 `Recoil`을 사용하였으므로, `atom`메소드를 활용하여 상태를 입력했습니다.
+React context를 사용하시거나 Redux 등 다른 라이브러리를 사용하시는 분들은 그에 맞게 상태를 넣어주시면 됩니다.
+
+```js
+import React, { useEffect } from 'react';
+import Switch from '../../atoms/Switch';
+import { useRecoilState } from 'recoil';
+import { initialColorMode } from '../../../recoilStates';
+
+const DarkModeSwitch = () => {
+  const [colorMode, setColorMode] = useRecoilState(initialColorMode);
+
+  const darkModeHandling = () => {
+    setColorMode(colorMode === 'dark' ? 'light' : 'dark');
+  };
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', colorMode);
+    window.localStorage.setItem('color-mode', colorMode);
+  }, [colorMode]);
+
+  return (
+    <Switch
+      className="switch-darkMode"
+      checked={colorMode === 'dark'}
+      unCheckedChildren="🌞"
+      checkedChildren="🌜"
+      onClick={darkModeHandling}
+    />
+  );
+};
+
+export default DarkModeSwitch;
+```
+
+미리 만들어 둔 `Switch` 컴포넌트에 기능을 확장시켜 `DarkModeSwitch` 컴포넌트를 만들겠습니다.
+
+html의 data 속성을 사용하여 밝은 테마와 어두운 테마를 구분하겠습니다.
+렌더링이 완료된 후 밝은 테마인 경우 `body`의 `data-theme`에 `'light'` 값을, 어두운 테마인 경우 `'dark'` 값을 주었습니다.
+로컬 스토리지에 상태 값을 저장해 사용자가 상태 값을 바꾼 후에도 바뀐 값을 사용할 수 있도록 합니다.
+
+브라우저를 종료 후 다시 페이지에 접속해도 이전 상태 값을 가져와야 하므로 테마 구분 함수를 아래와 같이 수정합니다.
+
+```JS
+import { atom } from 'recoil';
+
+function getInitialColorMode() {
+  //추가된 부분
+  const persistedColorPreference = window.localStorage.getItem('color-mode');
+
+  if (persistedColorPreference) {
+    return persistedColorPreference;
+  }
+  //
+
+  const systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+  if (systemPreference.matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
+const initialColorMode = atom({
+  key: 'initialColorMode',
+  default: getInitialColorMode(),
+});
+
+export { initialColorMode };
+```
+
+## 색상 선택
+
+웹 접근성을 만족해야 하기 때문에 일반 테마와 어두운 테마 두 가지 경우를 고려하여 색상을 따로 구성해야 합니다.
+
+<ExternalLink href="https://jthcast.dev/posts/Why-efforts-to-preserve-web-standards-and-web-accessibility-are-required/">
+  웹 표준과 웹 접근성을 지키기 위한 노력이 필요한 이유
+</ExternalLink>
+
+색상 선택은 물론 만드는 사람 마음이지만, UI/UX를 고려한 대표적인 가이드가 존재합니다. 'Material Design Dark theme'와
+'Human Interface Guideline Dark mode'입니다. 이를 비교하고 디자인을 선택하는 부분은 좋은 글이 있어 링크로 남기겠습니다.
+
+<ExternalLink href="https://tech.socarcorp.kr/design/2020/07/10/dark-mode-01.html">
+  [SOCAR FRAME 만들기 #2] 다크 모드 받고 디자인 시스템 더블로 가! (1탄)
+</ExternalLink>
+
+참고로, 저의 경우는 블로그 컨셉이 미니멀한 디자인이므로 확실한 색상 대비로 포인트를 주기 위해
+'Human Interface Guideline Dark mode'를 선택했습니다.
+
+## SCSS
+
+밝은 테마에서 적용할 변수들을 먼저 작성한 후, 속성 선택자를 활용하여 어두운 테마일 경우 같은 변수 명으로 Overriding 합니다.
+
+> **Overriding**
+>
+> Overriding은 이미 작성되어 있는 것을 다시 재정의 하여 사용하는 것을 말합니다.
+
+```scss
+:root {
+  --background-base: #ffffff;
+  --background-base-opacity: rgba(255, 255, 255, 0.85);
+  --background-down-opacity: rgba(255, 255, 255, 0.3);
+  --scrollbar-base-opacity: rgba(0, 0, 0, 0.5);
+  --background-code-base: #f9f2f4;
+  --color-base: #000000;
+  --color-down: #70757a;
+  --color-code-base: #9a354a;
+  --primary-brand-base: #f6a54c;
+  --secondary-brand-base: #614cf6;
+  --primary-brand-background-base: #504646;
+  --border-base: #d6d6d6;
+  --group-base: #f4f4f4;
+  --danger: #e03434;
+  --black: #000000;
+  --white: #ffffff;
+
+  background-color: var(--background-base);
+  color: var(--color-base);
+
+  * {
+    &::selection {
+      background: var(--color-base);
+      color: var(--background-base);
+    }
+  }
+}
+
+[data-theme='dark'] {
+  --background-base: #000000;
+  --background-base-opacity: rgba(0, 0, 0, 0.85);
+  --background-down-opacity: rgba(0, 0, 0, 0.3);
+  --scrollbar-base-opacity: rgba(255, 255, 255, 0.5);
+  --background-code-base: #3c3636;
+  --color-base: #ffffff;
+  --color-down: #ababab;
+  --color-code-base: #ffb3c2;
+  --secondary-brand-base: #6e59ff;
+  --border-base: #d6d6d6;
+  --group-base: #242526;
+
+  background-color: var(--background-base);
+  color: var(--color-base);
+
+  * {
+    &::selection {
+      background: var(--color-base);
+      color: var(--background-base);
+    }
+  }
+}
+```
+
+## 사용자 경험 개선
+
+처음 분석하였던 요구 사항은 모두 구현하였습니다.
+하지만 페이지를 새로 고침할 때 깜빡임 현상이 발생합니다.
+
+<Video src="./videos/darkmode_flash.mp4">윽! 눈부셔😣</Video>
+
+이는 사용자 경험을 좋지 않게 합니다.
+이를 개선하기 위해 화면이 완전히 렌더링 되기 전에 배경색을 먼저 넣어 주겠습니다.
+
+> **브라우저의 작동**
+>
+> 브라우저의 작동 순서는 다음과 같습니다.
+>
+> 1. HTML을 웹서버로부터 받음
+> 2. HTML 파싱 및 CSS, Script 로드(script로드 시 파싱을 중단하고 script를 먼저 로드 함)
+> 3. DOM Tree 및 Render Tree 구성
+> 4. 그리기
+>
+> 깜빡임 현상 개선을 위해 2번의 Script 로드 단계에서 배경색을 넣는 코드를 넣겠습니다.
+
+```js
+<script type="text/javascript">
+  (function() {
+    function getInitialColorMode() {
+      const isClient = typeof window !== 'undefined';
+      if (isClient) {
+        const persistedColorPreference = window.localStorage.getItem('color-mode');
+
+        if (persistedColorPreference) {
+          return persistedColorPreference;
+        }
+
+        const systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+        if (systemPreference.matches) {
+          return 'dark';
+        }
+        return 'light';
+      }
+    }
+    const colorMode = getInitialColorMode();
+    document.documentElement.style.setProperty(
+      'background-color',
+      colorMode === 'light' ? '#FFFFFF' : '#000000'
+    );
+  })();
+</script>
+```
+
+위 코드를 HTML의 `head` 부분에 넣어줍니다. React를 사용한다면 index.html에 넣어줍니다.
+화면을 그리기 전, 위의 script를 만나 `html`에 배경색을 미리 작성해 줍니다.😉
+
+Gatsby를 사용한다면 서버사이드렌더링(SSR) 하여 HTML을 내려주기 때문에 다른 방법이 필요합니다.
+gatsby-ssr.js 파일에 아래와 같이 사용해 줍니다.
+
+```js
+const SetColorModeBeforeRendering = () => {
+  let codeToRunOnClient = `
+(function() {
+  function getInitialColorMode() {
+    const isClient = typeof window !== 'undefined';
+    if (isClient) {
+      const persistedColorPreference = window.localStorage.getItem('color-mode');
+
+      if (persistedColorPreference) {
+        return persistedColorPreference;
+      }
+
+      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+      if (systemPreference.matches) {
+        return 'dark';
+      }
+      return 'light';
+    }
+  }
+  const colorMode = getInitialColorMode();
+  document.documentElement.style.setProperty(
+    'background-color',
+    colorMode === 'light' ? '#FFFFFF' : '#000000'
+  );
+})()`;
+  // eslint-disable-next-line react/no-danger
+  return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
+};
+
+export const onRenderBody = ({ setPreBodyComponents }) => {
+  setPreBodyComponents(
+    <SetColorModeBeforeRendering key="SetColorModeBeforeRendering" />
+  );
+};
+```
+
+렌더링이 완료된 후, `html`의 `style` 속성을 지워주어 사용자가 테마를 바꾸었을 때 `body`에 적용된 css가 올바르게 동작하도록 합니다.
+
+```js
+useEffect(() => {
+  document.documentElement.removeAttribute('style');
+}, []);
+```
+
+<Video src="./videos/darkmode_not_flash.mp4">완벽합니다!😁</Video>
+
+## 마치며
+
+다크 모드를 구현하며, 요구 사항 분석에서 발견되지 않은 사용자 경험 개선까지 진행해 보았습니다.
+0.1초의 짧은 시간이지만, 0.1초로 사용자는 다른 경험을 하게 됩니다.
+
+요구 사항 분석 당시 기능은 간단해 보였지만 사용자 경험까지 생각하며 구현하는 것은 간단하지 않았습니다.
+역시 프론트엔드 개발자로써 UI/UX와 브라우저에 대한 이해가 중요한 부분임을 다시 한번 느낄 수 있었습니다.😅

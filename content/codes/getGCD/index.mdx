@@ -1,0 +1,24 @@
+---
+title: 최대공약수
+date: '2020-12-21'
+description: 2개 이상의 수의 공약수 중에서 최대인 수
+icon: IconGCD
+tags: ['정수론']
+visible: true
+---
+
+```js
+const getGCD = (n, m) => {
+  return m ? getGCD(m, n % m) : n;
+};
+```
+
+## 입력
+
+const n = 2;
+
+const m = 4;
+
+## 출력
+
+2

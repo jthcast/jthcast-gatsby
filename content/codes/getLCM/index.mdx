@@ -1,0 +1,28 @@
+---
+title: 최소공배수
+date: '2020-12-21'
+description: 2개 이상의 수의 공배수 중에서 최소인 수
+icon: IconLCM
+tags: ['정수론']
+visible: true
+---
+
+```js
+const getLCM = (n, m) => {
+  const getGCD = (n, m) => {
+    return m ? getGCD(m, n % m) : n;
+  };
+
+  return (n * m) / getGCD(n, m);
+};
+```
+
+## 입력
+
+const n = 2;
+
+const m = 4;
+
+## 출력
+
+4
