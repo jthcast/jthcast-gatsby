@@ -13,6 +13,7 @@ type layoutProps = {
   title: string,
   description?: string,
   children?: any
+  image?: string
 }
 
 const ExternalLink = ({ children, ...props }) => {
@@ -42,7 +43,7 @@ const Video = ({ children, ...props }) => {
   )
 }
 
-const Layout = ({ title, description = '', children }: layoutProps) => {
+const Layout = ({ title, description = '', children, image }: layoutProps) => {
   const { t } = useTranslation();
   const shortcodes = { ExternalLink, Video };
 
@@ -53,7 +54,7 @@ const Layout = ({ title, description = '', children }: layoutProps) => {
   }, []);
   return (
     <div className="global-wrapper">
-      <SEO title={title} description={description} />
+      <SEO title={title} description={description} image={image} />
       <Header ghost showType="top" title={t('Common.title')} />
       <MenuList />
       <MDXProvider components={shortcodes}>

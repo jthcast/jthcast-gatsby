@@ -27,7 +27,9 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
 
   return (
     <Layout title={post.frontmatter.title}
-      description={post.frontmatter.description || post.excerpt}>
+      description={post.frontmatter.description || post.excerpt}
+      image={post.frontmatter.image.publicURL}
+    >
       <article
         className="jth-container jth-post"
         itemScope
@@ -123,6 +125,7 @@ export const pageQuery = graphql`
               ...GatsbyImageSharpFluid_withWebp_noBase64
             }
           }
+          publicURL
         }
         series
         tags

@@ -21,7 +21,9 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
 
   return (
     <Layout title={portfolio.frontmatter.title}
-      description={portfolio.frontmatter.description || portfolio.excerpt}>
+      description={portfolio.frontmatter.description || portfolio.excerpt}
+      image={portfolio.frontmatter.image.publicURL}
+    >
       <article
         className="jth-portfolio"
         itemScope
@@ -165,6 +167,7 @@ export const pageQuery = graphql`
               ...GatsbyImageSharpFluid_withWebp_noBase64
             }
           }
+          publicURL
         }
         detailPage
         github

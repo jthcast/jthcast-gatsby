@@ -6,21 +6,23 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Query } from '../../../graphql-types';
 import { useRecoilValue } from 'recoil';
 import { initialLanguageMode } from '../../../recoilStates';
+import { useLocation } from '@reach/router';
 
 type seoProps = {
-  description: string,
-  lang: string,
-  meta: ConcatArray<{ name: string; content: any; property?: undefined; }>,
-  title: string
+  description?: string,
+  lang?: string,
+  meta?: ConcatArray<{ name: string; content: any; property?: undefined; }>,
+  title?: string,
+  image?: string,
 }
 
-const SEO = ({ description, lang, meta, title }: seoProps) => {
+const SEO = ({ description = '', lang = 'ko', meta = [], title, image }: seoProps) => {
+  const { pathname } = useLocation();
   const { site }: Query = useStaticQuery(
     graphql`
       query {
@@ -31,6 +33,8 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
             social {
               twitter
             }
+            siteUrl
+            image
           }
         }
       }
@@ -38,7 +42,10 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
   );
 
   const metaDescription = description || site.siteMetadata.description;
+  const metaTitle = title || site.siteMetadata?.title;
   const defaultTitle = site.siteMetadata?.title;
+  const defaultImage = site.siteMetadata?.image;
+  const siteUrl = site.siteMetadata?.siteUrl;
   lang = useRecoilValue(initialLanguageMode);
 
   return (
@@ -54,8 +61,12 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
           content: metaDescription,
         },
         {
+          name: `og:url`,
+          content: `${siteUrl}${pathname}`,
+        },
+        {
           property: `og:title`,
-          content: title,
+          content: metaTitle,
         },
         {
           property: `og:description`,
@@ -64,6 +75,10 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          property: `og:image`,
+          content: `${siteUrl}${image || defaultImage}`,
         },
         {
           name: `twitter:card`,
@@ -75,7 +90,7 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: metaTitle,
         },
         {
           name: `twitter:description`,
@@ -84,19 +99,6 @@ const SEO = ({ description, lang, meta, title }: seoProps) => {
       ].concat(meta)}
     />
   );
-};
-
-SEO.defaultProps = {
-  lang: `ko`,
-  meta: [],
-  description: ``,
-};
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 };
 
 export default SEO;

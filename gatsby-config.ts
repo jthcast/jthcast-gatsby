@@ -6,6 +6,7 @@ export const siteMetadata = {
   },
   description: `Make digital products that people love to use. Don't force them to use it, make them want to use it.`,
   siteUrl: `https://jthcast.dev`,
+  image: `/jthcast.png`,
   social: {
     twitter: ``,
   },
