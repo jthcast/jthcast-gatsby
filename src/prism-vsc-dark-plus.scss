@@ -371,6 +371,11 @@ div.gatsby-highlight {
   background: #ff9800;
   color: white;
 }
+.gatsby-highlight pre[class='language-scss']::before {
+  content: 'scss';
+  background: #ff5e00;
+  color: white;
+}
 .gatsby-highlight pre[class='language-mdx']::before {
   content: 'mdx';
   background: #f9ac00;
