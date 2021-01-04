@@ -85,9 +85,13 @@ export const plugins = [
   `gatsby-transformer-sharp`,
   `gatsby-plugin-sharp`,
   {
-    resolve: `gatsby-plugin-google-analytics`,
+    resolve: `gatsby-plugin-google-gtag`,
     options: {
-      trackingId: process.env.GA_TRACKING_ID,
+      trackingIds: [
+        process.env.GA_TRACKING_ID, // Google Analytics / GA
+        '', // Google Ads / Adwords / AW
+        '', // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
+      ],
     },
   },
   {
