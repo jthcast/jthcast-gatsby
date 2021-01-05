@@ -110,49 +110,11 @@ export const plugins = [
         }
       `,
       feeds: [
-        {
-          serialize: ({ query: { site, allMdx } }) => {
-            return allMdx.edges.map(edge => {
-              return Object.assign({}, edge.node.frontmatter, {
-                description: edge.node.frontmatter.description,
-                date: edge.node.frontmatter.date,
-                url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                custom_elements: [
-                  {
-                    'content:encoded': `
-                  <p>${
-                    edge.node.frontmatter.description
-                  }</p><div style="margin-top: 16px;"><a href="${
-                      site.siteMetadata.siteUrl + edge.node.fields.slug
-                    }">Read this</a></div><br />
-                `,
-                  },
-                ],
-              });
-            });
-          },
-          query: `
-            {
-              allMdx(
-                sort: { order: DESC, fields: [frontmatter___date] }, filter: {frontmatter: {visible: {eq: true}}}
-              ) {
-                edges {
-                  node {
-                    fields { slug }
-                    frontmatter {
-                      title
-                      description
-                      date
-                    }
-                  }
-                }
-              }
-            }
-          `,
-          output: '/rss.xml',
-          title: "JthCast's RSS Feed",
-        },
+        getRssFeed({
+          filePathRegex: `/content/posts/`,
+          output: `/rss.xml`,
+          title: `JthCast's RSS Feed`,
+        }),
       ],
     },
   },
@@ -173,3 +135,52 @@ export const plugins = [
   // To learn more, visit: https://gatsby.dev/offline
   // `gatsby-plugin-offline`,
 ];
+
+function getRssFeed({ filePathRegex, ...props }) {
+  return {
+    serialize: ({ query: { site, allMdx } }) => {
+      return allMdx.edges.map(edge => {
+        return Object.assign({}, edge.node.frontmatter, {
+          description: edge.node.frontmatter.description,
+          date: edge.node.frontmatter.date,
+          url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+          guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+          custom_elements: [
+            {
+              'content:encoded': `
+              <p>${
+                edge.node.frontmatter.description
+              }</p><div style="margin-top: 16px;"><a href="${
+                site.siteMetadata.siteUrl + edge.node.fields.slug
+              }">Read this</a></div><br />
+            `,
+            },
+          ],
+        });
+      });
+    },
+    query: `
+        {
+          allMdx(
+            sort: { order: DESC, fields: [frontmatter___date] },
+            filter: {
+              frontmatter: {visible: {eq: true}}
+              fileAbsolutePath: {regex: "${filePathRegex}"}
+            }
+          ) {
+            edges {
+              node {
+                fields { slug }
+                frontmatter {
+                  title
+                  description
+                  date
+                }
+              }
+            }
+          }
+        }
+      `,
+    ...props,
+  };
+}
