@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
 import Layout from '../../components/atoms/Layout';
 import './Post.scss';
@@ -39,7 +39,8 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
           publishDate: data.mdx.frontmatter.date
         })
       });
-      const result = await fetchData.json();
+      await fetchData.json();
+      // const result = await fetchData.json();
       // setViewCount(result.Attributes.viewCount.N);
     }
     getViewCount();

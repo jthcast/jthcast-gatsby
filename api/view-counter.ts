@@ -6,10 +6,10 @@ import {
 import { NowRequest, NowResponse } from '@vercel/node';
 
 const dbclient = new DynamoDBClient({
-  region: 'ap-northeast-2',
+  region: process.env.DB_REGION,
   credentials: {
-    accessKeyId: 'AKIA23PHNMHMLEICQNGK',
-    secretAccessKey: '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',
+    accessKeyId: process.env.DB_ACCESSKEY_ID,
+    secretAccessKey: process.env.DB_SECRETACCESS_KEY,
   },
 });
 
@@ -17,7 +17,7 @@ const viewCounter = async (req: NowRequest, res: NowResponse) => {
   try {
     if (req.method === 'POST') {
       const params: UpdateItemInput = {
-        TableName: 'pages',
+        TableName: process.env.DB_TABLE_NAME,
         UpdateExpression:
           'SET viewCount = if_not_exists(viewCount, :init) + :val',
         ExpressionAttributeValues: {
