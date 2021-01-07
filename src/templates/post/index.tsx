@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
 import Layout from '../../components/atoms/Layout';
 import './Post.scss';
@@ -25,6 +25,25 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
   const post = data.mdx;
   const series = data.series.nodes;
   const related = data.related.nodes;
+  // const [viewCount, setViewCount] = useState(undefined);
+
+  useEffect(() => {
+    const getViewCount = async () => {
+      const fetchData = await fetch('/api/view-counter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          slug: data.mdx.fields.slug,
+          publishDate: data.mdx.frontmatter.date
+        })
+      });
+      const result = await fetchData.json();
+      // setViewCount(result.Attributes.viewCount.N);
+    }
+    getViewCount();
+  }, [data.mdx.fields.slug, data.mdx.frontmatter.date]);
 
   return (
     <Layout title={post.frontmatter.title}
@@ -57,6 +76,9 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
           </MDXRenderer>
           <IconTemplate iconName="IconWaveLine" className="jth-post-separator" />
         </section>
+        {/* <footer className="jth-post-info">
+          <p><span role="img" aria-label="Eyes">👀 </span>{viewCount}</p>
+        </footer> */}
       </article>
       <nav className="jth-post-links jth-container">
         {series.length > 1 && (
@@ -128,6 +150,9 @@ export const pageQuery = graphql`
         }
         series
         tags
+      }
+      fields {
+        slug
       }
     }
     series: allMdx(sort: {fields: [frontmatter___date], order: ASC}, filter: {frontmatter: {visible: { eq: true }, series: {eq: $series, ne: null }}, fileAbsolutePath: {regex: "/(content/posts)/"}}) {
