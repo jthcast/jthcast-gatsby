@@ -60,8 +60,10 @@ const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
       >
         <header className="jth-post-info">
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          {post.frontmatter.tags && <p>{post.frontmatter.tags.join(' / ')}</p>}
-          <p>{post.frontmatter.date}</p>
+          <div>
+            {post.frontmatter.tags && <p>{post.frontmatter.tags.join(' / ')}</p>}
+            <p>{post.frontmatter.date}</p>
+          </div>
           {post.frontmatter.image &&
             <div className="jth-post-info-image">
               <GatsbyImage
