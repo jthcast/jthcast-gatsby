@@ -63,8 +63,6 @@ const ScrollButton = ({
     return () => {
       window.removeEventListener('scroll', scrollHandling);
     };
-
-    return () => null;
   }, [scrollHandling]);
 
   return (
