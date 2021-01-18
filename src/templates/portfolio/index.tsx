@@ -37,9 +37,11 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
         </header>
         {portfolio.frontmatter.image &&
           <div className="jth-portfolio-info-image">
-            <GatsbyImage
-              fluid={portfolio.frontmatter.image.childImageSharp.fluid}
-              alt={portfolio.frontmatter.title} />
+            <div className="jth-portfolio-info-image-container">
+              <GatsbyImage
+                fluid={portfolio.frontmatter.image.childImageSharp.fluid}
+                alt={portfolio.frontmatter.title} />
+            </div>
           </div>}
         <section className="jth-section">
           <div className="jth-portfolio-content jth-container jth-section-repeatColGrid-center">
@@ -165,7 +167,7 @@ export const pageQuery = graphql`
         description
         image {
           childImageSharp {
-            fluid(maxWidth: 1920, maxHeight: 500, quality: 90) {
+            fluid(maxWidth: 1200, maxHeight: 630, quality: 90) {
               ...GatsbyImageSharpFluid_withWebp_noBase64
             }
           }

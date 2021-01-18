@@ -15,6 +15,18 @@
     }
   }
 
+  .jth-portfolio-info-image {
+    width: 100%;
+    max-height: rem(500px);
+    background-color: #f4f4f4;
+    overflow: hidden;
+
+    .jth-portfolio-info-image-container {
+      max-width: rem(1200px);
+      margin: auto;
+    }
+  }
+
   .jth-portfolio-logo {
     max-width: rem(250px);
   }
