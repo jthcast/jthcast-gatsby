@@ -76,9 +76,12 @@
       margin: rem(16px) 0;
     }
 
-    ul,
+    ul {
+      padding-left: rem(26px);
+    }
+
     ol {
-      padding-left: rem(20px);
+      padding-left: rem(24px);
     }
 
     blockquote {
