@@ -77,7 +77,7 @@ export default CodePostTemplate;
 export const pageQuery = graphql`
   query createCodePage(
     $id: String!
-    $tag: [String]
+    $tags: [String]
   ) {
     mdx (id: { eq: $id }) {
       body
@@ -89,7 +89,7 @@ export const pageQuery = graphql`
         tags
       }
     }
-    related: allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/codes)/"}, id: {ne: $id}}, limit: 3) {
+    related: allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {visible: {eq: true}, tags: {in: $tags}}, fileAbsolutePath: {regex: "/(content/codes)/"}, id: {ne: $id}}, limit: 3) {
       nodes {
         fields {
           slug

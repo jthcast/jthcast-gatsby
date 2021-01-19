@@ -47,12 +47,18 @@ interface Code {
   fields: {
     slug: string;
   };
+  frontmatter: {
+    tags: string[];
+  };
 }
 
 interface Portfolio {
   id: string;
   fields: {
     slug: string;
+  };
+  frontmatter: {
+    series: string;
   };
 }
 
@@ -65,16 +71,13 @@ function createPostPages(
 
   if (posts && posts.length > 0) {
     posts.forEach(post => {
-      const series = post.frontmatter.series;
-      const tag = post.frontmatter.tags ? post.frontmatter.tags[0] : '';
-
       createPage({
         path: `${post.fields?.slug}` || '/404',
         component: postTemplate,
         context: {
           id: post.id,
-          series,
-          tag,
+          series: post.frontmatter.series,
+          tags: post.frontmatter.tags,
         },
       });
     });
@@ -95,6 +98,7 @@ function createCodePages(
         component: codeTemplate,
         context: {
           id: post.id,
+          tags: post.frontmatter.tags,
         },
       });
     });
@@ -115,6 +119,7 @@ function createPortfolioPages(
         component: portfolioTemplate,
         context: {
           id: portfolio.id,
+          series: portfolio.frontmatter.series,
         },
       });
     });
@@ -167,6 +172,9 @@ export const createPages = async ({
             fields {
               slug
             }
+            frontmatter {
+              tags
+            }
           }
         }
         portfolios: allMdx(
@@ -181,6 +189,9 @@ export const createPages = async ({
             id
             fields {
               slug
+            }
+            frontmatter {
+              series
             }
           }
         }

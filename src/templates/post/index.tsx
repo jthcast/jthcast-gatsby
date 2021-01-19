@@ -138,7 +138,7 @@ export const pageQuery = graphql`
   query createPostPage(
     $id: String!
     $series: String
-    $tag: [String]
+    $tags: [String]
   ) {
     mdx (id: { eq: $id }) {
       excerpt(pruneLength: 160)
@@ -168,7 +168,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    related: allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {visible: {eq: true}, tags: {in: $tag}}, fileAbsolutePath: {regex: "/(content/posts)/"}, id: {ne: $id}}, limit: 2) {
+    related: allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {visible: {eq: true}, tags: {in: $tags}}, fileAbsolutePath: {regex: "/(content/posts)/"}, id: {ne: $id}}, limit: 2) {
       nodes {
         fields {
           slug
