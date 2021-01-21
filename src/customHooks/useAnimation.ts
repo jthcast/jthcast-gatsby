@@ -1,10 +1,14 @@
 import { useEffect } from 'react';
 
-const useAnimation = (root = null, rootMargin = '', threshold = 0.3): void => {
+const useAnimation = (
+  root = null,
+  rootMargin = '0px',
+  threshold = 0.3
+): void => {
   useEffect(() => {
     const observerObj = new IntersectionObserver(
       (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             if (
               entry.target instanceof HTMLElement ||
