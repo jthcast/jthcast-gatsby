@@ -12,7 +12,7 @@ const DarkModeSwitch = (): React.ReactElement => {
   };
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', colorMode);
+    document.documentElement.setAttribute('data-theme', colorMode);
     window.localStorage.setItem('color-mode', colorMode);
   }, [colorMode]);
 

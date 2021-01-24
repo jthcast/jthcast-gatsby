@@ -84,7 +84,7 @@ const DarkModeSwitch = () => {
   };
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', colorMode);
+    document.documentElement.setAttribute('data-theme', colorMode);
     window.localStorage.setItem('color-mode', colorMode);
   }, [colorMode]);
 
@@ -105,7 +105,7 @@ export default DarkModeSwitch;
 미리 만들어 둔 `Switch` 컴포넌트에 기능을 확장시켜 `DarkModeSwitch` 컴포넌트를 만들겠습니다.
 
 html의 data 속성을 사용하여 밝은 테마와 어두운 테마를 구분하겠습니다.
-렌더링이 완료된 후 밝은 테마인 경우 `body`의 `data-theme`에 `'light'` 값을, 어두운 테마인 경우 `'dark'` 값을 주었습니다.
+렌더링이 완료된 후 밝은 테마인 경우 `html`의 `data-theme`에 `'light'` 값을, 어두운 테마인 경우 `'dark'` 값을 주었습니다.
 로컬 스토리지에 상태 값을 저장해 사용자가 상태 값을 바꾼 후에도 바뀐 값을 사용할 수 있도록 합니다.
 
 브라우저를 종료 후 다시 페이지에 접속해도 이전 상태 값을 가져와야 하므로 테마 구분 함수를 아래와 같이 수정합니다.
@@ -316,7 +316,7 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
 };
 ```
 
-렌더링이 완료된 후, `html`의 `style` 속성을 지워주어 사용자가 테마를 바꾸었을 때 `body`에 적용된 css가 올바르게 동작하도록 합니다.
+렌더링이 완료된 후, `html`의 `style` 속성을 지워주어 사용자가 테마를 바꾸었을 때 `html`에 적용된 css가 올바르게 동작하도록 합니다.
 
 ```js
 useEffect(() => {

@@ -60,7 +60,7 @@ const SetColorModeBeforeRendering = () => {
     'background-color',
     colorMode === 'light' ? '#FFFFFF' : '#000000'
   );
-  document.body.setAttribute('data-theme', colorMode);
+  document.documentElement.setAttribute('data-theme', colorMode);
 })()`;
   // eslint-disable-next-line react/no-danger
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
