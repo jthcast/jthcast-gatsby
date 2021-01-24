@@ -116,6 +116,12 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title, image, author, p
           content: metaDescription,
         },
       ].concat(meta)}
+      link={[
+        {
+          rel: `canonical`,
+          href: siteUrl,
+        },
+      ]}
     />
   );
 };
