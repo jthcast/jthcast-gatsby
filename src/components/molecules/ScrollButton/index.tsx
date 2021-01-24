@@ -27,7 +27,7 @@ const ScrollButton = ({
   const showTypeRef = useRef(showType);
 
   const scrollHandling = useCallback(() => {
-    const scrollValue = window.scrollY;
+    const scrollValue = document.querySelector('.global-wrapper').scrollTop;
 
     if (scrollValue === 0) {
       setIsTopState(true);
@@ -58,10 +58,11 @@ const ScrollButton = ({
 
   useEffect(() => {
     scrollHandling();
-    window.addEventListener('scroll', scrollHandling);
+    const root = document.querySelector('.global-wrapper');
+    root.addEventListener('scroll', scrollHandling);
 
     return () => {
-      window.removeEventListener('scroll', scrollHandling);
+      root.removeEventListener('scroll', scrollHandling);
     };
   }, [scrollHandling]);
 
