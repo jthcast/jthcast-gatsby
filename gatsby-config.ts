@@ -125,7 +125,7 @@ export const plugins = [
       short_name: `JthCast`,
       start_url: `/`,
       background_color: `#ffffff`,
-      theme_color: `#000000`,
+      theme_color: `#ffffff`,
       display: `minimal-ui`,
       icon: `./static/favicon.svg`,
     },
