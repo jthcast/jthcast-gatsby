@@ -18,7 +18,8 @@ interface FooterProps {
 const Footer = ({ className }: FooterProps): React.ReactElement => {
   const { t } = useTranslation();
   const scrollToTop = () => {
-    window.scrollTo(0, 0);
+    const root = document.querySelector('.global-wrapper');
+    root.scrollTo(0, 0);
   };
 
   return (
