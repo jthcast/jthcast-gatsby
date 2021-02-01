@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
 import '../../../locales/i18n';
 import LanguageSwitch from '.';
+import { LanguageProvider } from '../../../context/LanguageContext';
 
 let languageGetter: jest.SpyInstance<string, []>;
 
@@ -15,9 +15,9 @@ it('renders LanguageSwitch', () => {
     languageGetter.mockReturnValue('en');
   }
   render(
-    <RecoilRoot>
+    <LanguageProvider>
       <LanguageSwitch />
-    </RecoilRoot>
+    </LanguageProvider>
   );
   const switchButton = screen.getByRole('switch');
   fireEvent.click(switchButton);

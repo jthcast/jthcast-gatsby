@@ -1,8 +1,4 @@
-import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
 import '../../../locales/i18n';
-import Header from '.';
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {

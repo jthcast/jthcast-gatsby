@@ -1,25 +1,25 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
 import HeaderMessage from '.';
+import { HeaderMessageProvider } from '../../../context/HeaderMessageContext';
 
 it('renders HeaderMessage with className', () => {
   render(
-    <RecoilRoot>
+    <HeaderMessageProvider>
       <HeaderMessage className="test">
         <p>test</p>
       </HeaderMessage>
-    </RecoilRoot>
+    </HeaderMessageProvider>
   );
 });
 
 it('when it click, HeaderMessage will disappear', () => {
   render(
-    <RecoilRoot>
+    <HeaderMessageProvider>
       <HeaderMessage>
         <p>test</p>
       </HeaderMessage>
-    </RecoilRoot>
+    </HeaderMessageProvider>
   );
   const closeButton = screen.getByRole('button');
   fireEvent.click(closeButton);

@@ -1,8 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
 import '../../../locales/i18n';
-import MenuList from '.';
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {

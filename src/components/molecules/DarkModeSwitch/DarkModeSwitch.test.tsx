@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
 import DarkModeSwitch from '.';
+import { ThemeProvider } from '../../../context/ThemeContext';
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {
@@ -19,9 +19,9 @@ beforeEach(() => {
 
 it('renders DarkModeSwitch', () => {
   render(
-    <RecoilRoot>
+    <ThemeProvider>
       <DarkModeSwitch />
-    </RecoilRoot>
+    </ThemeProvider>
   );
   const switchButton = screen.getByRole('switch');
   fireEvent.click(switchButton);
