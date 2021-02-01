@@ -1,5 +1,7 @@
 import React from "react"
-import { RecoilRoot } from "recoil"
+import { HeaderMessageProvider } from "./src/context/HeaderMessageContext";
+import { LanguageProvider } from "./src/context/LanguageContext";
+import { ThemeProvider } from "./src/context/ThemeContext";
 
 const CheckLegacyIE = () => {
   let codeToRunOnClient = `
@@ -72,5 +74,13 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
 };
 
 export const wrapRootElement = ({ element, props }) => {
-  return <RecoilRoot {...props}>{element}</RecoilRoot>
-}
+  return (
+    <ThemeProvider>
+      <HeaderMessageProvider>
+        <LanguageProvider>
+          {element}
+        </LanguageProvider>
+      </HeaderMessageProvider>
+    </ThemeProvider>
+  )
+};

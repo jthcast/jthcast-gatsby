@@ -1,13 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useCallback, useContext } from 'react';
 import './LanguageSwitch.scss';
-import { useRecoilState } from 'recoil';
 import Switch from '../../atoms/Switch';
-import { initialLanguageMode } from '../../../recoilStates';
+import { LanguageContext } from '../../../context/LanguageContext';
 
 const LanguageSwitch = (): React.ReactElement => {
-  const { i18n } = useTranslation();
-  const [language, setLanguage] = useRecoilState(initialLanguageMode);
+  const [language, setLanguage] = useContext(LanguageContext);
 
   const languageHandling = useCallback(() => {
     const isEnglish = language === 'en';
@@ -17,19 +14,6 @@ const LanguageSwitch = (): React.ReactElement => {
       setLanguage('en');
     }
   }, [language, setLanguage]);
-
-  useEffect(() => {
-    i18n.changeLanguage(language);
-    window.localStorage.setItem('language-mode', language);
-  }, [language, i18n]);
-
-  useEffect(() => {
-    window.addEventListener('languagechange', languageHandling);
-
-    return () => {
-      window.addEventListener('languagechange', languageHandling);
-    };
-  }, [languageHandling]);
 
   return (
     <Switch

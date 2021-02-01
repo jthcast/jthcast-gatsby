@@ -1,9 +1,8 @@
-import React from 'react';
-import { useRecoilState } from 'recoil';
-import { headerMessageState } from '../../../recoilStates';
+import React, { useContext } from 'react';
 import './HeaderMessage.scss';
 import Button from '../Button';
 import { IconTimes } from '../Icons';
+import { HeaderMessageContext } from '../../../context/HeaderMessageContext';
 
 interface HeaderMessageProps {
   allowClose?: boolean;
@@ -16,16 +15,15 @@ const HeaderMessage = ({
   children,
   className,
 }: HeaderMessageProps): React.ReactElement => {
-  const [headerMessage, setHeaderMessageState] = useRecoilState(
-    headerMessageState
-  );
+  const [isMessageShow, setMessageShow] = useContext(HeaderMessageContext);
+
   const closeHandling = () => {
-    setHeaderMessageState(false);
+    setMessageShow(false);
   };
 
   return (
     <>
-      {children && headerMessage && (
+      {children && isMessageShow && (
         <div className={`jth-headerMessage${className ? ` ${className}` : ``}`}>
           <div className="jth-headerMessage-container">
             <span className="jth-headerMessage-content">{children}</span>

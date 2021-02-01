@@ -25,7 +25,6 @@ Because it's a project to experience and learn the latest technologies.
 - Javascript ES6+
 - Typescript
 - React
-- Recoil
 - Testing Library
 - SCSS
 - Gatsby

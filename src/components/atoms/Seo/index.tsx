@@ -5,13 +5,12 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Query } from '../../../graphql-types';
-import { useRecoilValue } from 'recoil';
-import { initialLanguageMode } from '../../../recoilStates';
 import { useLocation } from '@reach/router';
+import { LanguageContext } from '../../../context/LanguageContext';
 
 type seoProps = {
   description?: string,
@@ -53,7 +52,7 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title, image, author, p
   const defaultTitle = site.siteMetadata?.title;
   const defaultImage = site.siteMetadata?.image;
   const siteUrl = site.siteMetadata?.siteUrl;
-  lang = useRecoilValue(initialLanguageMode);
+  lang = useContext(LanguageContext);
 
   return (
     <Helmet
