@@ -383,12 +383,15 @@ div.gatsby-highlight {
 }
 .gatsby-highlight pre[class='language-shell']::before {
   content: 'shell';
+  background: #f9f9f9;
 }
 .gatsby-highlight pre[class='language-sh']::before {
   content: 'sh';
+  background: #f9f9f9;
 }
 .gatsby-highlight pre[class='language-bash']::before {
   content: 'bash';
+  background: #f9f9f9;
 }
 .gatsby-highlight pre[class='language-yaml']::before {
   content: 'yaml';
@@ -396,6 +399,7 @@ div.gatsby-highlight {
 }
 .gatsby-highlight pre[class='language-markdown']::before {
   content: 'md';
+  background: #f9f9f9;
 }
 .gatsby-highlight pre[class='language-json']::before,
 .gatsby-highlight pre[class='language-json5']::before {
@@ -413,6 +417,10 @@ div.gatsby-highlight {
 .gatsby-highlight pre[class='language-flow']::before {
   content: 'flow';
   background: #e8bd36;
+}
+.gatsby-highlight pre[class='language-sql']::before {
+  content: 'sql';
+  background: #f9f9f9;
 }
 
 @include mobile {
