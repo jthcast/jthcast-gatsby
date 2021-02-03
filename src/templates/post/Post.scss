@@ -88,6 +88,21 @@
       margin: 3rem 0;
     }
 
+    table {
+      table-layout: fixed;
+      width: 100%;
+      margin: 1rem 0;
+      border: 1px solid gray;
+
+      th,
+      td {
+        border: 1px solid gray;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
     .gatsby-highlight {
       margin: 2rem -2rem;
 
