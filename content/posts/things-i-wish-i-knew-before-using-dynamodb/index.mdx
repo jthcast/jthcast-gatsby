@@ -1,0 +1,149 @@
+---
+title: DynamoDB를 사용하기 전에 알았으면 좋았을 것들
+date: '2021-02-07T02:00:00Z'
+description: AWS에서 언제나 무료로 프리 티어를 제공하는 DynamoDB. TechBlogPosts를 개발하며 무료 DB가 필요해 선택하였지만 NoSQL의 장벽은 높았는데요, RDB만 사용해봤던 저에겐 '아니 이게 안된다고?'라고 울부짖게 만든 몇 가지가 있습니다. 이러한 경험으로 느낀 DynamoDB를 사용하기 전에 알았으면 좋았을 것들에 대하여 느낀 점을 공유해 봅니다.
+image: ./images/things-i-wish-i-knew-before-using-dynamodb.png
+series: 'techBlogPosts'
+tags: ['database', 'aws']
+visible: true
+---
+
+## NoSQL
+
+일반적으로 DB는 테이블끼리 관계를 가지고 있으며, 각 테이블은 정해진 스키마에 따라 구성된다고 생각합니다.
+이는 대중적으로 사용되고 있는 관계형 데이터베이스(이하 RDB)를 의미하는데요,
+NoSQL은 스키마 없이 자유로운 구성으로 테이블을 이룰 수 있습니다.
+하지만 관계의 정의가 없기 때문에 JOIN과 같은 기능을 사용할 수 없습니다.
+
+NoSQL도 Key-Value 방식, Document 방식 등 여러 가지 방식을 활용한 DB가 존재합니다.
+이번에 사용하게 된 **Amazon DynamoDB는 Key-Value 방식**으로, 각 레코드는 Key와 Value를 가진 마치 객체처럼 존재합니다.
+
+## DynamoDB
+
+RDB에서 기본 키를 의미하는 스키마를 정의(seq, id 등) 하고 사용한 것처럼 DynamoDB도 기본 키가 존재해야 합니다.
+그렇지 않으면 특정 데이터를 선택할 수 없기 때문이죠. 이러한 기본 키의 역할을 '파티션 키'가 합니다.
+또한 '정렬 키'가 존재하는데요, 데이터를 정렬할 때 사용합니다.
+그리고 '파티션 키'와 '정렬 키'를 묶어 복합 키로 사용할 수 있습니다.
+물론, '파티션 키'만 존재하는 테이블의 경우 데이터는 중복될 수 없지만 복합 키라면 중복될 수 있겠죠.
+
+1. **'파티션 키'**는 **기본 키**이며 **'정렬 키'**와 함께 사용하여 **복합 키**로 사용할 수 있습니다.
+2. **'정렬 키'**는 레코드들을 정렬할 때 사용합니다.
+
+## 문서화가 중구난방 되어있다.
+
+본격적으로 DynamoDB를 Javascript로 사용하기 위해 아마존에서 제공하는 SDK에 대한 문서들을 찾아보았습니다.
+하지만 SDK가 버전이 워낙 다양해서 찾은 것으로 시도하면 이미 deprecated된 경우가 허다했습니다.
+
+또한 어떤 문서가 최신 문서인지 알아보기도 힘들고,
+AWS를 사용해보신 분들은 다 아시겠지만 특정 문서를 찾아가는 부분이 정말 쥐약입니다.
+
+![공짜라서 참습니다.. 😭](./images/guts.jpg)
+
+현시점에서는 'AWS SDK for JavaScript V3'이 가장 최신 버전임을 확인하고 진행하였습니다.
+
+<ExternalLink href="https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html">
+  What is the AWS SDK for JavaScript?
+</ExternalLink>
+
+## 리스트를 뽑기가 쉽지 않다.
+
+<ExternalLink href="https://techblogposts.com">Techblogposts</ExternalLink>는
+DB에 저장된 포스트들의 정보를 뿌려줍니다. 이를 위해서는 최신 순서대로 정렬된
+데이터를 받아야 합니다. 기본 키를 SEQ 필드로 준 RDB로 표현한다면 아래와 같을
+것입니다.
+
+|                               <center>SEQ</center> | <center>DATA_TYPE</center>                         | <center>TITLE</center>                             | <center>LINK</center>                                        |
+| -------------------------------------------------: | :------------------------------------------------- | :------------------------------------------------- | :----------------------------------------------------------- |
+|                                                  7 | post                                               | DynamoDB를 사용하기 전에 알았으면 좋았을 것들      | jthcast.dev/posts/things-i-wish-i-knew-before-using-dynamodb |
+|                                                  6 | blog                                               | Jthcast                                            | jthcast.dev                                                  |
+|                                                  5 | post                                               | Gatsby VS Next.js                                  | jthcast.dev/posts/gatsby-versus-nextjs                       |
+| <center>&centerdot;&centerdot;&centerdot;</center> | <center>&centerdot;&centerdot;&centerdot;</center> | <center>&centerdot;&centerdot;&centerdot;</center> | <center>&centerdot;&centerdot;&centerdot;</center>           |
+|                                                  1 | post                                               | Atomic Design으로 블로그 개발 시작하기             | jthcast.dev/posts/start-blog-development-with-atomic-design  |
+
+그리고 아래와 같이 데이터를 뽑아내겠죠. 😎
+
+```sql
+SELECT *
+FROM 'techblogposts'
+WHERE DATA_TYPE = 'post'
+ORDER BY SEQ DESC
+```
+
+만약 이와 같이 DynamoDB의 테이블을 구성한다면 어떨까요?
+
+| <center>techblogposts</center>                                                                                                                                |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| { **seq**: 7, dataType: 'post', title: 'DynamoDB를 사용하기 전에 알았으면 좋았을 것들', link: 'jthcast.dev/posts/things-i-wish-i-knew-before-using-dynamodb'} |
+| { **seq**: 6, dataType: 'blog', title: 'Jthcast', link: 'jthcast.dev'}                                                                                        |
+| { **seq**: 5, dataType: 'post', title: 'Gatsby VS Next.js', link: 'jthcast.dev/posts/gatsby-versus-nextjs'}                                                   |
+| <center>&centerdot;&centerdot;&centerdot;</center>                                                                                                            |
+| { **seq**: 1, dataType: 'post', title: 'Atomic Design으로 블로그 개발 시작하기', link: 'jthcast.dev/posts/start-blog-development-with-atomic-design'}         |
+
+DynamoDB는 **Key-Value** 기반 NoSQL입니다. 따라서 값을 특정할 수 있는 **'파티션 키'로만 값을 꺼내올 수 있습니다.**
+즉, SEQ === 1, SEQ === 7 과같이 데이터를 꺼내 사용하는 것에 최적화되어 있으며, 위의 경우와 같이 설계한 경우 post 리스트를 뽑을 수 없습니다.😨
+
+## 정렬하기가 쉽지 않다.
+
+리스트를 뽑기 위해 **'파티션 키'를 dataType**으로 주고, 데이터가 특정 가능해야 하므로 **복합 키 방식**을 사용하기 위해
+**'정렬 키'를 link**로 주었습니다. 제목은 겹칠 수 있지만, link는 고유한 주소이기 때문에 겹칠 일이 없겠죠.
+뭔가 좀 마음에 들진 않지만 어쩔 수 없습니다. 😤
+
+TechBlogPosts는 작성된 최신 순서대로 포스트를 보여주어야 합니다.
+따라서 post에 작성 시간을 의미하는 publishDate 속성을 추가로 주겠습니다.
+
+| <center>techblogposts</center>                                                                                                           |
+| :--------------------------------------------------------------------------------------------------------------------------------------- |
+| { **dataType**: 'post', **link**: 'jthcast.dev/...', publishDate: 1606867200000, title: 'DynamoDB를 사용하기 전에 알았으면 좋았을 것들'} |
+| { **dataType**: 'blog', **link**: 'jthcast.dev', title: 'Jthcast'}                                                                       |
+| { **dataType**: 'post', **link**: 'jthcast.dev/...', publishDate: 1586916026000, title: 'Gatsby VS Next.js'}                             |
+| <center>&centerdot;&centerdot;&centerdot;</center>                                                                                       |
+| { **dataType**: 'post', **link**: 'jthcast.dev/...', publishDate: 1611100800000, title: 'Atomic Design으로 블로그 개발 시작하기'}        |
+
+이제 dataType이 post인 데이터를 publishDate로 정렬해서 뽑으면..?
+정렬을 하려면 '정렬 키'가... '정렬 키'는 복합 키로 사용하기 위해 link인 상태.. 🤦‍♂️
+
+하지만 방법이 없지는 않습니다. **보조 인덱스**를 사용하기로 합니다.
+보조 인덱스는 간단하게, 데이터를 통째로 복사해 같은 테이블을 하나 더 만들어 쿼리 할 때 사용하는 방식입니다.
+따라서 프로비저닝 용량에 영향을 미치므로 프리 티어만 사용하기로 계획한 저는 뭔가 좀 더 맘에 들지 않게 되었습니다. 😤
+
+<ExternalLink href="https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/SecondaryIndexes.html">
+  보조 인덱스를 사용하여 데이터 액세스 향상
+</ExternalLink>
+
+## 검색하기가 쉽지 않다.
+
+TechBlogPosts를 공개하고 얼마 지나지 않아 검색 기능에 대한 요청이 들어왔습니다.
+물론 저도 생각하고 있었기에 요청이 들어온 겸 작업을 시작하기로 했습니다.
+
+'title에서 검색 요청된 값으로 filter 하면 되겠지?'라고 쉽게 생각했습니다만,
+역시나 DynamoDB는 쉽지 않았습니다. **DynamoDB는 Case Sensitive 하기 때문에 대소문자를 구분합니다.** 🤷‍♂️
+
+따라서 데이터를 저장 시, 사용자에게 보여줄 title과 검색용으로 사용할 lowercase 화(혹은 uppercase) 한 검색용 title 속성을
+만들거나 Elastic Search를 활용하여 검색을 해야 합니다.
+전자의 경우 원시적인 검색밖에 하지 못하며 **filter 기능은 '파티션 키'로 모든 데이터를 조회 후 조건에 맞지 않는 데이터를 버리는 식**으로 사용되기 때문에
+읽기 용량을 매우 크게 사용합니다. 프리 티어만 사용하기로 하였기 때문에 문제가 생기는 부분입니다.
+후자의 경우 아마존에서 프리 티어를 제공하지 않는 서비스이기 때문에 포기했습니다.
+
+![결국 돈이 문제입니다. 💸](./images/take-my-money.jpg)
+
+## 예약어
+
+마지막으로, 테이블의 속성 명을 작성할 때 예약어에 주의해야 합니다.
+분명 로직상 틀린 부분이 없는데 오류가 난다면 예약어 문제일 확률이 큽니다.
+'아니 애초에 예약어로 속성 생성이 안돼야 하는 거 아닌가?'라는 생각이 들지만 아무튼 조심하도록 합니다.
+
+<ExternalLink href="https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/ReservedWords.html">
+  DynamoDB의 예약어
+</ExternalLink>
+
+자주 쓰는 명칭이 예약어로 되어있는 부분이 많아 주의 깊게 봐야 합니다.
+
+## 마치며
+
+공짜로 서비스할 생각과 NoSQL에 대한 궁금증으로 DynamoDB를 선택하여 개발해 봤는데요,
+NoSQL과 DynamoDB의 특성에 대한 이해 없이 진행한 까닭에 매우 고생한 부분이었습니다.
+결국은 DB의 특성을 살리지 못하고 흑마법처럼 사용해 버렸습니다.👻
+
+Key-Value DB의 특성에 맞는 서비스를 구현한다면 DynamoDB는 매력적으로 사용할 수 있겠지요.
+이번 경험으로 개발하고자 하는 서비스의 특성과,
+이에 맞는 DB를 선택하는 설계부분이 개발에서 얼마나 중요한지 다시 한번 느낄 수 있었습니다. 😊
