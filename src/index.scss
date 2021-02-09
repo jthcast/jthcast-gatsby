@@ -1,7 +1,5 @@
 @import './mixins';
 
-// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=block');
-
 @font-face {
   font-family: 'IBMPlexSansKR-Light';
   src: local('IBMPlexSansKR-Light'),
@@ -21,8 +19,7 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'IBMPlexSansKR-Light', 'Courier New', monospace;
-  // font-family: 'Noto Sans KR', sans-serif;
+  font-family: -apple-system, 'IBMPlexSansKR-Light', 'Courier New', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
@@ -55,7 +52,7 @@ body.jth-menuList-show {
 a {
   text-decoration: none;
   color: var(--color-base);
-  font-weight: bold;
+  font-weight: $fontBold;
   z-index: 1;
   border-bottom: rem(2.5px) solid var(--secondary-brand-base);
 
