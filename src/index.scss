@@ -361,6 +361,14 @@ video {
   }
 }
 
+.jth-gradient {
+  width: fit-content;
+  background-image: linear-gradient(to right, #ef89c4, #36cda3);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .jth-emoji {
   margin: 0 0.5rem;
 }

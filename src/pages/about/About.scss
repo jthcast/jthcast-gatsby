@@ -14,9 +14,9 @@
         margin-right: 0;
       }
 
-      svg {
-        color: $secondaryBrandColor;
-      }
+      // svg {
+      //   color: $secondaryBrandColor;
+      // }
     }
   }
 
@@ -26,6 +26,36 @@
   }
 
   .jth-about-manifesto {
+    .jth-about-manifesto-grid {
+      gap: 5rem;
+    }
+
+    .jth-about-skills {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      width: 100%;
+
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .jth-about-skills-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          align-items: center;
+          justify-items: center;
+          gap: 0.15rem;
+
+          svg {
+            font-size: 3.5rem;
+          }
+        }
+      }
+    }
+
     h2 {
       line-height: 200%;
     }
@@ -88,6 +118,18 @@
     margin-top: 1rem;
 
     .jth-about-manifesto {
+      .jth-about-skills {
+        grid-template-columns: 1fr 1fr;
+
+        li {
+          .jth-about-skills-grid {
+            svg {
+              font-size: 3rem;
+            }
+          }
+        }
+      }
+
       ol {
         padding: 0 0 0 2rem;
       }

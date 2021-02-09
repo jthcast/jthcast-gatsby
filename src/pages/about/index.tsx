@@ -10,6 +10,18 @@ import {
   IconLinkedIn,
   IconObjectGroup,
   IconUserTie,
+  IconAWS,
+  IconCSS3,
+  IconFigma,
+  IconGatsby,
+  IconGraphql,
+  IconHtml5,
+  IconJavascript,
+  IconNextjs,
+  IconNodejs,
+  IconReact,
+  IconSass,
+  IconTypescript
 } from '../../components/atoms/Icons';
 import Button from '../../components/atoms/Button';
 import Layout from '../../components/atoms/Layout';
@@ -22,6 +34,11 @@ type aboutQueryProps = {
     childImageSharp: {
       fluid: FluidObject
     }
+  },
+  allFile: {
+    nodes: [{
+      publicURL: string
+    }]
   }
 }
 
@@ -36,7 +53,7 @@ const About = (): React.ReactElement => {
             ...GatsbyImageSharpFluid_withWebp_noBase64
           }
         }
-      }
+      },
     }
   `);
 
@@ -49,7 +66,11 @@ const About = (): React.ReactElement => {
               className="jth-section-rowGrid jth-section-mobileOrder-2 jth-animation"
               data-animationtype="opacityUp"
             >
-              <h1>{t('About.aboutMessage')}</h1>
+              <h1>
+                <span>{t('About.sayHi')}</span>
+                <span className="jth-emoji jth-animation-wave" role="img" aria-label="waving-hand">👋</span>
+                <span>{t('About.aboutMessage')}</span>
+              </h1>
               <p>{t('About.introduceMyself')}</p>
               <p>{t('About.aboutSubMessage')}</p>
               <div className="jth-about-contact">
@@ -80,10 +101,81 @@ const About = (): React.ReactElement => {
           </div>
         </section>
         <section className="jth-section jth-about-manifesto">
-          <div className="jth-container jth-section-twoColGrid">
-            <h2 className="jth-animation" data-animationtype="opacityUp">
-              {t('About.myManifesto')}
-            </h2>
+          <div className="jth-container jth-section-twoColGrid jth-about-manifesto-grid">
+            <ul className="jth-about-skills">
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconJavascript style={{ color: '#000000' }} />
+                  <p>Javascript</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconTypescript />
+                  <p>Typescript</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconReact />
+                  <p>React</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconNextjs />
+                  <p>Next JS</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconGatsby />
+                  <p>Gatsby</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconGraphql />
+                  <p>GraphQL</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconHtml5 />
+                  <p>HTML5</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconCSS3 />
+                  <p>CSS3</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconSass />
+                  <p>SASS</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconNodejs />
+                  <p>Node JS</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconAWS />
+                  <p>AWS</p>
+                </div>
+              </li>
+              <li className="jth-animation" data-animationtype="opacityUp">
+                <div className="jth-about-skills-grid">
+                  <IconFigma />
+                  <p>Figma</p>
+                </div>
+              </li>
+            </ul>
             <ol>
               <li className="jth-animation" data-animationtype="opacityUp">
                 <Accordion showIcon title={t('About.manifesto1')}>
@@ -147,7 +239,7 @@ const About = (): React.ReactElement => {
             <p>{t('About.summarySubMessage')}</p>
           </div>
         </section>
-        <section className="jth-section">
+        {/* <section className="jth-section">
           <div className="jth-container">
             <div className="jth-about-experience">
               <div
@@ -184,7 +276,7 @@ const About = (): React.ReactElement => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <section className="jth-section">
           <div
             className="jth-container jth-section-getInTouch jth-animation"
