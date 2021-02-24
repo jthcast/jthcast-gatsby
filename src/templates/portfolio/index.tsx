@@ -18,7 +18,6 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
   const { t } = useTranslation();
   const portfolio = data.mdx;
   const related = data.series.nodes;
-  console.log(data)
 
   return (
     <Layout title={portfolio.frontmatter.title}
