@@ -1,0 +1,32 @@
+---
+title: 큐
+date: '2021-02-26T23:52:00Z'
+description: 선입선출(先入先出, First In First Out; FIFO)의 자료구조. 대기열이라고도 한다. Queue라는 단어 자체가 표 같은 것을 구매하기 위해 줄서는 것을 의미한다.
+icon: IconQueue
+tags: ['자료구조']
+visible: true
+---
+
+```js
+class Queue {
+  constructor() {
+    this.array = [];
+  }
+
+  add(item) {
+    this.array.push(item);
+  }
+
+  peek() {
+    return this.array[0];
+  }
+
+  poll() {
+    return this.array.shift();
+  }
+
+  isEmpty() {
+    return this.array.length === 0;
+  }
+}
+```
