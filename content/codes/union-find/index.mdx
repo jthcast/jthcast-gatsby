@@ -1,0 +1,40 @@
+---
+title: 유니온 파인드
+date: '2021-05-11T23:24:00Z'
+description: 여러 노드가 존재할 때, 두 개의 노드가 연결된 그래프인지 확인하는 알고리즘이다. 최소 신장 트리를 구현하는 크루스칼 알고리즘에 사용된다.
+icon: IconNode
+tags: ['알고리즘']
+visible: true
+---
+
+```js
+const parents = [...Array(n).keys()];
+
+const find = (parents, index) => {
+  if(parents[index] === index){
+    return index;
+  }
+  return parents[index] = find(parents, parents[index]);
+};
+
+const union = (parents, node, anotherNode) => {
+  const nodeIndex = find(parents, node);
+  const anotherNodeIndex = find(parents, anotherNode);
+
+  if(nodeIndex > anotherNodeIndex){
+    parents[nodeIndex] = anotherNodeIndex;
+  }else{
+    parents[anotherNodeIndex] = nodeIndex;
+  }
+};
+
+const checkUnion = (parents, node, anotherNode) => {
+  const nodeIndex = find(parents, node);
+  const anotherNodeIndex = find(parents, anotherNode);
+
+  if(nodeIndex === anotherNodeIndex){
+    return true;
+  }
+  return false;
+};
+```
