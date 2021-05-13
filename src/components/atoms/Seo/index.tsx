@@ -23,6 +23,7 @@ type seoProps = {
 }
 
 const SEO = ({ description = '', lang = 'ko', meta = [], title, image, author, publishDate }: seoProps) => {
+  const [language, setLanguage] = useContext(LanguageContext);
   const { pathname } = useLocation();
   const { site }: Query = useStaticQuery(
     graphql`
@@ -52,7 +53,7 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title, image, author, p
   const defaultTitle = site.siteMetadata?.title;
   const defaultImage = site.siteMetadata?.image;
   const siteUrl = site.siteMetadata?.siteUrl;
-  lang = useContext(LanguageContext);
+  lang = language;
 
   return (
     <Helmet
