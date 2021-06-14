@@ -85,7 +85,7 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
               </div>}
           </div>
         </section>
-        {portfolio.frontmatter.logoDescription && (
+        {portfolio.frontmatter.logoDescription && portfolio.frontmatter.logo && (
           <section className="jth-section">
             <div className="jth-container jth-section-twoColGrid-center">
               <div className="jth-section-rowGrid jth-section-mobileOrder-2">

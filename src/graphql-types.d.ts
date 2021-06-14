@@ -737,9 +737,6 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___title'
   | 'childMdx___frontmatter___description'
   | 'childMdx___frontmatter___date'
-  | 'childMdx___frontmatter___icon'
-  | 'childMdx___frontmatter___tags'
-  | 'childMdx___frontmatter___visible'
   | 'childMdx___frontmatter___image___sourceInstanceName'
   | 'childMdx___frontmatter___image___absolutePath'
   | 'childMdx___frontmatter___image___relativePath'
@@ -780,6 +777,7 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___detailPage'
   | 'childMdx___frontmatter___github'
   | 'childMdx___frontmatter___demo'
+  | 'childMdx___frontmatter___visible'
   | 'childMdx___frontmatter___brief'
   | 'childMdx___frontmatter___solution'
   | 'childMdx___frontmatter___results'
@@ -821,6 +819,8 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___logo___id'
   | 'childMdx___frontmatter___logo___children'
   | 'childMdx___frontmatter___logoDescription'
+  | 'childMdx___frontmatter___icon'
+  | 'childMdx___frontmatter___tags'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -948,20 +948,20 @@ export type Frontmatter = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
-  icon?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
-  visible?: Maybe<Scalars['Boolean']>;
   image?: Maybe<File>;
   series?: Maybe<Scalars['String']>;
   detailPage?: Maybe<Scalars['Boolean']>;
   github?: Maybe<Scalars['String']>;
   demo?: Maybe<Scalars['String']>;
+  visible?: Maybe<Scalars['Boolean']>;
   brief?: Maybe<Scalars['String']>;
   solution?: Maybe<Scalars['String']>;
   results?: Maybe<Array<Maybe<Scalars['String']>>>;
   builtWith?: Maybe<Array<Maybe<Scalars['String']>>>;
   logo?: Maybe<File>;
   logoDescription?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -976,20 +976,20 @@ export type FrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
-  icon?: Maybe<StringQueryOperatorInput>;
-  tags?: Maybe<StringQueryOperatorInput>;
-  visible?: Maybe<BooleanQueryOperatorInput>;
   image?: Maybe<FileFilterInput>;
   series?: Maybe<StringQueryOperatorInput>;
   detailPage?: Maybe<BooleanQueryOperatorInput>;
   github?: Maybe<StringQueryOperatorInput>;
   demo?: Maybe<StringQueryOperatorInput>;
+  visible?: Maybe<BooleanQueryOperatorInput>;
   brief?: Maybe<StringQueryOperatorInput>;
   solution?: Maybe<StringQueryOperatorInput>;
   results?: Maybe<StringQueryOperatorInput>;
   builtWith?: Maybe<StringQueryOperatorInput>;
   logo?: Maybe<FileFilterInput>;
   logoDescription?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
 };
 
 export type HeadingsMdx = 
@@ -1664,9 +1664,6 @@ export type MdxFieldsEnum =
   | 'frontmatter___title'
   | 'frontmatter___description'
   | 'frontmatter___date'
-  | 'frontmatter___icon'
-  | 'frontmatter___tags'
-  | 'frontmatter___visible'
   | 'frontmatter___image___sourceInstanceName'
   | 'frontmatter___image___absolutePath'
   | 'frontmatter___image___relativePath'
@@ -1734,6 +1731,7 @@ export type MdxFieldsEnum =
   | 'frontmatter___detailPage'
   | 'frontmatter___github'
   | 'frontmatter___demo'
+  | 'frontmatter___visible'
   | 'frontmatter___brief'
   | 'frontmatter___solution'
   | 'frontmatter___results'
@@ -1802,6 +1800,8 @@ export type MdxFieldsEnum =
   | 'frontmatter___logo___childMdx___id'
   | 'frontmatter___logo___childMdx___children'
   | 'frontmatter___logoDescription'
+  | 'frontmatter___icon'
+  | 'frontmatter___tags'
   | 'slug'
   | 'body'
   | 'excerpt'
@@ -2151,8 +2151,6 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2293,8 +2291,6 @@ export type Site = Node & {
   __typename?: 'Site';
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Int']>;
-  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -2507,8 +2503,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___siteUrl'
   | 'siteMetadata___social___twitter'
   | 'siteMetadata___image'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -2601,8 +2595,6 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
