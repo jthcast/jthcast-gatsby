@@ -1,20 +1,12 @@
 import React from 'react';
 import './Portfolio.scss';
 import { graphql, Link, PageProps } from 'gatsby';
-import { Mdx } from '../../graphql-types';
 import { useTranslation } from 'react-i18next';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Layout from '../../components/atoms/Layout';
 import GatsbyImage from 'gatsby-image';
 
-interface PortfolioDataProps {
-  mdx?: Mdx;
-  series?: {
-    nodes: Mdx[];
-  }
-}
-
-const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement => {
+const Portfolio = ({ data }: PageProps<any>): React.ReactElement => {
   const { t } = useTranslation();
   const portfolio = data.mdx;
   const related = data.series.nodes;
@@ -85,7 +77,7 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
               </div>}
           </div>
         </section>
-        {portfolio.frontmatter.logoDescription && portfolio.frontmatter.logo && (
+        {portfolio.frontmatter.logoDescription && (
           <section className="jth-section">
             <div className="jth-container jth-section-twoColGrid-center">
               <div className="jth-section-rowGrid jth-section-mobileOrder-2">
@@ -96,7 +88,7 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
                     </p>
                   </>
               </div>
-              {portfolio.frontmatter.logo && <img className="jth-portfolio-logo" src={portfolio?.frontmatter?.logo?.publicURL} alt="Logo" />}
+              {portfolio.frontmatter.logo && <img className="jth-portfolio-logo" src={portfolio.frontmatter.logo.publicURL} alt="Logo" />}
             </div>
           </section>
         )}
