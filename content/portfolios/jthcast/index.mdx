@@ -15,77 +15,70 @@ builtWith: ['Javascript ES6+', 'Typescript', 'React', 'Gatsby.js', 'SCSS']
 logo: ./images/logo.svg
 logoDescription: JthCast는 IT에 대한 포스트가 주된 콘텐츠인 블로그입니다. 이에 Code와 Cast의 C, 코드 꺾은 괄호와 방송을 뜻하는 안테나에서 영감을 받아 만들었습니다. 미니멀 디자인을 유지하기 위해 로고 또한 디테일 없이 단순한 심벌로 표현하였으며, 전체적인 디자인과 꼭짓점 부분을 약간 둥글게 만들어 캐주얼함을 더했습니다. 색상은 오렌지색(#F6A54C)과 밝은 남색(#614CF6)으로 브랜드 색상과 통일하였습니다.
 ---
-<section className="jth-section">
-  <div className="jth-container">
-    <h2>Gatsby를 선택한 이유</h2>
+<h2>Gatsby를 선택한 이유</h2>
+<p>
+  블로그는 글이 노출될 수 있는 환경이 매우 중요합니다. CRA로 처음 블로그를 만들었을 때 SEO에 대한 부분과 초기 로딩 시간, 동적 로딩과 같은 기능을 직접 구현하기에는
+  너무 많은 작업이 필요함을 깨달았고, 이러한 문제를 쉽게 해결하기 위해 Gatsby와 같은 프레임워크가 있음을 알게 되었습니다.
+</p>
+<p>
+  Gatsby를 활용하여 SEO에 최적화된 정적 사이트를 쉽고 간편하게 만들 수 있었습니다.
+</p>
+
+<section className="jth-section jth-section-twoColGrid-center">
+  <video
+    preload="auto"
+    muted
+    loop
+    playsInline
+    autoPlay
+    src="./videos/darkmode.mp4"
+  ></video>
+  <div className="jth-section-rowGrid">
+    <h2>다크 모드</h2>
     <p>
-      블로그는 글이 노출될 수 있는 환경이 매우 중요합니다. CRA로 처음 블로그를 만들었을 때 SEO에 대한 부분과 초기 로딩 시간, 동적 로딩과 같은 기능을 직접 구현하기에는
-      너무 많은 작업이 필요함을 깨달았고, 이러한 문제를 쉽게 해결하기 위해 Gatsby와 같은 프레임워크가 있음을 알게 되었습니다.
+      모바일에서 어두운 테마를 지원하고, 모바일에서의 웹 사용이 늘어남에 따라
+      사용자들은 웹에서도 다크 모드를 원하기 시작했습니다. 이러한 요구에 따라
+      많은 웹 서비스들이 다크 모드를 지원하기 시작했습니다.
     </p>
+  </div>
+</section>
+
+<section className="jth-section jth-section-twoColGrid-center">
+  <div className="jth-section-rowGrid jth-section-mobileOrder-2">
+    <h2>국제화</h2>
     <p>
-      Gatsby를 활용하여 SEO에 최적화된 정적 사이트를 쉽고 간편하게 만들 수 있었습니다.
+      인터넷은 전 세계가 하나로 묶여있습니다. 검색 엔진이 발달함에 따라 다양한
+      국가에서 유입이 이루어지기도 하며, 하나의 제품을 여러 국가에서
+      서비스하기도 합니다. 이를 위해 다국어 및 국제화를 지원하는 서비스들이
+      많아졌습니다.
     </p>
   </div>
+  <video
+    preload="auto"
+    muted
+    loop
+    playsInline
+    autoPlay
+    src="./videos/internationalization.mp4"
+    className="jth-portfolio-widthImage"
+  ></video>
 </section>
-<section className="jth-section">
-  <div className="jth-container jth-section-twoColGrid-center">
-    <video
-      preload="auto"
-      muted
-      loop
-      playsInline
-      autoPlay
-      src="./videos/darkmode.mp4"
-    ></video>
-    <div className="jth-section-rowGrid">
-      <h2>다크 모드</h2>
-      <p>
-        모바일에서 어두운 테마를 지원하고, 모바일에서의 웹 사용이 늘어남에 따라
-        사용자들은 웹에서도 다크 모드를 원하기 시작했습니다. 이러한 요구에 따라
-        많은 웹 서비스들이 다크 모드를 지원하기 시작했습니다.
-      </p>
-    </div>
-  </div>
-</section>
-<section className="jth-section">
-  <div className="jth-container jth-section-twoColGrid-center">
-    <div className="jth-section-rowGrid jth-section-mobileOrder-2">
-      <h2>국제화</h2>
-      <p>
-        인터넷은 전 세계가 하나로 묶여있습니다. 검색 엔진이 발달함에 따라 다양한
-        국가에서 유입이 이루어지기도 하며, 하나의 제품을 여러 국가에서
-        서비스하기도 합니다. 이를 위해 다국어 및 국제화를 지원하는 서비스들이
-        많아졌습니다.
-      </p>
-    </div>
-    <video
-      preload="auto"
-      muted
-      loop
-      playsInline
-      autoPlay
-      src="./videos/internationalization.mp4"
-      className="jth-portfolio-widthImage"
-    ></video>
-  </div>
-</section>
-<section className="jth-section">
-  <div className="jth-container jth-section-twoColGrid-center">
-    <video
-      preload="auto"
-      muted
-      loop
-      playsInline
-      autoPlay
-      src="./videos/accessibility.mp4"
-    ></video>
-    <div className="jth-section-rowGrid">
-      <h2>웹 표준</h2>
-      <p>
-        정보화 사회로 빠르게 발전함에 따라 장애인, 노인, 저시력자 등
-        정보취약계층의 인터넷 사용률 또한 높아졌습니다. 웹 표준을 지킴으로써
-        접근성을 높여 이러한 분들이 더 쉽게 웹페이지를 이용할 수 있습니다.
-      </p>
-    </div>
+
+<section className="jth-section jth-section-twoColGrid-center">
+  <video
+    preload="auto"
+    muted
+    loop
+    playsInline
+    autoPlay
+    src="./videos/accessibility.mp4"
+  ></video>
+  <div className="jth-section-rowGrid">
+    <h2>웹 표준</h2>
+    <p>
+      정보화 사회로 빠르게 발전함에 따라 장애인, 노인, 저시력자 등
+      정보취약계층의 인터넷 사용률 또한 높아졌습니다. 웹 표준을 지킴으로써
+      접근성을 높여 이러한 분들이 더 쉽게 웹페이지를 이용할 수 있습니다.
+    </p>
   </div>
 </section>

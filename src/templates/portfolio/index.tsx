@@ -124,9 +124,13 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
             }
           </div>
         </section>
-        <MDXRenderer>
-          {portfolio.body}
-        </MDXRenderer>
+        <section className="jth-section">
+          <div className="jth-container">
+            <MDXRenderer>
+              {portfolio.body}
+            </MDXRenderer>
+          </div>
+        </section>
       </article>
       {related.length > 0 && (
         <nav className="jth-portfolio-links">
