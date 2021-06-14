@@ -96,7 +96,7 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
                     </p>
                   </>
               </div>
-              {portfolio.frontmatter.logo && <img className="jth-portfolio-logo" src={portfolio.frontmatter.logo.publicURL} alt="Logo" />}
+              {portfolio.frontmatter.logo && <img className="jth-portfolio-logo" src={portfolio?.frontmatter?.logo?.publicURL} alt="Logo" />}
             </div>
           </section>
         )}
