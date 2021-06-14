@@ -85,21 +85,21 @@ const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement 
               </div>}
           </div>
         </section>
-        <section className="jth-section">
-          <div className="jth-container jth-section-twoColGrid-center">
-            <div className="jth-section-rowGrid jth-section-mobileOrder-2">
-              {portfolio.frontmatter.logoDescription &&
-                <>
-                  <h2>로고</h2>
-                  <p>
-                    {portfolio.frontmatter.logoDescription}
-                  </p>
-                </>
-              }
+        {portfolio.frontmatter.logoDescription && (
+          <section className="jth-section">
+            <div className="jth-container jth-section-twoColGrid-center">
+              <div className="jth-section-rowGrid jth-section-mobileOrder-2">
+                  <>
+                    <h2>로고</h2>
+                    <p>
+                      {portfolio.frontmatter.logoDescription}
+                    </p>
+                  </>
+              </div>
+              {portfolio.frontmatter.logo && <img className="jth-portfolio-logo" src={portfolio.frontmatter.logo.publicURL} alt="Logo" />}
             </div>
-            {portfolio.frontmatter.logo && <img className="jth-portfolio-logo" src={portfolio.frontmatter.logo.publicURL} alt="Logo" />}
-          </div>
-        </section>
+          </section>
+        )}
         <section className="jth-section">
           <div className="jth-container jth-section-rowGrid">
             {portfolio.frontmatter.builtWith &&
