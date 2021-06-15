@@ -6,10 +6,21 @@ import { useTranslation } from 'react-i18next';
 import GatsbyImage from 'gatsby-image';
 import Card from '../../components/atoms/Card';
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import { Mdx } from '../../graphql-types';
 import { IconTemplate } from '../../components/atoms/Icons';
 import '../../fragments';
 
-const Post = ({ data }: PageProps<any>): React.ReactElement => {
+interface PostDataProps {
+  mdx?: Mdx;
+  series?: {
+    nodes: Mdx[];
+  }
+  related?: {
+    nodes: Mdx[];
+  }
+}
+
+const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
   const { t } = useTranslation();
   const post = data.mdx;
   const series = data.series.nodes;

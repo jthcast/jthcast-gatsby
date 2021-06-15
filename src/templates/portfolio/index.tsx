@@ -5,8 +5,16 @@ import { useTranslation } from 'react-i18next';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Layout from '../../components/atoms/Layout';
 import GatsbyImage from 'gatsby-image';
+import { Mdx } from '../../graphql-types'
 
-const Portfolio = ({ data }: PageProps<any>): React.ReactElement => {
+interface PortfolioDataProps {
+  mdx?: Mdx;
+  series?: {
+    nodes: Mdx[];
+  }
+}
+
+const Portfolio = ({ data }: PageProps<PortfolioDataProps>): React.ReactElement => {
   const { t } = useTranslation();
   const portfolio = data.mdx;
   const related = data.series.nodes;

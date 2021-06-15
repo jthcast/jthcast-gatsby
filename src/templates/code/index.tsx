@@ -2,12 +2,20 @@ import React from 'react';
 import './Code.scss';
 import { graphql, Link, PageProps } from 'gatsby';
 import Layout from '../../components/atoms/Layout';
+import { Mdx } from '../../graphql-types';
 import { useTranslation } from 'react-i18next';
 import GatsbyImage from 'gatsby-image';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { IconTemplate } from '../../components/atoms/Icons';
 
-const CodePostTemplate = ({ data }: PageProps<any>) => {
+interface CodeDataProps {
+  mdx?: Mdx;
+  related?: {
+    nodes: Mdx[];
+  }
+}
+
+const CodePostTemplate = ({ data }: PageProps<CodeDataProps>) => {
   const { t } = useTranslation();
   const code = data.mdx;
   const related = data.related.nodes;
