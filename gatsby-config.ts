@@ -15,12 +15,6 @@ export const siteMetadata = {
 export const plugins = [
   `gatsby-plugin-sitemap`,
   `gatsby-plugin-sass`,
-  {
-    resolve: `gatsby-plugin-generate-typings`,
-    options: {
-      dest: `./src/graphql-types.d.ts`,
-    },
-  },
   `gatsby-plugin-typescript`,
   {
     resolve: `gatsby-source-filesystem`,

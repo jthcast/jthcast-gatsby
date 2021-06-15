@@ -7,9 +7,8 @@ import {
 } from 'gatsby';
 import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
-import { Mdx } from './src/graphql-types';
 
-function createMdxPages(actions: Actions, nodes: Mdx[], pageTemplate: string) {
+function createMdxPages(actions: Actions, nodes: any[], pageTemplate: string) {
   const { createPage } = actions;
 
   if (nodes && nodes.length > 0) {
