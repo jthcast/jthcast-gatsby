@@ -10,17 +10,17 @@ import { Mdx } from '../../graphql-types';
 import { IconTemplate } from '../../components/atoms/Icons';
 import '../../fragments';
 
-interface PostDataProps {
-  mdx?: Mdx;
-  series?: {
-    nodes: Mdx[];
-  }
-  related?: {
-    nodes: Mdx[];
-  }
-}
+// interface PostDataProps {
+//   mdx?: Mdx;
+//   series?: {
+//     nodes: Mdx[];
+//   }
+//   related?: {
+//     nodes: Mdx[];
+//   }
+// }
 
-const Post = ({ data }: PageProps<PostDataProps>): React.ReactElement => {
+const Post = ({ data }: PageProps<any>): React.ReactElement => {
   const { t } = useTranslation();
   const post = data.mdx;
   const series = data.series.nodes;
