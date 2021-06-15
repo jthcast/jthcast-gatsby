@@ -1,0 +1,325 @@
+---
+title: 왜 리액트를 사용하는 걸까?
+date: '2021-06-15T23:51:00Z'
+description: Catridge 프로젝트를 통해 리액트가 어떠한 불편함을 제거하기 위해 개발되었는지 몸으로 체험하게 되었습니다. 왜 모듈 단위로 설계하는지, 컴포넌트 단위 무엇인지, 상태와 생명주기가 무엇인지, 왜 JSX를 사용하도록 권고하는지 등 react에 대해 막연하게만 알고 있던 부분을 정리해 보겠습니다.
+image: ./images/why-use-react.png
+series: 'catridge'
+tags: ['react', 'javascript']
+visible: true
+---
+
+## 멱등성을 가지며 추상화된 함수가 재사용성이 좋다
+
+여러분들은 특정한 기능을 가진 버튼, 혹은 페이지의 틀을 사용하기 위해 복사 후 붙여넣기 한 경험이 있으신가요?
+똑같은 코드를 여기저기 붙여넣기 하며 사용하다가, 해당 코드에 수정할 점이 생기면 모든 파일을 뒤져가며 수정해보신 경험이 있으신가요?
+실제로 저는 소수점 자릿수 표시를 세 자리에서 두 자리로 변경하기 위해 위와 같은 행위를 한 적이 있습니다. 😞
+
+그 이유는 로직이 최소 행위로 이루어진 함수 단위로 구성되지 않았고,
+소수점 자리수 표시를 변수 혹은 함수로 관리하지 않고 하드코딩으로 작성되었기 때문입니다.
+
+멱등성을 가지며 추상화된 함수 혹은 이러한 함수의 집합을 모듈로 사용한다면 유지보수와 테스팅도
+간편하고 모듈을 쌓아 확장하기도 편합니다.
+
+## 컴포넌트
+
+화면을 구성할 때 모듈 방식을 활용하여 만들어진 단위를 컴포넌트라고 합니다.
+바닐라 자바스크립트만을 사용하여 만든 최소 단위 컴포넌트인 Icon 컴포넌트를 만들어 보겠습니다.
+
+Icon 컴포넌트는 아래와 같은 기능을 가집니다.
+- `className` 속성을 통해 커스텀 클래스의 적용이 가능할 것
+- `iconName` 속성을 통해 SVG 아이콘을 생성할 것
+- `isSpin` 속성을 통해 360도 무한 회전 여부를 결정할 것
+- `rotate` 속성을 통해 회전 각도를 결정할 것
+- `onClick` 속성을 통해 클릭 이벤트를 적용할 것
+- `target` 속성을 통해 어느 엘리먼트에 아이콘을 붙일 것인지 설정할 것
+
+```js
+const icons = {
+  search: {
+    viewBox: `0 0 512 512`,
+    paths: [
+      {
+        d: `M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z`
+      }
+    ]
+  },
+  spinner: {
+    viewBox: `0 0 1024 1024`,
+    paths: [
+      {
+        d: `M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z`
+      }
+    ]
+  }
+};
+
+const getRotateDegree = (viewBox) => {
+  const viewBoxArray = viewBox.split(` `)
+
+  return `${+viewBoxArray[2] / 2} ${+viewBoxArray[3] / 2}`
+};
+
+export default class Icon{
+  constructor({
+    className,
+    iconName,
+    isSpin = false,
+    onClick,
+    rotate,
+    target
+  }){
+    this.$svg = document.createElementNS(`http://www.w3.org/2000/svg`, `svg`)
+    this.$svg.classList.add(`icon`)
+    this.$svg.setAttribute(`width`, `1em`)
+    this.$svg.setAttribute(`height`, `1em`)
+    this.$svg.setAttribute(`fill`, `currentColor`)
+    this.$svg.setAttribute(`focusable`, `false`)
+    this.className = className
+    this.isFocusable = isFocusable
+    this.iconName = iconName
+    this.isSpin = isSpin
+    this.onClick = onClick
+    if(this.onClick){
+      this.$svg.addEventListener(`click`, this.onClick)
+    }
+    this.rotate = rotate
+
+    target.appendChild(this.$svg)
+    this.render()
+  }
+  
+  render(){
+    this.$svg.innerHTML = null
+
+    if(this.className){
+      this.$svg.classList.add(this.className)
+    }
+    if(this.iconName){
+      const iconData = icons[this.iconName]
+      const { viewBox, paths } = iconData
+
+      this.$svg.setAttribute(`viewBox`, viewBox)
+      paths.forEach((pathData) => {
+        const $path = document.createElementNS(`http://www.w3.org/2000/svg`, `path`)
+        const { fill, d } = pathData
+
+        if(fill){
+          $path.setAttribute(`fill`, fill)
+        }
+        if(d){
+          $path.setAttribute(`d`, d)
+        }
+        if(this.rotate){
+          $path.setAttribute(`transform`, `rotate(${this.rotate} ${getRotateDegree(viewBox)})`)
+        }
+        this.$svg.appendChild($path)
+      });
+    }
+    if(this.isSpin){
+      this.$svg.classList.add(`icon-spin`)
+    }else{
+      this.$svg.classList.remove(`icon-spin`)
+    }
+  }
+}
+```
+
+이 컴포넌트는 아래와 같이 사용될 것입니다.
+
+```js
+const $div = document.createElement(`div`)
+
+const $icon = new Icon({
+  target: $div,
+  iconName: `spinner`,
+  isSpin: true
+})
+```
+
+그런데 여러분들은 이 코드가 직관적으로 이해가 되시나요? 
+SPA를 개발하기 위해, HTML에 직접 쓰는 것이 아닌 자바스크립트를 사용해야 하는데
+HTML의 문법에 익숙한 개발자들이 위와 같은 코드를 보고 한 번에 구조를 유추할 수 있을까요?
+
+## 구조를 파악하기 쉽다
+
+이와 같은 문제를 해결하기 위해 리액트는 `JSX`를 사용합니다.
+
+```JSX
+const icons = {
+  search: {
+    viewBox: `0 0 512 512`,
+    paths: [
+      {
+        d: `M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z`
+      }
+    ]
+  },
+  spinner: {
+    viewBox: `0 0 1024 1024`,
+    paths: [
+      {
+        d: `M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z`
+      }
+    ]
+  }
+}
+
+const getRotateDegree = (viewBox) => {
+  const viewBoxArray = viewBox.split(` `)
+
+  return `${+viewBoxArray[2] / 2} ${+viewBoxArray[3] / 2}`
+};
+
+const Icon = ({
+  className,
+  iconName,
+  isSpin,
+  onClick,
+  rotate,
+}) => {
+  const { viewBox, paths } = icons[iconName]
+
+  return (
+    <svg
+      viewBox={viewBox}
+      focusable="false"
+      className={`icon ${isSpin ? `icon-spin` : ``} ${className ? ` ${className}` : ``}`}
+      width="1em"
+      height="1em"
+      fill="currentColor"
+      aria-hidden="true"
+      onClick={onClick}
+    >
+      {paths.map((path, index) => {
+        const { fill, d } = path;
+
+        return(
+          <path
+            key={`${d}${index}`}
+            transform={
+              rotate
+                ? `rotate(${rotate} ${getRotateDegree(viewBox)})`
+                : undefined
+            }
+            fill={fill}
+            d={d}
+          />
+        )
+      })}
+    </svg>
+  )
+}
+```
+
+JSX를 사용해 로직과 뷰를 분리하여 확인할 수 있습니다.
+
+```jsx
+<div>
+  <Icon iconName='spinner' isSpin />
+</div>
+```
+
+또한 사용함에 있어서 target과 같은 속성의 필요 없이
+HTML 구조와 비슷하게 사용하기 때문에 편합니다.
+
+## 가상 DOM을 이용한 렌더링
+
+기존 바닐라 자바스크립트로 만든 컴포넌트는 상태 관리를 사용자가 직접 해주어야 합니다.
+
+```js
+$icon.isSpin = false
+$icon.render()
+```
+
+하지만 이렇게 컴포넌트를 다시 렌더링 한다면 방금 바꾼 `isSpin`의 부분만 렌더링 되는 것이 아닌
+다른 부분도 모두 렌더링 되어 자원이 낭비됩니다.
+
+리액트는 이를 위해 가상 DOM 기능을 개발하였습니다. HTML의 DOM 트리에서 모두 계산하지 않고,
+컴포넌트를 객체화 시켜 가상 DOM을 구성한 뒤 바뀐 부분만 비교하여 실제 HTML에 렌더링 하는 방식입니다.
+
+이를 위해 state라는 상태를 관리하는 변수를 설정합니다.
+리액트는 useState 훅을 사용하여 생성된 state의 변화를 감지하여 자동으로 뷰를 바꾸어 줍니다.
+자세한 훅의 사용법은 아래의 링크를 확인해 주세요.
+
+<ExternalLink href="https://ko.reactjs.org/docs/hooks-intro.html">
+  HOOK
+</ExternalLink>
+
+```jsx
+const [isSpin, setSpin] = useState(true);
+
+return (
+  <div>
+    <Icon iconName='spinner' isSpin={isSpin} />
+  </div>
+)
+```
+
+즉, 가상 DOM과 state를 사용함으로써 쉽고 빠르게 뷰를 제어할 수 있습니다.
+
+## 쉬운 상태 관리
+
+그렇다면 내가 원할 때 상태를 변경시키고 싶다면 어떻게 해야 할까요?
+예를 들어, 우리는 이전에 아래와 같은 코드를 작성한 경험이 있을 것입니다.
+
+```js
+window.onload = function () {
+  ...
+  if(isLoggedIn){
+    $icon.isSpin = false
+    $icon.render()
+  }
+}
+```
+
+위의 코드는 'HTML 문서의 로딩이 끝난 후'에 값을 비교하여 렌더링 하는 코드입니다.
+리액트로 작성한 컴포넌트들의 상태는 각각 하나의 단위로 실행되는데, 이런 경우는 어떻게 제어해야 할까요?
+
+리액트 컴포넌트 코드가 실행될 때부터 해당 컴포넌트가 화면에서 제거될 때까지 가지는 상태가 각각 존재하는데요,
+자세한 설명은 여기서 다루지 않고 아래의 링크를 확인해 주시기 바랍니다.
+
+<ExternalLink href="https://ko.reactjs.org/docs/state-and-lifecycle.html">
+  State and Lifecycle
+</ExternalLink>
+
+즉, 위의 생명주기를 바탕으로 우리가 필요한 시점에 함수를 작동시킬 상황이 존재한다는 겁니다.
+위와 같은 경우 컴포넌트가 렌더링 된 이후 로직을 실행시켜주면 됩니다.
+이를 위해 useEffect 훅을 아래처럼 사용합니다.
+
+```jsx
+const [isSpin, setSpin] = useState(true);
+
+useEffect(() => {
+  ...
+  if(isLoggedIn){
+    setSpin(false)
+  }
+}, [])
+...
+```
+
+이처럼 컴포넌트 생명주기를 이해한 후 훅을 활용한다면 컴포넌트를 쉽게 제어할 수 있습니다.
+
+## 정리
+
+즉, 리액트를 사용하며 아래와 같은 이점을 얻을 수 있습니다.
+
+1. 컴포넌트 단위로 구성하여 조합, 분해하기 쉽다.
+1. 로직과 뷰를 분리하여 구분하기 쉽다.
+1. 가상 DOM을 활용하기 때문에 화면이 자주 바뀌는 경우 렌더링 자원을 아낄 수 있다.
+1. 상태 관리와 이에 따른 뷰의 변화를 제어하기 쉽다.
+
+## 마치며
+위의 내용은 리액트의 예제 문서를 읽으며 '음 그렇구나'하고 단순히 넘어갔었던 내용들입니다.
+물론 HOOKs의 경우는 공부하며 익혔지만 사실 JSX의 경우에는 너무 당연하게 사용해왔기 때문에
+바닐라 자바스크립트로 SPA를 구현할 때 꽤나 애를 먹었습니다. 😓
+
+이러한 경험을 통해 리액트가 왜 생겼는지,
+리액트를 왜 사용하는지 다시 한번 진지하게 되돌아볼 수 있었습니다.
+
+
+
+
+
+
+
