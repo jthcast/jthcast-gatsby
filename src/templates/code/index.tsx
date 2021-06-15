@@ -8,14 +8,14 @@ import GatsbyImage from 'gatsby-image';
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { IconTemplate } from '../../components/atoms/Icons';
 
-interface CodeDataProps {
-  mdx?: Mdx;
-  related?: {
-    nodes: Mdx[];
-  }
-}
+// interface CodeDataProps {
+//   mdx?: Mdx;
+//   related?: {
+//     nodes: Mdx[];
+//   }
+// }
 
-const CodePostTemplate = ({ data }: PageProps<CodeDataProps>) => {
+const CodePostTemplate = ({ data }: PageProps<any>) => {
   const { t } = useTranslation();
   const code = data.mdx;
   const related = data.related.nodes;
