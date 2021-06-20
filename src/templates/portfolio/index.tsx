@@ -20,7 +20,6 @@ const Portfolio = ({
   const { t } = useTranslation();
   const portfolio = data.mdx;
   const related = data.series.nodes;
-  console.log('##', related);
 
   return (
     <Layout
