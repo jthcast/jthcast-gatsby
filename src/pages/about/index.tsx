@@ -277,7 +277,7 @@ const About = (): React.ReactElement => {
             </div>
           </div>
         </section> */}
-        <section className="jth-section">
+        {/* <section className="jth-section">
           <div
             className="jth-container jth-section-getInTouch jth-animation"
             data-animationtype="opacityUp"
@@ -292,7 +292,7 @@ const About = (): React.ReactElement => {
               {t('Footer.contactButtonMessage')}
             </Button>
           </div>
-        </section>
+        </section> */}
       </section>
     </Layout>
   );
