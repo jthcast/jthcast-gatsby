@@ -53,9 +53,9 @@ const Header = ({
 
   return (
     <>
-      <HeaderMessage allowClose>
+      {/* <HeaderMessage allowClose>
         <Link to="/about/">{t('Header.headerMessage')}</Link>
-      </HeaderMessage>
+      </HeaderMessage> */}
       <header
         className={`jth-header-container${showTypeRef.current === 'sticky' ? ' jth-header-sticky' : ``
           }${showTypeRef.current === 'fixed' ? ' jth-header-fixed' : ``}${hideRef.current ? ' jth-header-hide' : ``
